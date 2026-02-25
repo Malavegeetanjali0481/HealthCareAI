@@ -74,7 +74,7 @@ AI/ML: Logistic Regression, Decision Tree, Random Forest
 
 Design Focus: Explainability, scalability, ethical AI
 
-## 8.Final Contribution
+## 8 .Final Contribution
 
 Arogya Mithra presents a practical implementation of an AI-powered multilingual symptom triage and referral system designed to support rural frontline health workers in identifying high-risk patients and prioritizing teleconsultations.
 
@@ -84,4 +84,5 @@ This work highlights the potential of responsible, data-driven AI to advance equ
 
 ## 9.Contact
 malavegeetanjali09@gmail.com
+
 Project Link:
