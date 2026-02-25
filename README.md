@@ -1,12 +1,13 @@
 # HealthCareAI
-Arogya Mithra  AI for Equitable Healthcare
+### Arogya Mithra
+### Arogya Mithra  AI for Equitable Healthcare
 Arogya Mithra
 
 AI for Equitable Healthcare
 
 ## 1. Project Title
 
-Arogya Mithra – AI-Assisted Rural Healthcare Support Platform
+### Arogya Mithra – AI-Assisted Rural Healthcare Support Platform
 
 ## 2. Overview
 
