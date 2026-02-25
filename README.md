@@ -40,9 +40,13 @@ All data usage follows privacy-first and consent-based principles.
 ## 5. Regulatory & Ethical Alignment
 
 Human-in-the-loop AI design
+
 Explainable and interpretable ML models
+
 Role-based access control
+
 No automated diagnosis or prescriptions
+
 Designed to align with responsible AI and public healthcare workflows
 
 ## 6. Usage & Benefits
@@ -63,8 +67,11 @@ Data-driven public health decision-making
 ## 7. Tools & Technologies
 
 Frontend: Antigravity Web UI
+
 Backend: Firebase Authentication, Firestore
+
 AI/ML: Logistic Regression, Decision Tree, Random Forest
+
 Design Focus: Explainability, scalability, ethical AI
 
 ## 8.Final Contribution
