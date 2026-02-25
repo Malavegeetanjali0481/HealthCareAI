@@ -22,8 +22,9 @@ Role Selection and Login
 Log in as one of the following roles:
 <ul>
 <li> Patient</li>
-  <li>Item 2</li>
-  <li>Item 3</li>
+  <li>Asha Worker</li>
+  <li>Doctor</li>
+  <li>District Officer</li>
 </ul>
 
 Symptom Assessment (Patient / Health Worker)
