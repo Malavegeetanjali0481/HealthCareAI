@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Telemed Dashboard | Arogya Raksha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Telemed Specific CSS -->
+    <link rel="stylesheet" href="telemed.css">
+</head>
+
+<body class="bg-light-bg dashboard-body">
+
+    <!-- Navbar -->
+    <nav class="navbar dashboard-navbar telemed-navbar">
+        <div class="container-fluid nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-video text-primary"></i>
+                <span>Arogya Raksha <span class="text-secondary fw-400">| Doctor Telemed</span></span>
+            </div>
+            <div class="nav-user">
+                <div class="user-info hide-mobile">
+                    <span class="user-name">Admin Coordinator</span>
+                </div>
+                <div class="user-avatar-sm bg-primary-light text-primary">
+                    <i class="fa-solid fa-user-md"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <main class="dashboard-main px-max">
+
+            <!-- 1. PAGE HEADER & FILTERS -->
+            <header class="dashboard-header telemed-header fade-in-up">
+                <div class="header-titles">
+                    <h1>Doctor Telemed Dashboard</h1>
+                    <p class="subtitle text-gray mb-0">AI-assisted patient queue for efficient teleconsultation</p>
+                </div>
+
+                <div class="dashboard-filters">
+                    <div class="filter-group telemed-filter">
+                        <i class="fa-regular fa-calendar text-gray"></i>
+                        <input type="date" class="form-control-sm" id="dateFilter" value="2026-02-25"
+                            title="Static Filter">
+                    </div>
+                    <div class="filter-group telemed-filter">
+                        <i class="fa-solid fa-layer-group text-gray"></i>
+                        <select class="form-control-sm" id="riskFilter" title="Static Filter">
+                            <option value="all" selected>All Risk Levels</option>
+                            <option value="high">High Risk Only</option>
+                            <option value="medium">Medium Risk</option>
+                            <option value="low">Low Risk</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 6. EFFICIENCY INSIGHTS PANEL (STATIC METRICS) -->
+            <section class="metrics-grid mb-4 fade-in-up delay-1">
+                <div class="metric-card card telemed-card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">High Priority Cases Today</h4>
+                        <div class="metric-icon bg-danger-light text-danger"><i
+                                class="fa-solid fa-triangle-exclamation"></i></div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value text-danger">5</h2>
+                    </div>
+                </div>
+
+                <div class="metric-card card telemed-card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">Avg. Waiting Time</h4>
+                        <div class="metric-icon bg-warning-light text-warning"><i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value">12 <span class="font-sm text-gray fw-400">mins</span></h2>
+                    </div>
+                </div>
+
+                <div class="metric-card card telemed-card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">Doctor Load Optimized</h4>
+                        <div class="metric-icon bg-secondary-light text-secondary"><i
+                                class="fa-solid fa-user-doctor"></i></div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value text-secondary">32%</h2>
+                    </div>
+                </div>
+            </section>
+
+            <div class="telemed-layout fade-in-up delay-2">
+                <!-- LEFT COLUMN: AI QUEUE -->
+                <div class="queue-section">
+
+                    <div class="card p-0 table-card">
+                        <div class="card-header border-bottom p-3 d-flex justify-between align-center">
+                            <div>
+                                <h3 class="mb-0"><i class="fa-solid fa-list-ol text-primary"></i> AI-Prioritized Patient
+                                    Queue</h3>
+                                <p class="text-xs text-gray mt-1"><i class="fa-solid fa-robot"></i> Queue is auto-sorted
+                                    based on AI risk assessment.</p>
+                            </div>
+                        </div>
+
+                        <!-- 3 & 4. AI-PRIORITIZED PATIENT QUEUE (STATIC DATA) & AUTO SLOT -->
+                        <div class="table-responsive telemed-table-wrapper">
+                            <table class="data-table telemed-table" id="queueTable">
+                                <thead>
+                                    <tr>
+                                        <th>Priority</th>
+                                        <th>Patient</th>
+                                        <th>AI Score</th>
+                                        <th>Waiting Time</th>
+                                        <th>Auto Slot Suggestion</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- High Risk Row -->
+                                    <tr class="risk-red">
+                                        <td class="text-center">
+                                            <div class="priority-badge pulse"><i class="fa-solid fa-angles-up"></i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong>Patient A</strong>
+                                        </td>
+                                        <td><span class="badge badge-danger">High (92/100)</span></td>
+                                        <td>
+                                            <div class="wait-time text-danger fw-600">14 mins</div>
+                                            <progress max="15" value="14" class="progress-danger"></progress>
+                                        </td>
+                                        <td>
+                                            <div class="slot-info">
+                                                <span class="slot-time"><i class="fa-solid fa-bolt text-warning"></i>
+                                                    Earliest slot (10:00 AM)</span>
+                                                <span class="slot-doc text-xs text-gray d-block">Dr. Sharma</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="action-stack">
+                                                <button class="btn btn-primary sm-btn w-100 mb-1">Confirm Slot</button>
+                                                <button class="btn btn-outline sm-btn w-100 text-xs">Reschedule</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Medium Risk Row -->
+                                    <tr class="risk-yellow">
+                                        <td class="text-center">
+                                            <div class="priority-badge-med"><i class="fa-solid fa-angle-up"></i></div>
+                                        </td>
+                                        <td>
+                                            <strong>Patient B</strong>
+                                        </td>
+                                        <td><span class="badge badge-warning">Med (64/100)</span></td>
+                                        <td>
+                                            <div class="wait-time text-warning fw-600">8 mins</div>
+                                            <progress max="45" value="8" class="progress-warning"></progress>
+                                        </td>
+                                        <td>
+                                            <div class="slot-info">
+                                                <span class="slot-time">Next available (10:20 AM)</span>
+                                                <span class="slot-doc text-xs text-gray d-block">Dr. Rao</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="action-stack">
+                                                <button
+                                                    class="btn btn-primary sm-btn w-100 mb-1 btn-warning-theme">Confirm
+                                                    Slot</button>
+                                                <button class="btn btn-outline sm-btn w-100 text-xs">Reschedule</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Low Risk Row -->
+                                    <tr class="risk-green">
+                                        <td class="text-center">
+                                            <div class="priority-badge-low"><i class="fa-solid fa-minus"></i></div>
+                                        </td>
+                                        <td>
+                                            <strong>Patient C</strong>
+                                        </td>
+                                        <td><span class="badge badge-success">Low (28/100)</span></td>
+                                        <td>
+                                            <div class="wait-time text-secondary fw-600">2 mins</div>
+                                            <progress max="120" value="2" class="progress-success"></progress>
+                                        </td>
+                                        <td>
+                                            <div class="slot-info">
+                                                <span class="slot-time">Later slot (10:40 AM)</span>
+                                                <span class="slot-doc text-xs text-gray d-block">Dr. Sharma</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="action-stack">
+                                                <button
+                                                    class="btn btn-primary bg-secondary-light text-secondary sm-btn w-100 mb-1 border-transparent">Confirm
+                                                    Slot</button>
+                                                <button class="btn btn-outline sm-btn w-100 text-xs">Reschedule</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: DOCTOR ASSIGNMENT -->
+                <aside class="doctor-sidebar">
+                    <!-- 2. DOCTOR AVAILABILITY PANEL -->
+                    <div class="card p-0 h-100">
+                        <div class="card-header border-bottom p-3 bg-light-blue">
+                            <h3 class="mb-0"><i class="fa-solid fa-user-doctor text-primary"></i> Doctor Availability
+                            </h3>
+                        </div>
+                        <div class="doctor-list p-3">
+
+                            <!-- Dr. Sharma -->
+                            <div class="doctor-item online">
+                                <div class="doc-header d-flex justify-between align-center">
+                                    <div class="d-flex align-center gap-2">
+                                        <div class="status-dot green pulse-dot"></div>
+                                        <strong>Dr. Sharma</strong>
+                                    </div>
+                                    <span class="badge badge-success">Online</span>
+                                </div>
+                                <div class="text-sm text-gray mt-1">Specialty: General Medicine</div>
+                                <div class="doc-slots mt-2 d-flex gap-2">
+                                    <span class="slot-pill active">10:00</span>
+                                    <span class="slot-pill">10:40</span>
+                                </div>
+                            </div>
+
+                            <!-- Dr. Rao -->
+                            <div class="doctor-item online mt-3">
+                                <div class="doc-header d-flex justify-between align-center">
+                                    <div class="d-flex align-center gap-2">
+                                        <div class="status-dot green pulse-dot"></div>
+                                        <strong>Dr. Rao</strong>
+                                    </div>
+                                    <span class="badge badge-success">Online</span>
+                                </div>
+                                <div class="text-sm text-gray mt-1">Specialty: Pulmonology</div>
+                                <div class="doc-slots mt-2 d-flex gap-2 flex-wrap">
+                                    <span class="slot-pill active">10:20</span>
+                                    <span class="slot-pill">10:50</span>
+                                </div>
+                            </div>
+
+                            <!-- Dr. Mehta -->
+                            <div class="doctor-item offline mt-3">
+                                <div class="doc-header d-flex justify-between align-center text-light-gray">
+                                    <div class="d-flex align-center gap-2">
+                                        <div class="status-dot gray"></div>
+                                        <strong>Dr. Mehta</strong>
+                                    </div>
+                                    <span class="badge" style="background:var(--light-gray);color:white;">Offline</span>
+                                </div>
+                                <div class="text-sm text-light-gray mt-1">Specialty: Pediatrics</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- 7. ETHICAL AI & SAFETY NOTE -->
+            <div class="disclaimer-box card bg-light-blue text-sm text-gray mt-4 mb-xl text-center fade-in-up delay-3">
+                <i class="fa-solid fa-scale-balanced text-primary mb-2 text-md"></i>
+                <p><strong>Ethical AI Note:</strong> AI assists in prioritization. Doctors make final consultation
+                    decisions.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 9. FOOTER -->
+    <footer class="dashboard-footer bg-white border-top py-sm">
+        <div class="container-fluid flex-row justify-between align-center px-4">
+            <div>
+                <a href="index.html" class="btn btn-outline sm-btn"><i class="fa-solid fa-house"></i> Back to Doctor
+                    Dashboard</a>
+            </div>
+            <div class="text-sm text-gray mt-mobile-2">
+                &copy; 2026 Arogya Raksha Telemed Center.
+            </div>
+            <div class="mt-mobile-2">
+                <a href="privacy.html" class="text-primary hover-dark text-sm fw-500">Privacy & Ethics</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="firestore-service.js"></script>
+    <script src="telemed.js"></script>
+</body>
+
+</html>

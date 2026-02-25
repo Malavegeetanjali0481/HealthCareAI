@@ -1,0 +1,349 @@
+﻿/* =========================================
+   TELEMEDICINE SPECIFIC STYLES
+   ========================================= */
+
+.telemed-navbar {
+    background: var(--dark-dark);
+    color: var(--white);
+}
+
+.telemed-navbar .logo span {
+    color: var(--white);
+}
+
+.telemed-navbar .user-name {
+    color: var(--white);
+}
+
+.px-max {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Layout */
+.telemed-layout {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.queue-section {
+    flex: 3;
+    min-width: 0;
+    /* Prevent flex box overflow */
+}
+
+.doctor-sidebar {
+    flex: 1;
+    min-width: 300px;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+/* Overrides for Header Layout */
+.telemed-header {
+    margin-bottom: 1.5rem;
+}
+
+/* 3. AI-PRIORITIZED PATIENT QUEUE (Table) */
+.table-card {
+    overflow: hidden;
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--dark-light);
+}
+
+.telemed-table-wrapper {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.telemed-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.telemed-table th {
+    background: var(--light-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.telemed-table td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+/* Color Coded Rows by Risk */
+.telemed-table tr {
+    transition: background-color 0.2s;
+}
+
+.telemed-table tr:hover {
+    background-color: var(--light-bg);
+}
+
+.risk-red td {
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.risk-red:hover td {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.risk-yellow td {
+    background-color: rgba(245, 158, 11, 0.03);
+}
+
+/* Progress Bars indicating Wait Time */
+progress {
+    width: 100%;
+    height: 6px;
+    border-radius: var(--radius-full);
+    display: block;
+    margin-top: 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--light-gray);
+}
+
+progress::-webkit-progress-bar {
+    background-color: var(--light-gray);
+    border-radius: var(--radius-full);
+}
+
+.progress-danger::-webkit-progress-value {
+    background-color: var(--danger-color);
+    border-radius: var(--radius-full);
+}
+
+.progress-danger::-moz-progress-bar {
+    background-color: var(--danger-color);
+    border-radius: var(--radius-full);
+}
+
+.progress-warning::-webkit-progress-value {
+    background-color: var(--warning-color);
+    border-radius: var(--radius-full);
+}
+
+.progress-warning::-moz-progress-bar {
+    background-color: var(--warning-color);
+    border-radius: var(--radius-full);
+}
+
+.progress-success::-webkit-progress-value {
+    background-color: var(--secondary-color);
+    border-radius: var(--radius-full);
+}
+
+.progress-success::-moz-progress-bar {
+    background-color: var(--secondary-color);
+    border-radius: var(--radius-full);
+}
+
+/* Priority Badges */
+.priority-badge,
+.priority-badge-med,
+.priority-badge-low {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.priority-badge {
+    background: var(--danger-color);
+    color: var(--white);
+}
+
+.priority-badge-med {
+    background: var(--warning-color);
+    color: var(--white);
+}
+
+.priority-badge-low {
+    background: var(--secondary-light);
+    color: var(--secondary-color);
+}
+
+.priority-badge i,
+.priority-badge-med i,
+.priority-badge-low i {
+    font-size: 0.7rem;
+    margin-bottom: 2px;
+}
+
+/* Actions Stack in Table */
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.btn-warning-theme {
+    background-color: var(--warning-color);
+    color: var(--white);
+    border-color: var(--warning-color);
+}
+
+.btn-warning-theme:hover {
+    background-color: #d97706;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+}
+
+/* 2. DOCTOR AVAILABILITY SIDEBAR */
+.doctor-item {
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--light-gray);
+}
+
+.doctor-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-dot.green {
+    background: var(--secondary-color);
+}
+
+.status-dot.yellow {
+    background: var(--warning-color);
+}
+
+.status-dot.gray {
+    background: var(--light-gray);
+}
+
+.pulse-dot {
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+    animation: pulse-green 1.5s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(5, 150, 105, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+    }
+}
+
+.slot-pill {
+    padding: 0.25rem 0.5rem;
+    background: var(--dark-light);
+    color: var(--dark-color);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--light-gray);
+    transition: var(--transition);
+}
+
+.slot-pill:hover:not(.disabled) {
+    border-color: var(--primary-color);
+}
+
+.slot-pill.active {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.slot-pill.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+/* Animations */
+.queue-updated {
+    animation: highlight-row 1.5s ease;
+}
+
+@keyframes highlight-row {
+    0% {
+        background-color: var(--primary-light);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .telemed-layout {
+        flex-direction: column;
+    }
+
+    .queue-section,
+    .doctor-sidebar {
+        width: 100%;
+    }
+
+    .doctor-sidebar {
+        margin-top: 1rem;
+    }
+
+    /* Simple horizontal layout for doc list on smaller screens */
+    .doctor-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .doctor-item {
+        border-bottom: none;
+        padding-bottom: 0;
+        background: var(--light-bg);
+        padding: 1rem;
+        border-radius: var(--radius-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .telemed-table-wrapper {
+        max-height: 400px;
+        /* shorter on mobile */
+    }
+
+    /* basic responsive table handling */
+    .telemed-table th,
+    .telemed-table td {
+        padding: 0.5rem;
+    }
+
+    .hide-mobile-table {
+        display: none;
+    }
+}

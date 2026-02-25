@@ -1,0 +1,1456 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHA Worker Dashboard | HealthAI — Field Healthcare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-d: #047857;
+            --sl: #065f46;
+            --danger: #ef4444;
+            --warn: #f59e0b;
+            --blue: #2563eb;
+            --sw: 220px;
+            --gh: 32px;
+            --th: 56px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0fdf4;
+            color: #0f172a;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .govt-bar {
+            height: var(--gh);
+            background: #020617;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .gl {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gsep {
+            margin: 0 8px;
+            opacity: .3;
+        }
+
+        .top-nav {
+            height: var(--th);
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 16px;
+            z-index: 200;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: var(--sw);
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .bname {
+            font-size: 15px;
+            font-weight: 800;
+            color: #064e3b;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .bsub {
+            font-size: 9px;
+            font-weight: 700;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .ndiv {
+            width: 1px;
+            height: 32px;
+            background: #e2e8f0;
+        }
+
+        .portal-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .top-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .tgreeting {
+            font-size: 13px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .ttime {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .t-bell {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .t-bell .nd {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .t-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .shell {
+            display: flex;
+            height: calc(100vh - var(--gh) - var(--th));
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: var(--sw);
+            background: var(--sl);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .s-profile {
+            padding: 24px 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            text-align: center;
+        }
+
+        .s-av {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, .15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #fff;
+            margin: 0 auto 12px;
+        }
+
+        .s-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .s-role {
+            font-size: 11px;
+            color: #a7f3d0;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .s-loc {
+            font-size: 11px;
+            color: #6ee7b7;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .s-badge {
+            margin-top: 12px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .s-badge.on {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .sl-label {
+            padding: 14px 16px 4px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: rgba(255, 255, 255, .3);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 8px;
+            color: rgba(255, 255, 255, .65);
+            font-size: 13px;
+            font-weight: 500;
+            transition: .2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, .1);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: #10b981;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nb {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        .nb.green {
+            background: #10b981;
+        }
+
+        .nb.red {
+            background: #ef4444;
+        }
+
+        .nb.amber {
+            background: #f59e0b;
+        }
+
+        .nb.blue {
+            background: #2563eb;
+        }
+
+        .nb.pink {
+            background: #ec4899;
+        }
+
+        .s-bottom {
+            padding: 14px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-sb {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-sync {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-logout {
+            background: transparent;
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, .3);
+        }
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 32px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+            animation: fadeIn .3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .ph {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .ph-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .ph-icon.green {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .ph-icon.red {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .ph-icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .ph-icon.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .ph-icon.pink {
+            background: #fce7f3;
+            color: #ec4899;
+        }
+
+        .ph-icon.amber {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .ph-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .ph-sub {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        /* KPI */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(0, 0, 0, .03);
+        }
+
+        .kpi-ico {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+        .kv {
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: #0f172a;
+        }
+
+        .kl {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* Visits */
+        .visit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .visit-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .v-num {
+            width: 32px;
+            height: 32px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #64748b;
+            flex-shrink: 0;
+        }
+
+        .v-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .v-meta {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .v-status {
+            margin-left: auto;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .v-status.done {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .v-status.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .v-status.urgent {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-visit {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--primary);
+            color: #fff;
+            margin-left: 8px;
+        }
+
+        /* Patient List */
+        .search-bar {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 13px;
+            font-family: inherit;
+            color: #334155;
+        }
+
+        .pt-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .04);
+        }
+
+        .pt-table th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 800;
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .pt-table td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .pt-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pt-table tr:hover td {
+            background: #f0fdf4;
+        }
+
+        .risk-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .risk-dot.high {
+            background: #ef4444;
+        }
+
+        .risk-dot.med {
+            background: #f59e0b;
+        }
+
+        .risk-dot.low {
+            background: #10b981;
+        }
+
+        /* Symptom Check */
+        .symptom-form {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .04);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: .2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+        }
+
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .sym-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            padding: 7px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            background: #fff;
+            color: #475569;
+        }
+
+        .chip:hover,
+        .chip.selected {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .btn-assess {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+
+        .btn-assess:hover {
+            background: var(--primary-d);
+        }
+
+        .result-box {
+            background: #f0fdf4;
+            border: 1px solid #6ee7b7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .result-box h4 {
+            color: #065f46;
+            margin-bottom: 8px;
+        }
+
+        .result-box p {
+            font-size: 13px;
+            color: #047857;
+            line-height: 1.6;
+        }
+
+        /* Emergency */
+        .emergency-contacts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .emg-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .emg-icon {
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .emg-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .emg-sub {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .btn-call {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-call.red {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .btn-call.blue {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .btn-call.green {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .ref-form {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .04);
+        }
+
+        .ref-form h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .urgency-pills {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .urg-pill {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .urg-pill.critical {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .urg-pill.urgent {
+            background: #fff;
+            color: #f97316;
+            border-color: #f97316;
+        }
+
+        .urg-pill.routine {
+            background: #fff;
+            color: #f59e0b;
+            border-color: #fbbf24;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-d);
+        }
+
+        /* pregnancy */
+        .preg-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .preg-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Alerts */
+        .alert-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .alert-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid;
+        }
+
+        .alert-item.high {
+            border-left-color: #ef4444;
+        }
+
+        .alert-item.med {
+            border-left-color: #f59e0b;
+        }
+
+        .alert-item.info {
+            border-left-color: #2563eb;
+        }
+
+        .dash-footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media(max-width:900px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .emergency-contacts {
+                grid-template-columns: 1fr;
+            }
+
+            .vitals-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- GOVT BAR -->
+    <div class="govt-bar">
+        <div class="gl">
+            <span><i class="fa-solid fa-circle-check" style="color:#6ee7b7;"></i> Ministry of Health &amp; Family
+                Welfare</span>
+            <span class="gsep">|</span>
+            <span><i class="fa-solid fa-leaf" style="color:#a7f3d0;"></i> NHM Integrated</span>
+        </div>
+        <span>🇮🇳 Government of India</span>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+        <div class="brand-wrap">
+            <div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div>
+                <div class="bname">HealthAI</div>
+                <div class="bsub">ASHA Worker Portal</div>
+            </div>
+        </div>
+        <div class="ndiv"></div>
+        <div class="portal-label"><i class="fa-solid fa-person-walking" style="color:#10b981;margin-right:6px;"></i>ASHA
+            Portal</div>
+        <div class="top-right">
+            <span class="tgreeting" id="tbGreeting">Good Afternoon, Sunita</span>
+            <span class="ttime" id="topbarTime"></span>
+            <div class="t-bell"><i class="fa-solid fa-bell"></i>
+                <div class="nd"></div>
+            </div>
+            <div class="t-avatar">SB</div>
+        </div>
+    </nav>
+
+    <div class="shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="s-profile">
+                <div class="s-av"><i class="fa-solid fa-person-walking"></i></div>
+                <div class="s-name">Sunita Bai</div>
+                <div class="s-role">ASHA Worker · ID: ASHA-2041</div>
+                <div class="s-loc"><i class="fa-solid fa-location-dot" style="font-size:10px;"></i> Rampura Village,
+                    Barwani Block</div>
+                <div class="s-badge on">● On Field Duty</div>
+            </div>
+
+            <div class="sl-label">Field Operations</div>
+            <div class="nav-item" id="nav-overview" onclick="switchPanel('overview')"><i
+                    class="fa-solid fa-house-medical"></i><span>Dashboard Overview</span></div>
+            <div class="nav-item active" id="nav-visits" onclick="switchPanel('visits')"><i
+                    class="fa-solid fa-calendar-check"></i><span>Today's Visits</span><span class="nb green">8</span>
+            </div>
+            <div class="nav-item" id="nav-patients" onclick="switchPanel('patients')"><i
+                    class="fa-solid fa-users"></i><span>Patient List</span></div>
+            <div class="nav-item" id="nav-symptom" onclick="switchPanel('symptom')"><i
+                    class="fa-solid fa-stethoscope"></i><span>Symptom Check</span></div>
+            <div class="nav-item" id="nav-pregnancy" onclick="switchPanel('pregnancy')"><i
+                    class="fa-solid fa-baby"></i><span>Pregnancy Care</span><span class="nb pink">4</span></div>
+            <div class="nav-item" id="nav-vaccination" onclick="switchPanel('vaccination')"><i
+                    class="fa-solid fa-syringe"></i><span>Child Vaccination</span><span class="nb amber">6</span></div>
+            <div class="nav-item" id="nav-followups" onclick="switchPanel('followups')"><i
+                    class="fa-solid fa-rotate"></i><span>Follow-ups</span><span class="nb blue">3</span></div>
+            <div class="nav-item" id="nav-alerts" onclick="switchPanel('alerts')"><i
+                    class="fa-solid fa-bell"></i><span>Alerts</span><span class="nb red">2</span></div>
+            <div class="nav-item" id="nav-emergency" onclick="switchPanel('emergency')"><i
+                    class="fa-solid fa-truck-medical"></i><span>Emergency / Referral</span></div>
+
+            <div class="s-bottom">
+                <button class="btn-sb btn-sync" onclick="alert('Syncing field data...')"><i
+                        class="fa-solid fa-rotate"></i> Sync Data</button>
+                <button class="btn-sb btn-logout" onclick="window.location.href='index.html'"><i
+                        class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main-content">
+
+            <!-- OVERVIEW PANEL -->
+            <div class="panel" id="panel-overview">
+                <div class="ph">
+                    <div class="ph-icon green"><i class="fa-solid fa-house-medical"></i></div>
+                    <div>
+                        <div class="ph-title">Dashboard Overview</div>
+                        <div class="ph-sub">Your daily field activity summary</div>
+                    </div>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#d1fae5;color:#10b981;"><i
+                                class="fa-solid fa-calendar-check"></i></div>
+                        <div>
+                            <div class="kv">8</div>
+                            <div class="kl">Visits Today</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fee2e2;color:#ef4444;"><i
+                                class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div>
+                            <div class="kv">2</div>
+                            <div class="kl">High Risk Patients</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fce7f3;color:#ec4899;"><i class="fa-solid fa-baby"></i>
+                        </div>
+                        <div>
+                            <div class="kv">4</div>
+                            <div class="kl">Pregnant Women</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fef3c7;color:#d97706;"><i
+                                class="fa-solid fa-syringe"></i></div>
+                        <div>
+                            <div class="kv">6</div>
+                            <div class="kl">Vaccines Due</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISITS PANEL -->
+            <div class="panel active" id="panel-visits">
+                <div class="ph">
+                    <div class="ph-icon green"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div>
+                        <div class="ph-title">Today's Visits</div>
+                        <div class="ph-sub">Wednesday, 25 Feb 2026 — Rampura Village</div>
+                    </div>
+                </div>
+                <div class="visit-list">
+                    <div class="visit-item">
+                        <div class="v-num">1</div>
+                        <div>
+                            <div class="v-name">Ramesh Kumar</div>
+                            <div class="v-meta"><i class="fa-solid fa-location-dot"></i> House No. 12, Lane B
+                                &nbsp;|&nbsp; 10:00 AM</div>
+                        </div><span class="v-status urgent">High Risk</span><button class="btn-visit"
+                            onclick="switchPanel('symptom')">Assess Now</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num">2</div>
+                        <div>
+                            <div class="v-name">Meena Bai</div>
+                            <div class="v-meta"><i class="fa-solid fa-location-dot"></i> Near Panchayat Office
+                                &nbsp;|&nbsp; 10:45 AM</div>
+                        </div><span class="v-status pending">Pregnancy Follow-up</span><button
+                            class="btn-visit">Visit</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num">3</div>
+                        <div>
+                            <div class="v-name">Gopal Singh (Child)</div>
+                            <div class="v-meta"><i class="fa-solid fa-location-dot"></i> House No. 4 &nbsp;|&nbsp; 11:30
+                                AM</div>
+                        </div><span class="v-status pending">Vaccination Due</span><button
+                            class="btn-visit">Visit</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num">4</div>
+                        <div>
+                            <div class="v-name">Kamla Devi</div>
+                            <div class="v-meta"><i class="fa-solid fa-location-dot"></i> Block C &nbsp;|&nbsp; 12:00 PM
+                            </div>
+                        </div><span class="v-status done">✓ Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PATIENT LIST -->
+            <div class="panel" id="panel-patients">
+                <div class="ph">
+                    <div class="ph-icon blue"><i class="fa-solid fa-users"></i></div>
+                    <div>
+                        <div class="ph-title">Patient List</div>
+                        <div class="ph-sub">All registered households in your coverage area</div>
+                    </div>
+                </div>
+                <div class="search-bar"><i class="fa-solid fa-magnifying-glass" style="color:#94a3b8;"></i><input
+                        type="text" placeholder="Search patient name or village..."></div>
+                <table class="pt-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Age/Sex</th>
+                            <th>Village</th>
+                            <th>Condition</th>
+                            <th>Risk</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>Ramesh Kumar</strong></td>
+                            <td>56M</td>
+                            <td>Rampura</td>
+                            <td>Fever, Dyspnea</td>
+                            <td><span class="risk-dot high"></span>High</td>
+                            <td><button class="btn-visit" style="padding:5px 10px;font-size:11px;">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>Meena Bai</strong></td>
+                            <td>28F</td>
+                            <td>Rampura</td>
+                            <td>7th Month Pregnancy</td>
+                            <td><span class="risk-dot med"></span>Medium</td>
+                            <td><button class="btn-visit" style="padding:5px 10px;font-size:11px;">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>Kamla Devi</strong></td>
+                            <td>62F</td>
+                            <td>Palakonda</td>
+                            <td>Diabetes follow-up</td>
+                            <td><span class="risk-dot med"></span>Medium</td>
+                            <td><button class="btn-visit" style="padding:5px 10px;font-size:11px;">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>Gopal Singh</strong></td>
+                            <td>2M</td>
+                            <td>Rampura</td>
+                            <td>Vaccination due</td>
+                            <td><span class="risk-dot low"></span>Low</td>
+                            <td><button class="btn-visit" style="padding:5px 10px;font-size:11px;">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SYMPTOM CHECK -->
+            <div class="panel" id="panel-symptom">
+                <div class="ph">
+                    <div class="ph-icon green"><i class="fa-solid fa-stethoscope"></i></div>
+                    <div>
+                        <div class="ph-title">Symptom Check</div>
+                        <div class="ph-sub">AI-assisted triage for field assessment</div>
+                    </div>
+                </div>
+                <div class="symptom-form">
+                    <div class="form-group"><label class="form-label">Patient Name</label><input class="form-input"
+                            placeholder="Enter patient name..." type="text"></div>
+                    <div class="form-group"><label class="form-label">Vitals</label>
+                        <div class="vitals-grid">
+                            <input class="form-input" placeholder="Temp (°F)" type="text">
+                            <input class="form-input" placeholder="SpO2 (%)" type="text">
+                            <input class="form-input" placeholder="Pulse (bpm)" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group"><label class="form-label">Select Symptoms</label>
+                        <div class="sym-chips">
+                            <span class="chip" onclick="this.classList.toggle('selected')">🌡️ Fever</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">😮‍💨 Breathlessness</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">😮 Cough</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">💧 Diarrhea</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">🤢 Vomiting</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">😰 Fatigue</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">💛 Jaundice</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">🤕 Headache</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">💪 Body Pain</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">👁️ Eye Redness</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">🫀 Chest Pain</span>
+                            <span class="chip" onclick="this.classList.toggle('selected')">🤧 Runny Nose</span>
+                        </div>
+                    </div>
+                    <button class="btn-assess" onclick="showResult()"><i class="fa-solid fa-robot"></i> Run AI Triage
+                        Assessment</button>
+                    <div class="result-box" id="triageResult" style="display:none;">
+                        <h4><i class="fa-solid fa-circle-exclamation"></i> AI Risk Assessment: HIGH RISK</h4>
+                        <p>Multiple critical symptoms detected. Immediate teleconsultation with doctor recommended.
+                            Consider emergency referral to PHC Rampura if SpO2 drops below 90%.</p>
+                        <p style="margin-top:8px;font-size:11px;opacity:.7;"><i class="fa-solid fa-circle-info"></i> AI
+                            triage is assistive only. Use clinical judgment.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREGNANCY CARE -->
+            <div class="panel" id="panel-pregnancy">
+                <div class="ph">
+                    <div class="ph-icon pink"><i class="fa-solid fa-baby"></i></div>
+                    <div>
+                        <div class="ph-title">Pregnancy Care</div>
+                        <div class="ph-sub">Track registered pregnant women in your area</div>
+                    </div>
+                </div>
+                <div class="preg-grid">
+                    <div class="v-name"
+                        style="font-size:15px;font-weight:700;padding-bottom:8px;border-bottom:1px solid #e2e8f0;margin-bottom:12px;grid-column:1/-1;">
+                        4 Pregnant Women Registered</div>
+                    <div
+                        style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #fce7f3;border-left:4px solid #ec4899;">
+                        <strong>Meena Bai</strong><br><span style="font-size:12px;color:#64748b;">7th month · ANC due
+                            today</span></div>
+                    <div
+                        style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #fce7f3;border-left:4px solid #ec4899;">
+                        <strong>Lakshmi Devi</strong><br><span style="font-size:12px;color:#64748b;">5th month · Iron
+                            tablet supply low</span></div>
+                    <div
+                        style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #fce7f3;border-left:4px solid #f9a8d4;">
+                        <strong>Radha Patel</strong><br><span style="font-size:12px;color:#64748b;">3rd month · First
+                            ANC visit pending</span></div>
+                    <div
+                        style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid #fce7f3;border-left:4px solid #f9a8d4;">
+                        <strong>Sushila Bai</strong><br><span style="font-size:12px;color:#64748b;">8th month · High BP
+                            noted</span></div>
+                </div>
+            </div>
+
+            <!-- CHILD VACCINATION -->
+            <div class="panel" id="panel-vaccination">
+                <div class="ph">
+                    <div class="ph-icon amber"><i class="fa-solid fa-syringe"></i></div>
+                    <div>
+                        <div class="ph-title">Child Vaccination</div>
+                        <div class="ph-sub">Track vaccination schedules for children under 5</div>
+                    </div>
+                </div>
+                <div class="visit-list">
+                    <div class="visit-item">
+                        <div class="v-num" style="background:#fef3c7;color:#d97706;">1</div>
+                        <div>
+                            <div class="v-name">Gopal Singh · Age: 2 yrs</div>
+                            <div class="v-meta">MMR Vaccine due · Today</div>
+                        </div><span class="v-status urgent">Due Today</span><button class="btn-visit">Mark
+                            Given</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num" style="background:#fef3c7;color:#d97706;">2</div>
+                        <div>
+                            <div class="v-name">Rani Devi · Age: 6 months</div>
+                            <div class="v-meta">DPT Booster due · Tomorrow</div>
+                        </div><span class="v-status pending">Tomorrow</span><button class="btn-visit">Schedule</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLLOW-UPS -->
+            <div class="panel" id="panel-followups">
+                <div class="ph">
+                    <div class="ph-icon blue"><i class="fa-solid fa-rotate"></i></div>
+                    <div>
+                        <div class="ph-title">Follow-ups</div>
+                        <div class="ph-sub">Patients requiring follow-up visits</div>
+                    </div>
+                </div>
+                <div class="visit-list">
+                    <div class="visit-item">
+                        <div class="v-num">1</div>
+                        <div>
+                            <div class="v-name">Ramesh Kumar</div>
+                            <div class="v-meta">Post-fever check · Day 3 follow-up</div>
+                        </div><span class="v-status urgent">Urgent</span><button class="btn-visit"
+                            onclick="switchPanel('symptom')">Assess</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num">2</div>
+                        <div>
+                            <div class="v-name">Kamla Devi</div>
+                            <div class="v-meta">Diabetes medication refill · Due this week</div>
+                        </div><span class="v-status pending">Pending</span><button class="btn-visit">Visit</button>
+                    </div>
+                    <div class="visit-item">
+                        <div class="v-num">3</div>
+                        <div>
+                            <div class="v-name">Sushila Bai</div>
+                            <div class="v-meta">High BP monitoring · 3rd reading this month</div>
+                        </div><span class="v-status pending">Pending</span><button class="btn-visit">Visit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALERTS -->
+            <div class="panel" id="panel-alerts">
+                <div class="ph">
+                    <div class="ph-icon red"><i class="fa-solid fa-bell"></i></div>
+                    <div>
+                        <div class="ph-title">Alerts</div>
+                        <div class="ph-sub">Important health alerts for your coverage area</div>
+                    </div>
+                </div>
+                <div class="alert-list">
+                    <div class="alert-item high"><i class="fa-solid fa-biohazard"
+                            style="color:#ef4444;margin-top:2px;"></i>
+                        <div><strong>Dengue Alert — Rampura Block</strong><br><span
+                                style="font-size:12px;color:#64748b;">Dengue confirmed in 3 households. Water stagnation
+                                spotted near house no. 12. Report to PHC immediately.</span></div>
+                    </div>
+                    <div class="alert-item med"><i class="fa-solid fa-syringe"
+                            style="color:#f59e0b;margin-top:2px;"></i>
+                        <div><strong>Vaccination Drive — Feb 28</strong><br><span
+                                style="font-size:12px;color:#64748b;">District vaccination drive scheduled at Panchayat
+                                Hall. Bring your patient list for coordination.</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMERGENCY / REFERRAL -->
+            <div class="panel" id="panel-emergency">
+                <div class="ph">
+                    <div class="ph-icon red"><i class="fa-solid fa-truck-medical"></i></div>
+                    <div>
+                        <div class="ph-title">Emergency / Referral</div>
+                        <div class="ph-sub">Quick access to emergency services and patient referrals</div>
+                    </div>
+                </div>
+                <div class="emergency-contacts">
+                    <div class="emg-card">
+                        <div class="emg-icon">🚑</div>
+                        <div class="emg-name">Ambulance (108)</div>
+                        <div class="emg-sub">24/7 Emergency</div>
+                        <button class="btn-call red" onclick="window.location.href='tel:108'"><i
+                                class="fa-solid fa-phone"></i> Call</button>
+                    </div>
+                    <div class="emg-card">
+                        <div class="emg-icon">🏥</div>
+                        <div class="emg-name">PHC Rampura</div>
+                        <div class="emg-sub">Dr. Mehra · 2.3 km away</div>
+                        <button class="btn-call blue" onclick="alert('Calling PHC Rampura...')"><i
+                                class="fa-solid fa-phone"></i> Call</button>
+                    </div>
+                    <div class="emg-card">
+                        <div class="emg-icon">👤</div>
+                        <div class="emg-name">Block Health Officer</div>
+                        <div class="emg-sub">Dr. Anil Kumar</div>
+                        <button class="btn-call green" onclick="alert('Calling Block Health Officer...')"><i
+                                class="fa-solid fa-phone"></i> Call</button>
+                    </div>
+                </div>
+
+                <div class="ref-form">
+                    <h3><i class="fa-solid fa-file-medical" style="color:#10b981;"></i> Quick Referral Form</h3>
+                    <label class="form-label">Patient</label>
+                    <select class="form-select">
+                        <option>-- Select Patient --</option>
+                        <option>Ramesh Kumar</option>
+                        <option>Meena Bai</option>
+                        <option>Kamla Devi</option>
+                    </select>
+                    <label class="form-label">Referral Reason</label>
+                    <select class="form-select">
+                        <option>-- Select Reason --</option>
+                        <option>High Fever / Dengue Suspected</option>
+                        <option>Pregnancy Complication</option>
+                        <option>Severe Breathlessness</option>
+                        <option>Emergency / Unknown</option>
+                    </select>
+                    <label class="form-label">Refer To</label>
+                    <select class="form-select">
+                        <option>PHC Rampura (2.3 km)</option>
+                        <option>CHC Barwani (8.7 km)</option>
+                        <option>District Hospital (22 km)</option>
+                    </select>
+                    <label class="form-label">Urgency</label>
+                    <div class="urgency-pills">
+                        <span class="urg-pill critical">🔴 Critical</span>
+                        <span class="urg-pill urgent">🟠 Urgent</span>
+                        <span class="urg-pill routine">🟡 Routine</span>
+                    </div>
+                    <button class="btn-submit" onclick="alert('Referral submitted! PHC Rampura has been alerted.')">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Referral &amp; Alert PHC
+                    </button>
+                </div>
+            </div>
+
+            <div class="dash-footer">
+                <i class="fa-solid fa-leaf" style="color:#10b981;"></i>
+                <span>Arogya Mithra — ASHA Worker Portal · Powered by NHM India · All data is secure and
+                    encrypted.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        function updateClock() { var n = new Date(), t = n.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }), d = n.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }), el = document.getElementById('topbarTime'); if (el) el.textContent = t + ' | ' + d; }
+        function setGreeting() { var h = new Date().getHours(), g = h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening', el = document.getElementById('tbGreeting'); if (el) el.textContent = g + ', Sunita'; }
+        function switchPanel(id) { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); var p = document.getElementById('panel-' + id), n = document.getElementById('nav-' + id); if (p) p.classList.add('active'); if (n) n.classList.add('active'); }
+        function showResult() { document.getElementById('triageResult').style.display = 'block'; }
+        document.addEventListener('DOMContentLoaded', function () { updateClock(); setGreeting(); setInterval(updateClock, 1000); });
+    </script>
+</body>
+
+</html>

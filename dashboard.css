@@ -1,0 +1,466 @@
+﻿/* =========================================
+   DASHBOARD SPECIFIC STYLES
+   ========================================= */
+
+.bg-light-bg {
+    background-color: #f4f7fe;
+}
+
+/* Dashboard Layout */
+.dashboard-navbar {
+    position: sticky;
+    top: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: var(--white);
+    z-index: 1000;
+}
+
+.dashboard-navbar .nav-container {
+    padding: 0 1.5rem;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--dark-dark);
+}
+
+.user-role {
+    font-size: 0.75rem;
+    color: var(--gray-color);
+}
+
+.user-avatar-sm {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.dashboard-sidebar {
+    width: 250px;
+    background: var(--white);
+    border-right: 1px solid var(--dark-light);
+    padding: 1.5rem 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--gray-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu li.active a {
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border-right: 3px solid var(--primary-color);
+}
+
+.sidebar-menu i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Main Content Area */
+.dashboard-main {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    overflow-x: hidden;
+}
+
+/* Header & Filters */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.header-titles h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--light-gray);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-control-sm {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--dark-color);
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Loader */
+.dashboard-loader {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Utility: hide any element */
+.hidden {
+    display: none !important;
+}
+
+/* Metrics Grid */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.metric-card {
+    padding: 1.5rem;
+    border: none;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.font-sm {
+    font-size: 0.875rem;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.metric-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.metric-value {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+}
+
+.metric-trend {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 500;
+}
+
+.trend-up {
+    color: var(--danger-color);
+}
+
+/* Higher cases generally bad */
+.trend-down {
+    color: var(--secondary-color);
+}
+
+/* Lower cases generally good */
+
+/* Charts Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+.col-span-3 {
+    grid-column: span 3;
+}
+
+.chart-card {
+    padding: 1.5rem;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.chart-header h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: var(--gray-color);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+    transition: var(--transition);
+}
+
+.btn-icon:hover {
+    color: var(--primary-color);
+}
+
+.chart-container {
+    flex: 1;
+    width: 100%;
+}
+
+/* Outbreak Risk Gauge (CSS Based) */
+.gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+.risk-meter {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    /* Half circle */
+}
+
+.gauge-arch {
+    width: 200px;
+    height: 100px;
+    background: linear-gradient(to right, var(--secondary-color), var(--warning-color), var(--danger-color));
+    border-radius: 100px 100px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Creating the inner cutout of arch */
+.gauge-arch::after {
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 70px;
+    background: var(--white);
+    border-radius: 70px 70px 0 0;
+    bottom: 0;
+    left: 30px;
+}
+
+.gauge-fill {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    background: var(--light-gray);
+    transform-origin: center top;
+    border-radius: 0 0 100px 100px;
+    transition: transform 1s ease-out;
+    z-index: 1;
+    /* Cover the colored arch from the right side */
+}
+
+.gauge-needle {
+    width: 4px;
+    height: 90px;
+    background: var(--dark-dark);
+    position: absolute;
+    bottom: -10px;
+    /* Let it anchor slightly below */
+    left: 98px;
+    transform-origin: bottom center;
+    transition: transform 1s ease-out;
+    z-index: 2;
+    border-radius: 4px 4px 0 0;
+}
+
+.gauge-needle::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--dark-dark);
+    border-radius: 50%;
+    bottom: 2px;
+    left: -6px;
+}
+
+.gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+/* High Risk Data Table */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    color: var(--gray-color);
+    border-bottom: 2px solid var(--dark-light);
+    font-weight: 600;
+}
+
+.data-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--dark-light);
+    color: var(--dark-color);
+}
+
+.badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-danger {
+    background: var(--danger-light);
+    color: var(--danger-color);
+}
+
+.badge-warning {
+    background: var(--warning-light);
+    color: var(--warning-color);
+}
+
+.badge-success {
+    background: var(--secondary-light);
+    color: var(--secondary-color);
+}
+
+/* XAI Area */
+.border-dash {
+    border: 1px dashed var(--light-gray);
+}
+
+/* Footer */
+.dashboard-footer {
+    border-top: 1px solid var(--dark-light);
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .col-span-3 {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .col-span-2,
+    .col-span-3 {
+        grid-column: span 1;
+    }
+
+    .dashboard-main {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-filters {
+        width: 100%;
+    }
+
+    .filter-group {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-group {
+        flex: 100%;
+    }
+}

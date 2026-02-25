@@ -1,0 +1,1134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Arogya Mithra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-page {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== LEFT PANEL ===== */
+        .left-panel {
+            width: 42%;
+            background: linear-gradient(160deg, #052e61 0%, #0b4ba8 45%, #0d6efd 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2.5rem 2.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, .06);
+            border-radius: 50%;
+        }
+
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -60px;
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, .05);
+            border-radius: 50%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            z-index: 1;
+            position: relative;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .left-center {
+            z-index: 1;
+            position: relative;
+        }
+
+        .left-tagline {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .left-tagline span {
+            color: #7dd3fc;
+        }
+
+        .left-desc {
+            font-size: .875rem;
+            color: rgba(255, 255, 255, .7);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: .65rem;
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            background: rgba(255, 255, 255, .08);
+            border-radius: 12px;
+            padding: .75rem 1rem;
+        }
+
+        .feature-row-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .9rem;
+        }
+
+        .feature-row-text {
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .85);
+            font-weight: 500;
+        }
+
+        .left-footer {
+            font-size: .72rem;
+            color: rgba(255, 255, 255, .4);
+            z-index: 1;
+            position: relative;
+        }
+
+        .left-footer a {
+            color: rgba(255, 255, 255, .5);
+            text-decoration: none;
+        }
+
+        /* ===== RIGHT PANEL ===== */
+        .right-panel {
+            flex: 1;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .right-inner {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            color: #64748b;
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            background: #e2e8f0;
+            border-radius: 20px;
+            padding: .35rem .85rem;
+            transition: background .2s;
+        }
+
+        .back-link:hover {
+            background: #cbd5e1;
+        }
+
+        .form-heading {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: .3rem;
+        }
+
+        .form-subheading {
+            font-size: .85rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Role tabs */
+        .role-tabs {
+            display: flex;
+            gap: .4rem;
+            background: #e2e8f0;
+            border-radius: 12px;
+            padding: .3rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .role-tab {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .2rem;
+            padding: .55rem .3rem;
+            border-radius: 9px;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: .7rem;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .role-tab i {
+            font-size: 1rem;
+        }
+
+        .role-tab.active-patient {
+            background: #fff;
+            color: #0369a1;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        }
+
+        .role-tab.active-asha {
+            background: #fff;
+            color: #15803d;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        }
+
+        .role-tab.active-doctor {
+            background: #fff;
+            color: #4338ca;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        }
+
+        .role-tab.active-district {
+            background: #fff;
+            color: #7c3aed;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+        }
+
+        /* Forms */
+        .form-panel {
+            display: none;
+            animation: fadeSlide .22s ease;
+        }
+
+        .form-panel.visible {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            border-radius: 20px;
+            padding: .35rem .85rem;
+            font-size: .78rem;
+            font-weight: 700;
+            margin-bottom: 1.1rem;
+        }
+
+        .field {
+            margin-bottom: .9rem;
+        }
+
+        .field label {
+            display: block;
+            font-size: .77rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: .35rem;
+        }
+
+        .field-wrap {
+            position: relative;
+        }
+
+        .field-wrap .fi {
+            position: absolute;
+            left: .85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: .82rem;
+            pointer-events: none;
+        }
+
+        .field-wrap input,
+        .field-wrap select {
+            width: 100%;
+            padding: .7rem .9rem .7rem 2.3rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: .875rem;
+            color: #0f172a;
+            background: #fff;
+            outline: none;
+            transition: border-color .18s;
+        }
+
+        .rp-patient .field-wrap input:focus,
+        .rp-patient .field-wrap select:focus {
+            border-color: #0284c7;
+        }
+
+        .rp-asha .field-wrap input:focus,
+        .rp-asha .field-wrap select:focus {
+            border-color: #15803d;
+        }
+
+        .rp-doctor .field-wrap input:focus,
+        .rp-doctor .field-wrap select:focus {
+            border-color: #4338ca;
+        }
+
+        .rp-district .field-wrap input:focus,
+        .rp-district .field-wrap select:focus {
+            border-color: #7c3aed;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+        }
+
+        .eye-btn {
+            position: absolute;
+            right: .85rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: .82rem;
+        }
+
+        .hint-box {
+            display: flex;
+            align-items: flex-start;
+            gap: .5rem;
+            border-radius: 8px;
+            padding: .6rem .75rem;
+            font-size: .76rem;
+            line-height: 1.5;
+            margin-bottom: .5rem;
+        }
+
+        .hint-patient {
+            background: #f0f9ff;
+            color: #0c4a6e;
+        }
+
+        .hint-asha {
+            background: #f0fdf4;
+            color: #14532d;
+        }
+
+        .hint-doctor {
+            background: #eef2ff;
+            color: #1e1b4b;
+        }
+
+        .hint-district {
+            background: #faf5ff;
+            color: #3b0764;
+        }
+
+        /* Error message */
+        .auth-error {
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            border-radius: 8px;
+            padding: .6rem .85rem;
+            font-size: .78rem;
+            color: #b91c1c;
+            margin-bottom: .75rem;
+            display: none;
+        }
+
+        .auth-error.show {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        /* Submit */
+        .submit-btn {
+            width: 100%;
+            margin-top: 1.1rem;
+            padding: .82rem;
+            border: none;
+            border-radius: 11px;
+            font-family: inherit;
+            font-size: .92rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            transition: opacity .18s, transform .15s;
+        }
+
+        .submit-btn:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-patient {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        }
+
+        .btn-asha {
+            background: linear-gradient(135deg, #22c55e, #15803d);
+        }
+
+        .btn-doctor {
+            background: linear-gradient(135deg, #6366f1, #4338ca);
+        }
+
+        .btn-district {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+        }
+
+        .badge-patient {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .badge-asha {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge-doctor {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .badge-district {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .divider {
+            text-align: center;
+            color: #94a3b8;
+            font-size: .72rem;
+            margin: 1rem 0;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .privacy-note {
+            text-align: center;
+            font-size: .72rem;
+            color: #94a3b8;
+            margin-top: 1rem;
+        }
+
+        .privacy-note a {
+            color: #0ea5e9;
+            text-decoration: none;
+        }
+
+        /* Mode toggle */
+        .mode-toggle {
+            display: flex;
+            background: #e2e8f0;
+            border-radius: 10px;
+            padding: .25rem;
+            margin-bottom: 1.4rem;
+            gap: .3rem;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: .55rem;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .2s;
+            background: transparent;
+            color: #64748b;
+        }
+
+        .mode-btn.active {
+            background: #fff;
+            color: #0f172a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+        }
+
+        .signup-success {
+            background: #f0fdf4;
+            border: 1.5px solid #86efac;
+            border-radius: 8px;
+            padding: .65rem .85rem;
+            font-size: .78rem;
+            color: #15803d;
+            margin-bottom: .75rem;
+            display: none;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .signup-success.show {
+            display: flex;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: #fff;
+            padding: .65rem 1.4rem;
+            border-radius: 20px;
+            font-size: .82rem;
+            font-weight: 600;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, .25);
+            z-index: 9999;
+            display: none;
+            white-space: nowrap;
+        }
+
+        /* Spinner */
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, .4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin .6s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media(max-width:768px) {
+            .login-page {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                width: 100%;
+                padding: 1.5rem 1.5rem 2rem;
+                min-height: auto;
+            }
+
+            .left-tagline {
+                font-size: 1.5rem;
+            }
+
+            .feature-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: .5rem;
+            }
+
+            .left-footer {
+                display: none;
+            }
+
+            .right-panel {
+                padding: 1.5rem 1.25rem 2rem;
+            }
+        }
+
+        @media(max-width:400px) {
+            .role-tab span {
+                display: none;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <!-- ===== LEFT PANEL ===== -->
+        <div class="left-panel">
+            <div class="brand">
+                <div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <span class="brand-name">Arogya Mithra</span>
+            </div>
+            <div class="left-center">
+                <h1 class="left-tagline">Smart Healthcare<br>for <span>Rural India</span></h1>
+                <p class="left-desc">
+                    An intelligent platform that connects patients, health workers,
+                    doctors, and district officials — bringing quality care to every village.
+                </p>
+                <div class="feature-list">
+                    <div class="feature-row">
+                        <div class="feature-row-icon" style="background:rgba(125,211,252,.2);color:#7dd3fc;"><i
+                                class="fa-solid fa-stethoscope"></i></div>
+                        <span class="feature-row-text">AI Symptom Checker</span>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-row-icon" style="background:rgba(134,239,172,.2);color:#86efac;"><i
+                                class="fa-solid fa-user-nurse"></i></div>
+                        <span class="feature-row-text">ASHA Worker Task Manager</span>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-row-icon" style="background:rgba(167,139,250,.2);color:#c4b5fd;"><i
+                                class="fa-solid fa-video"></i></div>
+                        <span class="feature-row-text">Tele-Consultation Queue</span>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-row-icon" style="background:rgba(253,186,116,.2);color:#fdba74;"><i
+                                class="fa-solid fa-chart-line"></i></div>
+                        <span class="feature-row-text">District Health Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="left-footer">
+                &copy; 2026 Arogya Mithra &nbsp;|&nbsp;
+                <a href="privacy.html">Privacy &amp; Ethics</a>
+            </div>
+        </div>
+
+        <!-- ===== RIGHT PANEL ===== -->
+        <div class="right-panel">
+            <div class="right-inner">
+
+                <a href="index.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Home
+                </a>
+
+                <!-- Mode Toggle -->
+                <div class="mode-toggle">
+                    <button class="mode-btn active" id="mode-login" onclick="setMode('login')">
+                        <i class="fa-solid fa-right-to-bracket"></i> Log In
+                    </button>
+                    <button class="mode-btn" id="mode-signup" onclick="setMode('signup')">
+                        <i class="fa-solid fa-user-plus"></i> Sign Up
+                    </button>
+                </div>
+
+                <h2 class="form-heading" id="main-heading">Welcome back 👋</h2>
+                <p class="form-subheading" id="main-subheading">Select your role and log in below</p>
+
+                <!-- ROLE TABS -->
+                <div class="role-tabs">
+                    <button class="role-tab active-patient" id="tab-patient" onclick="switchRole('patient')">
+                        <i class="fa-solid fa-user"></i><span>Patient</span>
+                    </button>
+                    <button class="role-tab" id="tab-asha" onclick="switchRole('asha')">
+                        <i class="fa-solid fa-user-nurse"></i><span>ASHA</span>
+                    </button>
+                    <button class="role-tab" id="tab-doctor" onclick="switchRole('doctor')">
+                        <i class="fa-solid fa-user-doctor"></i><span>Doctor</span>
+                    </button>
+                    <button class="role-tab" id="tab-district" onclick="switchRole('district')">
+                        <i class="fa-solid fa-building-columns"></i><span>District</span>
+                    </button>
+                </div>
+
+                <!-- ======= PATIENT FORM ======= -->
+                <div class="form-panel rp-patient visible" id="panel-patient">
+                    <div class="role-badge badge-patient"><i class="fa-solid fa-user"></i> Patient Login</div>
+                    <div class="auth-error" id="err-patient"><i class="fa-solid fa-circle-exclamation"></i><span></span>
+                    </div>
+                    <form id="form-patient">
+                        <div class="field">
+                            <label>Full Name</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-user fi"></i>
+                                <input type="text" id="patient-name" placeholder="e.g. Priya Devi" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Mobile Number</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-mobile-screen fi"></i>
+                                <input type="text" id="patient-mobile" placeholder="e.g. 9876543210" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Date of Birth (used as password)</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-calendar-days fi"></i>
+                                <input type="date" id="patient-dob" required>
+                            </div>
+                        </div>
+                        <div class="hint-box hint-patient">
+                            <i class="fa-solid fa-circle-info" style="flex-shrink:0;margin-top:1px;"></i>
+                            Log in with your mobile number and date of birth. First time? Ask your ASHA worker to
+                            register you.
+                        </div>
+                        <button type="submit" class="submit-btn btn-patient" id="btn-patient">
+                            <i class="fa-solid fa-right-to-bracket"></i> Log in as Patient
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ======= ASHA WORKER FORM ======= -->
+                <div class="form-panel rp-asha" id="panel-asha">
+                    <div class="role-badge badge-asha"><i class="fa-solid fa-user-nurse"></i> ASHA Worker Login</div>
+                    <div class="auth-error" id="err-asha"><i class="fa-solid fa-circle-exclamation"></i><span></span>
+                    </div>
+                    <form id="form-asha">
+                        <div class="field-row">
+                            <div class="field">
+                                <label>Worker ID</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-id-badge fi"></i>
+                                    <input type="text" id="asha-id" placeholder="ASHA-2041" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>6-Digit PIN</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-lock fi"></i>
+                                    <input type="password" id="asha-pin" placeholder="••••••" maxlength="6" required>
+                                    <button type="button" class="eye-btn" onclick="togglePwd('asha-pin',this)"><i
+                                            class="fa-regular fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Village / Block</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-location-dot fi"></i>
+                                <input type="text" id="asha-village" placeholder="e.g. Gopalpur, Varanasi Block">
+                            </div>
+                        </div>
+                        <div class="hint-box hint-asha">
+                            <i class="fa-solid fa-circle-info" style="flex-shrink:0;margin-top:1px;"></i>
+                            Use the Worker ID and PIN given to you by your supervisor.
+                        </div>
+                        <button type="submit" class="submit-btn btn-asha" id="btn-asha">
+                            <i class="fa-solid fa-right-to-bracket"></i> Log in as ASHA Worker
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ======= DOCTOR FORM ======= -->
+                <div class="form-panel rp-doctor" id="panel-doctor">
+                    <div class="role-badge badge-doctor"><i class="fa-solid fa-user-doctor"></i> Doctor Login</div>
+                    <div class="auth-error" id="err-doctor"><i class="fa-solid fa-circle-exclamation"></i><span></span>
+                    </div>
+                    <form id="form-doctor">
+                        <div class="field">
+                            <label>MCI Registration Number</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-stethoscope fi"></i>
+                                <input type="text" id="doc-mci" placeholder="e.g. MCI-987654" required>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label>Specialization</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-briefcase-medical fi"></i>
+                                    <select id="doc-spec">
+                                        <option>General Physician</option>
+                                        <option>Pediatrician</option>
+                                        <option>Internal Medicine</option>
+                                        <option>Gynecologist</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Password</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-lock fi"></i>
+                                    <input type="password" id="doc-pwd" placeholder="••••••••" required>
+                                    <button type="button" class="eye-btn" onclick="togglePwd('doc-pwd',this)"><i
+                                            class="fa-regular fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hint-box hint-doctor">
+                            <i class="fa-solid fa-shield-halved" style="flex-shrink:0;margin-top:1px;"></i>
+                            Use your MCI number and the password set during platform onboarding.
+                        </div>
+                        <button type="submit" class="submit-btn btn-doctor" id="btn-doctor">
+                            <i class="fa-solid fa-right-to-bracket"></i> Log in as Doctor
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ======= DISTRICT OFFICIAL FORM ======= -->
+                <div class="form-panel rp-district" id="panel-district">
+                    <div class="role-badge badge-district"><i class="fa-solid fa-building-columns"></i> District
+                        Official Login</div>
+                    <div class="auth-error" id="err-district"><i
+                            class="fa-solid fa-circle-exclamation"></i><span></span></div>
+                    <form id="form-district">
+                        <div class="field">
+                            <label>Government Email Address</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-envelope fi"></i>
+                                <input type="email" id="dist-email" placeholder="dhmo.varanasi@gov.in" required>
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label>District Code</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-map-pin fi"></i>
+                                    <input type="text" id="dist-code" placeholder="UP-VNS-042" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>State</label>
+                                <div class="field-wrap">
+                                    <i class="fa-solid fa-flag fi"></i>
+                                    <select id="dist-state">
+                                        <option selected>Andhra Pradesh</option>
+                                        <option>Bihar</option>
+                                        <option>Chhattisgarh</option>
+                                        <option>Gujarat</option>
+                                        <option>Jharkhand</option>
+                                        <option>Karnataka</option>
+                                        <option>Kerala</option>
+                                        <option>Madhya Pradesh</option>
+                                        <option>Maharashtra</option>
+                                        <option>Odisha</option>
+                                        <option>Rajasthan</option>
+                                        <option>Tamil Nadu</option>
+                                        <option>Telangana</option>
+                                        <option>Uttar Pradesh</option>
+                                        <option>West Bengal</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Admin Password</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-lock fi"></i>
+                                <input type="password" id="dist-pwd" placeholder="Enter your admin password" required>
+                                <button type="button" class="eye-btn" onclick="togglePwd('dist-pwd',this)"><i
+                                        class="fa-regular fa-eye"></i></button>
+                            </div>
+                        </div>
+                        <div class="hint-box hint-district">
+                            <i class="fa-solid fa-shield-halved" style="flex-shrink:0;margin-top:1px;"></i>
+                            Credentials are issued by the District Health Mission Office. Contact your State IT cell for
+                            help.
+                        </div>
+                        <button type="submit" class="submit-btn btn-district" id="btn-district">
+                            <i class="fa-solid fa-right-to-bracket"></i> Log in as District Official
+                        </button>
+                    </form>
+                </div>
+
+                <div class="divider">or</div>
+                <p class="privacy-note">
+                    By logging in you agree to our <a href="privacy.html">Data Privacy &amp; Ethics Policy</a>.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
+            from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
+        import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKLbWsqsNipU6a-Qec6t_y1X60hhiQMFI",
+            authDomain: "health1-6deda.firebaseapp.com",
+            projectId: "health1-6deda",
+            storageBucket: "health1-6deda.firebasestorage.app",
+            messagingSenderId: "366719596305",
+            appId: "1:366719596305:web:1c5a1876fff53e05157eb0"
+        };
+
+        const firebaseApp = initializeApp(firebaseConfig);
+        const firebaseAuth = getAuth(firebaseApp);
+        const firestoreDB = getFirestore(firebaseApp);
+
+        window.firebaseApp = firebaseApp;
+        window.firebaseAuth = firebaseAuth;
+        window.firestoreDB = firestoreDB;
+
+        const DEST = {
+            patient: 'patient-dashboard.html',
+            asha: 'asha-dashboard.html',
+            doctor: 'doctor-dashboard.html',
+            district: 'district-dashboard.html'
+        };
+
+        function buildEmail(role, id) {
+            const safe = id.trim().toLowerCase().replace(/\s+/g, '.');
+            return `${safe}@${role}.healthai.in`;
+        }
+
+        // Button label originals per role+mode
+        const BTN_LABELS = {
+            login: { patient: '→ Log in as Patient', asha: '→ Log in as ASHA Worker', doctor: '→ Log in as Doctor', district: '→ Log in as District Official' },
+            signup: { patient: '✦ Sign Up as Patient', asha: '✦ Sign Up as ASHA Worker', doctor: '✦ Sign Up as Doctor', district: '✦ Sign Up as District Official' }
+        };
+        function setLoading(btnId, role, loading, mode) {
+            const btn = document.getElementById(btnId);
+            if (loading) {
+                btn.disabled = true;
+                btn.innerHTML = `<span class="spinner"></span> ${mode === 'signup' ? 'Creating account...' : 'Verifying...'}`;
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> ${(BTN_LABELS[mode] || BTN_LABELS.login)[role]}`;
+            }
+        }
+        function showError(role, msg) {
+            const el = document.getElementById('err-' + role);
+            el.querySelector('span').textContent = msg;
+            el.classList.add('show');
+        }
+        function clearError(role) { document.getElementById('err-' + role).classList.remove('show'); }
+        function showSuccess(role, msg) {
+            let el = document.getElementById('ok-' + role);
+            if (el) { el.querySelector('span').textContent = msg; el.classList.add('show'); }
+        }
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 2500);
+        }
+        function getMode() { return window._authMode || 'login'; }
+
+        const ERROR_MSGS = {
+            'auth/user-not-found': 'No account found. Please Sign Up first.',
+            'auth/wrong-password': 'Incorrect credentials. Please try again.',
+            'auth/invalid-credential': 'Incorrect credentials. Please try again.',
+            'auth/email-already-in-use': 'Account already exists. Please Log In instead.',
+            'auth/weak-password': 'Password too short (min 6 characters).',
+            'auth/invalid-email': 'Invalid email format.',
+            'auth/too-many-requests': 'Too many attempts. Please wait a moment.'
+        };
+
+        async function handleAuth(role, email, password, btnId, extra) {
+            clearError(role);
+            const mode = getMode();
+            setLoading(btnId, role, true, mode);
+            try {
+                let cred;
+                if (mode === 'signup') {
+                    cred = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+                    // Save profile to Firestore — non-blocking, a rules error won't break login
+                    setDoc(doc(firestoreDB, 'users', cred.user.uid), {
+                        role, email, createdAt: new Date().toISOString(), ...extra
+                    }).catch(e => console.warn('[Firestore] Could not save profile:', e.message));
+                    toast('✅ Account created! Redirecting...');
+                } else {
+                    cred = await signInWithEmailAndPassword(firebaseAuth, email, password);
+                    toast('✅ Logged in! Redirecting...');
+                }
+                sessionStorage.setItem('ha_role', role);
+                sessionStorage.setItem('ha_uid', cred.user.uid);
+                setTimeout(() => { window.location.href = DEST[role]; }, 1100);
+            } catch (err) {
+                console.error('[Firebase Auth error]', err.code, err.message);
+                setLoading(btnId, role, false, mode);
+                showError(role, ERROR_MSGS[err.code] || `Error: ${err.code || err.message}`);
+            }
+        }
+
+        /* ── Patient ── */
+        document.getElementById('form-patient').addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('patient-name').value.trim();
+            const mobile = document.getElementById('patient-mobile').value.trim();
+            const dob = document.getElementById('patient-dob').value;
+            if (!name || !mobile || !dob) return;
+
+            // Persist name for the dashboard
+            localStorage.setItem('ha_patient_name', name);
+
+            handleAuth('patient', buildEmail('patient', mobile), dob.replace(/-/g, ''), 'btn-patient', { name, mobile });
+        });
+
+        /* ── ASHA Worker ── */
+        document.getElementById('form-asha').addEventListener('submit', e => {
+            e.preventDefault();
+            const wid = document.getElementById('asha-id').value.trim();
+            const pin = document.getElementById('asha-pin').value.trim();
+            if (!wid || !pin) return;
+            const village = document.getElementById('asha-village').value.trim();
+            handleAuth('asha', buildEmail('asha', wid), pin, 'btn-asha', { workerId: wid, village });
+        });
+
+        /* ── Doctor ── */
+        document.getElementById('form-doctor').addEventListener('submit', e => {
+            e.preventDefault();
+            const mci = document.getElementById('doc-mci').value.trim();
+            const pwd = document.getElementById('doc-pwd').value;
+            const spec = document.getElementById('doc-spec').value;
+            if (!mci || !pwd) return;
+            handleAuth('doctor', buildEmail('doctor', mci), pwd, 'btn-doctor', { mci, specialization: spec });
+        });
+
+        /* ── District Official ── */
+        document.getElementById('form-district').addEventListener('submit', e => {
+            e.preventDefault();
+            const email = document.getElementById('dist-email').value.trim();
+            const pwd = document.getElementById('dist-pwd').value;
+            const code = document.getElementById('dist-code').value.trim();
+            const state = document.getElementById('dist-state').value;
+            if (!email || !pwd) return;
+            handleAuth('district', email, pwd, 'btn-district', { districtCode: code, state });
+        });
+    </script>
+
+    <!-- Non-module helpers accessible globally -->
+    <script>
+        function switchRole(role) {
+            ['patient', 'asha', 'doctor', 'district'].forEach(r => {
+                document.getElementById('panel-' + r).classList.remove('visible');
+                document.getElementById('tab-' + r).className = 'role-tab';
+            });
+            document.getElementById('panel-' + role).classList.add('visible');
+            document.getElementById('tab-' + role).className = 'role-tab active-' + role;
+        }
+
+        function setMode(mode) {
+            window._authMode = mode;
+            var isSignup = mode === 'signup';
+            // Toggle active button
+            document.getElementById('mode-login').classList.toggle('active', !isSignup);
+            document.getElementById('mode-signup').classList.toggle('active', isSignup);
+            // Update heading
+            document.getElementById('main-heading').textContent = isSignup ? 'Create your account 🎉' : 'Welcome back 👋';
+            document.getElementById('main-subheading').textContent = isSignup
+                ? 'Select your role and register below'
+                : 'Select your role and log in below';
+            // Update all button labels
+            var btnLabels = {
+                patient: isSignup ? '✦ Sign Up as Patient' : '→ Log in as Patient',
+                asha: isSignup ? '✦ Sign Up as ASHA Worker' : '→ Log in as ASHA Worker',
+                doctor: isSignup ? '✦ Sign Up as Doctor' : '→ Log in as Doctor',
+                district: isSignup ? '✦ Sign Up as District Official' : '→ Log in as District Official'
+            };
+            ['patient', 'asha', 'doctor', 'district'].forEach(function (r) {
+                var btn = document.getElementById('btn-' + r);
+                if (btn && !btn.disabled) btn.textContent = btnLabels[r];
+            });
+        }
+        function togglePwd(id, btn) {
+            const inp = document.getElementById(id);
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                btn.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+            } else {
+                inp.type = 'password';
+                btn.innerHTML = '<i class="fa-regular fa-eye"></i>';
+            }
+        }
+    </script>
+</body>
+
+</html>

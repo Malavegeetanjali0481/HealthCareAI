@@ -1,0 +1,713 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arogya Mithra | Your Health Companion | Rural Healthcare Platform</title>
+    <meta name="description"
+        content="Arogya Mithra is a smart rural healthcare platform supporting frontline health workers, telemedicine, and data-driven decisions for every Indian village.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         OFFICIAL GOVT BAR (NEW)
+         ========================================= -->
+    <div class="official-gov-bar">
+        <div class="container gov-bar-container">
+            <div class="gov-left">
+                <span class="gov-text">Government of India</span>
+                <span class="bar-sep">|</span>
+                <span class="gov-text">Ministry of Health & Family Welfare</span>
+            </div>
+            <div class="gov-center">
+                <div class="rotating-banner">
+                    <div class="banner-track">
+                        <span class="banner-item">Seasonal Disease Alert: Prevention is better than cure.</span>
+                        <span class="banner-item">Upcoming Medical Camps: Mega camp at Barwani on March 5th.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gov-right">
+                <span class="helpline"><i class="fa-solid fa-phone-volume"></i> Health Helpline: 108 / 104</span>
+                <span class="bar-sep">|</span>
+                <div class="lang-selector">
+                    <a href="javascript:void(0)" onclick="setAppLang('en')" id="lang-en" class="active">English</a>
+                    <span>|</span>
+                    <a href="javascript:void(0)" onclick="setAppLang('hi')" id="lang-hi">हिंदी</a>
+                    <span>|</span>
+                    <a href="javascript:void(0)" onclick="setAppLang('te')" id="lang-te">తెలుగు</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================
+         NAVBAR
+         ========================================= -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text-wrap">
+                    <span>Arogya Mithra</span>
+                    <span class="logo-sub">YOUR HEALTH COMPANION</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#problem">About Us</a>
+                <a href="#solution">How It Works</a>
+            </div>
+            <div class="nav-right-actions">
+                <a href="login.html" class="btn btn-primary sm-btn" id="nav-login-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login / Register</a>
+                <button class="btn btn-navy sm-btn" id="nav-logout-btn" style="display:none;"
+                    onclick="handleNavLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                <button class="mobile-menu-btn" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================================
+         1. HERO SECTION
+         ========================================= -->
+    <section class="hero" aria-labelledby="hero-heading">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="badge fade-in-up">
+                    <i class="fa-solid fa-leaf mr-1"></i> Smart Healthcare for Bharat
+                </div>
+                <h1 class="fade-in-up delay-1" id="hero-heading">Arogya Mithra</h1>
+                <div class="supporting-line fade-in-up delay-1"
+                    style="font-size: 1.5rem; font-weight: 500; margin-bottom: 1.5rem; color: var(--accent-color);">
+                    Equitable healthcare for every Indian village.
+                </div>
+                <p class="fade-in-up delay-2" style="font-size: 1.1rem; opacity: 0.95; margin-bottom: 2rem;">
+                    An AI-powered platform for frontline health workers, tele-doctors, and district officials.
+                </p>
+
+                <!-- Trust Badges -->
+                <div class="hero-badges fade-in-up delay-2">
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-shield-halved"></i> Govt Compliant
+                    </span>
+                    <span class="hero-badge green">
+                        <i class="fa-solid fa-wifi"></i> Offline Ready
+                    </span>
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-lock"></i> Privacy-First
+                    </span>
+                    <span class="hero-badge green">
+                        <i class="fa-solid fa-wheelchair-move"></i> WCAG 2.1 AA
+                    </span>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hero-buttons fade-in-up delay-3">
+                    <a href="login.html" class="btn btn-primary btn-lg pulse-animation">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login / Register
+                    </a>
+                    <a href="#solution" class="btn btn-outline btn-lg">
+                        <i class="fa-solid fa-desktop"></i> Explore Features
+                    </a>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="hero-stats-row fade-in-up delay-3">
+                    <div class="hero-stat">
+                        <div class="num">6</div>
+                        <div class="lbl">Smart Modules</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">4</div>
+                        <div class="lbl">User Roles</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">500+</div>
+                        <div class="lbl">Villages Covered</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="num">100%</div>
+                        <div class="lbl">Open Standard</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual fade-in-up delay-2">
+                <div class="image-wrapper">
+                    <img src="hero_illustration.png" alt="ASHA worker using Arogya Mithra platform with rural patient"
+                        class="hero-img">
+                    <div class="floating-card top-right bounce">
+                        <i class="fa-solid fa-shield-heart"></i>
+                        <span>Smart Triage</span>
+                    </div>
+                    <div class="floating-card bottom-left bounce-delayed">
+                        <i class="fa-solid fa-wifi"></i>
+                        <span>Offline Sync</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wave-shape">
+            <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M0,60L80,65C160,70,320,80,480,75C640,70,800,50,960,45C1120,40,1280,50,1360,55L1440,60L1440,100L0,100Z"
+                    fill="#F7F9FC"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- =========================================
+         2. PROBLEM STATEMENT (ABOUT US)
+         ========================================= -->
+    <section id="problem" class="problem-section py-large bg-light" aria-labelledby="problem-heading">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 id="problem-heading">The Rural Healthcare <span class="accent-word">Crisis</span></h2>
+                <p class="subtitle">India's 65% rural population faces chronic underservicing in primary healthcare — a
+                    gap our platform is built to bridge.</p>
+            </div>
+            <div class="grid grid-3 problem-grid">
+                <div class="card problem-card">
+                    <span class="stat-chip">1 per 11,000 pop.</span>
+                    <div class="icon-wrapper icon-danger"><i class="fa-solid fa-user-doctor"></i></div>
+                    <h3>Shortage of Specialist Doctors</h3>
+                    <p>Rural India has critically fewer doctors per capita than WHO-recommended norms.</p>
+                </div>
+                <div class="card problem-card warning-card">
+                    <span class="stat-chip warn">Avg. 30+ km travel</span>
+                    <div class="icon-wrapper icon-warning"><i class="fa-solid fa-route"></i></div>
+                    <h3>Long Travel Distances</h3>
+                    <p>Patients travel hours or days to reach secondary or tertiary care facilities.</p>
+                </div>
+                <div class="card problem-card">
+                    <span class="stat-chip">67% cases delayed</span>
+                    <div class="icon-wrapper icon-danger"><i class="fa-solid fa-clock"></i></div>
+                    <h3>Delayed Diagnosis</h3>
+                    <p>Critical conditions worsen due to delayed screening and slow treatment pipelines.</p>
+                </div>
+                <div class="card problem-card warning-card">
+                    <span class="stat-chip warn">&lt;30% PHC equipped</span>
+                    <div class="icon-wrapper icon-warning"><i class="fa-solid fa-microscope"></i></div>
+                    <h3>Limited Diagnostic Access</h3>
+                    <p>Fewer than 30% of primary health centres have adequate diagnostic equipment.</p>
+                </div>
+                <div class="card problem-card">
+                    <span class="stat-chip">900+ patients/ASHA</span>
+                    <div class="icon-wrapper icon-danger"><i class="fa-solid fa-users-slash"></i></div>
+                    <h3>Overburdened Frontline Workers</h3>
+                    <p>ASHA and ANM workers handle excessive caseloads without digital support tools.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         3. HOW IT WORKS (SOLUTION)
+         ========================================= -->
+    <section id="solution" class="solution-section py-large" aria-labelledby="solution-heading">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 id="solution-heading">How Our Platform <span class="accent-word">Works</span></h2>
+                <p class="subtitle">Six intelligent modules, built for last-mile delivery. All features require login to
+                    maintain data security and accountability.</p>
+            </div>
+            <div class="grid grid-2 solution-features">
+
+                <div class="feature-item">
+                    <div class="icon-box bg-primary-light text-primary"><i class="fa-solid fa-stethoscope"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 01</span>
+                        <h3>Smart Symptom Checker</h3>
+                        <p>Intelligent assessment of symptoms, vitals, and history to triage patients and recommend the
+                            right care pathway instantly.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon-box bg-secondary-light text-secondary"><i class="fa-solid fa-video"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 02</span>
+                        <h3>Telemed Queue Manager</h3>
+                        <p>Optimises tele-doctor queues by prioritising high-risk patients and auto-generating
+                            pre-triage case summaries.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon-box bg-primary-light text-primary"><i class="fa-solid fa-tablet-screen-button"></i>
+                    </div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 03</span>
+                        <h3>ASHA / CHW Worker App</h3>
+                        <p>Guides ASHA workers through village visits, symptom collection, and referral decisions —
+                            works completely offline.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon-box bg-secondary-light text-secondary"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 04</span>
+                        <h3>Public Health Analytics</h3>
+                        <p>Real-time district-level dashboards for health officials to track disease trends, outbreaks,
+                            and resource allocation.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon-box bg-primary-light text-primary"><i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 05</span>
+                        <h3>Disease Risk Tracker</h3>
+                        <p>Village and seasonal risk mapping using AI pattern recognition across historical and live
+                            data for early outbreak alerts.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon-box bg-secondary-light text-secondary"><i class="fa-solid fa-address-card"></i>
+                    </div>
+                    <div class="feature-text">
+                        <span class="feature-num">MODULE 06</span>
+                        <h3>Patient Health Record</h3>
+                        <p>Longitudinal patient profiles with AI risk scores, prescription history, and ABDM-linked
+                            health ID integration.</p>
+                        <a href="login.html"><i class="fa-solid fa-lock"></i> Login to Access</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         4. CORE FEATURES
+         ========================================= -->
+    <section id="features" class="features-section py-large" aria-labelledby="features-heading">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 id="features-heading">Platform <span class="accent-word">Capabilities</span></h2>
+                <p class="subtitle">Designed for the constraints and challenges of low-resource, last-mile healthcare
+                    settings.</p>
+            </div>
+            <div class="grid grid-3 feature-cards">
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-clipboard-list text-primary"></i>
+                        <h4>Risk Stratification</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="tags">
+                            <span class="tag low">Low</span>
+                            <span class="tag med">Medium</span>
+                            <span class="tag high">High</span>
+                        </div>
+                        <p>Instantly stratifies patient risk based on collected symptoms, vitals, and clinical
+                            history.</p>
+                    </div>
+                </div>
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-arrows-turn-right text-secondary"></i>
+                        <h4>Referral Guidance</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Protocol-driven referral decisions: <strong>Home care</strong>, <strong>Teleconsult</strong>,
+                            or <strong>Hospital</strong> — with reasoning logs.</p>
+                    </div>
+                </div>
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-comments text-primary"></i>
+                        <h4>Multilingual Support</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Voice and text assistance in Hindi and major regional languages, ensuring complete
+                            accessibility.</p>
+                    </div>
+                </div>
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-wifi" style="color: var(--warning-color);"></i>
+                        <h4>Offline-First Architecture</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Core modules operate fully offline with seamless sync when connectivity is restored.</p>
+                    </div>
+                </div>
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-chart-pie text-secondary"></i>
+                        <h4>Outbreak Detection</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Data-driven early warning system to detect localised outbreaks before they escalate.</p>
+                    </div>
+                </div>
+                <div class="card feature-card-minimal">
+                    <div class="card-header">
+                        <i class="fa-solid fa-lock text-primary"></i>
+                        <h4>Privacy-Aware Design</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>End-to-end encrypted data storage with role-based access following DPDP Act 2023 standards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         5. TARGET USERS
+         ========================================= -->
+    <section id="users" class="users-section py-large" aria-labelledby="users-heading">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 id="users-heading">Who Uses <span class="accent-word">Arogya Mithra</span>?</h2>
+                <p class="subtitle">Connecting all stakeholders in India's public healthcare ecosystem.</p>
+            </div>
+            <div class="grid grid-4 user-grid">
+                <div class="user-profile card text-center">
+                    <div class="user-avatar bg-primary-light text-primary"><i class="fa-solid fa-user-nurse"></i></div>
+                    <h4>Community Health Workers</h4>
+                    <span class="user-role">ASHA / ANM</span>
+                    <p>Empowered to make accurate preliminary assessments and digitise patient records instantly.</p>
+                </div>
+                <div class="user-profile card text-center">
+                    <div class="user-avatar bg-secondary-light text-secondary"><i class="fa-solid fa-person-cane"></i>
+                    </div>
+                    <h4>Rural Patients</h4>
+                    <span class="user-role">Beneficiaries</span>
+                    <p>Access better care, faster specialist consultations, and personalised health tracking.</p>
+                </div>
+                <div class="user-profile card text-center">
+                    <div class="user-avatar" style="background:#e0e7ff; color:#4338ca;"><i
+                            class="fa-solid fa-user-md"></i></div>
+                    <h4>Urban Specialist Doctors</h4>
+                    <span class="user-role">Telemedicine Providers</span>
+                    <p>Receive neatly summarised, pre-triaged cases from verified ASHA workers.</p>
+                </div>
+                <div class="user-profile card text-center">
+                    <div class="user-avatar bg-dark-light text-dark"><i class="fa-solid fa-building-user"></i></div>
+                    <h4>Public Health Officers</h4>
+                    <span class="user-role">District Administrators</span>
+                    <p>Real-time district health metrics, outbreak alerts, and resource allocation dashboards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         6. IMPACT METRICS
+         ========================================= -->
+    <section id="impact" class="impact-section py-large" aria-labelledby="impact-heading">
+        <div class="container">
+            <div class="section-header text-center">
+                <div class="projected-label">
+                    <i class="fa-solid fa-chart-line"></i> Projected Social Impact
+                </div>
+                <h2 id="impact-heading" style="color:var(--white);">Measurable Impact at <span
+                        style="color:var(--accent-color);">National Scale</span></h2>
+                <p class="subtitle" style="color:rgba(255,255,255,0.6);">Validated projections based on pilot data and
+                    NHP 2.0 benchmarks.</p>
+            </div>
+            <div class="grid grid-3"
+                style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.25rem; margin-top:1rem;">
+                <div class="metric" style="flex:1 1 28%; min-width:200px;">
+                    <div class="metric-number">↓40%</div>
+                    <div class="metric-label">Unnecessary Hospital<br>Referrals</div>
+                </div>
+                <div class="metric" style="flex:1 1 28%; min-width:200px;">
+                    <div class="metric-number">3×</div>
+                    <div class="metric-label">Faster Triage &amp;<br>Early Risk Detection</div>
+                </div>
+                <div class="metric" style="flex:1 1 28%; min-width:200px;">
+                    <div class="metric-number">5×</div>
+                    <div class="metric-label">Improved Rural<br>Healthcare Access</div>
+                </div>
+                <div class="metric" style="flex:1 1 28%; min-width:200px;">
+                    <div class="metric-number">↓60%</div>
+                    <div class="metric-label">Reduction in Specialist<br>Doctor Overload</div>
+                </div>
+                <div class="metric" style="flex:1 1 28%; min-width:200px;">
+                    <div class="metric-number">100%</div>
+                    <div class="metric-label">Outbreak Early<br>Warning Coverage</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         7. COMPLIANCE STRIP (NEW)
+         ========================================= -->
+    <section class="compliance-section" aria-labelledby="compliance-heading">
+        <div class="container">
+            <div class="compliance-intro">
+                <div class="section-label">
+                    <i class="fa-solid fa-circle-check"></i> STANDARDS &amp; COMPLIANCE
+                </div>
+                <h2 id="compliance-heading">Built to India's Highest <span class="accent-word">Standards</span></h2>
+                <p>Designed to meet every regulatory, security, and accessibility requirement for national healthcare
+                    deployment.</p>
+            </div>
+            <div class="compliance-grid">
+                <div class="compliance-badge">
+                    <div class="cb-icon" style="background:#e0f2fe; color:#0369a1;">
+                        <i class="fa-solid fa-notes-medical"></i>
+                    </div>
+                    <div class="cb-text">
+                        <strong>ABDM Compliant</strong>
+                        <span>Ayushman Bharat Digital Mission PHR linked</span>
+                    </div>
+                </div>
+                <div class="compliance-badge">
+                    <div class="cb-icon" style="background:#fef3c7; color:#d97706;">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <div class="cb-text">
+                        <strong>DPDP Act 2023</strong>
+                        <span>Digital Personal Data Protection compliant</span>
+                    </div>
+                </div>
+                <div class="compliance-badge">
+                    <div class="cb-icon" style="background:#ecfdf5; color:#059669;">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div class="cb-text">
+                        <strong>NHP 2.0 Aligned</strong>
+                        <span>National Health Policy framework integration</span>
+                    </div>
+                </div>
+                <div class="compliance-badge">
+                    <div class="cb-icon" style="background:#f3e8ff; color:#7c3aed;">
+                        <i class="fa-solid fa-universal-access"></i>
+                    </div>
+                    <div class="cb-text">
+                        <strong>WCAG 2.1 AA</strong>
+                        <span>Accessibility standard for all users</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         8. ETHICAL AI & TRUST
+         ========================================= -->
+    <section class="ethics-section py-large bg-light" aria-labelledby="ethics-heading">
+        <div class="container ethics-container flex-row">
+            <div class="ethics-content half-width">
+                <h2 id="ethics-heading">Ethical, Responsible <span class="accent-word">Technology</span></h2>
+                <p class="mb-3">We build technology that elevates healthcare professionals, ensuring smart tools work
+                    for India
+                    without compromising safety or sovereignty.</p>
+                <ul class="ethics-checklist list-unstyled">
+                    <li>
+                        <i class="fa-solid fa-check-circle text-secondary"></i>
+                        <span><strong>Assists, Does Not Replace:</strong> Technology empowers frontline health workers —
+                            final
+                            clinical judgment always remains with a human doctor.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-circle text-secondary"></i>
+                        <span><strong>No Autonomous Diagnoses:</strong> All system outputs are decision-support
+                            recommendations only, never final diagnoses.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-circle text-secondary"></i>
+                        <span><strong>Privacy-First Design:</strong> Patient data stored in India, encrypted end-to-end,
+                            with explicit consent flows.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check-circle text-secondary"></i>
+                        <span><strong>Explainable Decisions:</strong> All outputs include clear reasoning trails for
+                            doctors and officials to review and override.</span>
+                    </li>
+                </ul>
+                <div class="ai-disclaimer">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span><strong>Assistive Model (Not Autonomous):</strong> This system follows the NHP-mandated
+                        "Human-in-the-Loop" principle for all clinical decisions.</span>
+                </div>
+            </div>
+            <div class="ethics-visual half-width text-center">
+                <div class="shield-container">
+                    <div class="shield-bg"></div>
+                    <i class="fa-solid fa-shield-heart shield-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         9. FINAL CTA
+         ========================================= -->
+    <section id="cta" class="cta-section py-xlarge text-center position-relative" aria-labelledby="cta-heading">
+        <div class="container z-10 position-relative">
+            <div class="badge"
+                style="background:rgba(255,255,255,0.2); color:#fff; border-color:rgba(255,255,255,0.3); margin-bottom:1.5rem;">
+                <i class="fa-solid fa-rocket mr-1"></i> Ready to Deploy
+            </div>
+            <h2 id="cta-heading">Ready to Transform<br>Rural Healthcare in India?</h2>
+            <p class="subtitle" style="color:rgba(255,255,255,0.85); max-width:520px; margin:0 auto 2.5rem;">
+                Join healthcare workers, district officials, and medical teams already using Arogya Mithra to reach the
+                last
+                mile.
+            </p>
+            <a href="login.html" class="btn btn-white btn-lg pulse-animation">
+                <i class="fa-solid fa-right-to-bracket"></i> Login / Register to Begin
+            </a>
+            <p style="margin-top:1.25rem; font-size:0.8rem; color:rgba(255,255,255,0.6);">
+                <i class="fa-solid fa-lock" style="font-size:0.7rem;"></i>
+                Secure authentication | Role-based access | Government-grade encryption
+            </p>
+        </div>
+        <div class="overlay"></div>
+    </section>
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+    <footer class="footer py-md" aria-label="Site footer">
+        <div class="container flex-row footer-content" style="align-items:flex-start;">
+            <!-- Brand -->
+            <div class="footer-brand" style="flex:1.5;">
+                <div class="logo mb-2">
+                    <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <div class="logo-text-wrap">
+                        <span style="color:#fff;">Arogya Mithra</span>
+                        <span class="logo-sub">YOUR HEALTH COMPANION</span>
+                    </div>
+                </div>
+                <p class="footer-tagline">
+                    A smart rural healthcare platform for India's last mile.<br>
+                    Built in alignment with Ministry of Health &amp; Family Welfare and NHP 2.0 guidelines.
+                </p>
+                <div class="made-in-india" style="margin-top:1rem;">
+                    <span>🇮🇳</span>
+                    <span>Made in India — Built for Bharat</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-links-col" style="flex:1;">
+                <h5>Navigation</h5>
+                <a href="#">Home</a>
+                <a href="#problem">About Us</a>
+                <a href="#solution">How It Works</a>
+                <a href="#features">Platform Features</a>
+                <a href="login.html">Login / Register</a>
+            </div>
+
+            <!-- Compliance -->
+            <div class="footer-links-col" style="flex:1;">
+                <h5>Standards &amp; Policy</h5>
+                <a href="#">ABDM Compliance</a>
+                <a href="#">DPDP Act 2023</a>
+                <a href="#">NHP 2.0 Framework</a>
+                <a href="privacy.html">Privacy &amp; Ethics Policy</a>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="container">
+            <div class="footer-bottom">
+                <span>© 2026 Arogya Mithra — Your Health Companion. All rights reserved.</span>
+                <span style="display:flex; align-items:center; gap:1rem;">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span style="opacity:0.3">|</span>
+                    <span>NHP 2.0 · DPDP Compliant</span>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Firebase Auth: show/hide nav items based on login state -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js';
+        import { getAuth, onAuthStateChanged, signOut }
+            from 'https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js';
+
+        const app = initializeApp({
+            apiKey: "AIzaSyBKLbWsqsNipU6a-Qec6t_y1X60hhiQMFI",
+            authDomain: "health1-6deda.firebaseapp.com",
+            projectId: "health1-6deda",
+            storageBucket: "health1-6deda.firebasestorage.app",
+            messagingSenderId: "366719596305",
+            appId: "1:366719596305:web:1c5a1876fff53e05157eb0"
+        });
+        const auth = getAuth(app);
+        const loginBtn = document.getElementById('nav-login-btn');
+        const logoutBtn = document.getElementById('nav-logout-btn');
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = '';
+            } else {
+                if (loginBtn) loginBtn.style.display = '';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        });
+
+        window.handleNavLogout = function () {
+            signOut(auth).then(() => {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            });
+        };
+    </script>
+
+    <script src="chatbot.js"></script>
+    <script>
+        function setAppLang(l) {
+            localStorage.setItem('arogya_lang', l);
+            // Update UI classes
+            document.querySelectorAll('.lang-selector a').forEach(a => a.classList.remove('active'));
+            document.getElementById('lang-' + l).classList.add('active');
+
+            // Trigger chatbot update if open or reload
+            // For now, simpler to just reload or let chatbot.js handle it on next open
+            // But we can manually trigger the change event on the hidden chat select
+            const chatSel = document.getElementById('chatLang');
+            if (chatSel) {
+                chatSel.value = l;
+                chatSel.dispatchEvent(new Event('change'));
+            }
+        }
+        // Initialize active lang on load
+        window.addEventListener('load', () => {
+            const l = localStorage.getItem('arogya_lang') || 'en';
+            setAppLang(l);
+        });
+    </script>
+</body>
+
+</html>

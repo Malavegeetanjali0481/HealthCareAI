@@ -1,0 +1,1520 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District Health Dashboard | HealthAI — Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --sl: #1e1b4b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warn: #f59e0b;
+            --sw: 220px;
+            --gh: 32px;
+            --th: 56px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .govt-bar {
+            height: var(--gh);
+            background: #020617;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .govt-bar .gl {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gsep {
+            margin: 0 8px;
+            opacity: .3;
+        }
+
+        .top-nav {
+            height: var(--th);
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 16px;
+            z-index: 200;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: var(--sw);
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .bname {
+            font-size: 15px;
+            font-weight: 800;
+            color: #1e1b4b;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .bsub {
+            font-size: 9px;
+            font-weight: 700;
+            color: #7c3aed;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .ndiv {
+            width: 1px;
+            height: 32px;
+            background: #e2e8f0;
+        }
+
+        .portal-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .top-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .tgreeting {
+            font-size: 13px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .ttime {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .t-bell {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .t-bell .nd {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .t-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .shell {
+            display: flex;
+            height: calc(100vh - var(--gh) - var(--th));
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: var(--sw);
+            background: var(--sl);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .s-profile {
+            padding: 24px 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            text-align: center;
+        }
+
+        .s-av {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, .12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #fff;
+            margin: 0 auto 12px;
+        }
+
+        .s-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .s-role {
+            font-size: 11px;
+            color: #a5b4fc;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .s-loc {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .s-badge {
+            margin-top: 12px;
+            background: #10b981;
+            color: #fff;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .sl-label {
+            padding: 14px 16px 4px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: rgba(255, 255, 255, .3);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 8px;
+            color: rgba(255, 255, 255, .65);
+            font-size: 13px;
+            font-weight: 500;
+            transition: .2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nb {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .nb.orange {
+            background: #f59e0b;
+        }
+
+        .s-bottom {
+            padding: 14px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-sb {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-exp {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-lo {
+            background: transparent;
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, .3);
+        }
+
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 32px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+            animation: fadeIn .3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .ph {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .ph-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .ph-icon.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .ph-icon.navy {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .ph-icon.red {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .ph-icon.green {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .ph-icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .ph-icon.amber {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .ph-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .ph-sub {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(0, 0, 0, .03);
+        }
+
+        .kpi-ico {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .kv {
+            font-size: 26px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: #0f172a;
+        }
+
+        .kl {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* MAP PANEL */
+        .map-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .m-tab {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid #e2e8f0;
+            background: #fff;
+            color: #475569;
+            transition: .2s;
+        }
+
+        .m-tab.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .map-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            margin-bottom: 20px;
+        }
+
+        .map-card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-legend {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .leg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .leg-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .map-visual {
+            background: linear-gradient(135deg, #e0f2fe, #e8f5e9);
+            border-radius: 12px;
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .map-grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(148, 163, 184, .1) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, .1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .mandal-block {
+            position: absolute;
+            border-radius: 14px;
+            padding: 10px 14px;
+            color: #fff;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .2);
+            transition: .2s;
+            cursor: pointer;
+        }
+
+        .mandal-block:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+        }
+
+        .mandal-block.very-high {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .mandal-block.high {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+        }
+
+        .mandal-block.medium {
+            background: linear-gradient(135deg, #d97706, #fbbf24);
+        }
+
+        .mandal-block.low {
+            background: linear-gradient(135deg, #059669, #34d399);
+        }
+
+        .mandal-block.clear {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+        }
+
+        .pulse-ring {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .8);
+            border-radius: 50%;
+            animation: pulse-r 1.5s infinite;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        @keyframes pulse-r {
+            0% {
+                transform: scale(1);
+                opacity: 1
+            }
+
+            100% {
+                transform: scale(1.8);
+                opacity: 0
+            }
+        }
+
+        .map-footer {
+            display: flex;
+            gap: 20px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .mf-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        /* Surveillance */
+        .alert-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .alert-row {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #e2e8f0;
+        }
+
+        .alert-row.critical {
+            border-left-color: #ef4444;
+        }
+
+        .alert-row.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .alert-row.moderate {
+            border-left-color: #f97316;
+        }
+
+        .alert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .alert-icon.red {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .alert-icon.orange {
+            background: #ffedd5;
+            color: #f97316;
+        }
+
+        .alert-icon.yellow {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .a-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .a-meta {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .a-badge {
+            margin-left: auto;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .a-badge.high {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .a-badge.med {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .btn-view {
+            padding: 7px 14px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-view:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Hospital */
+        .hosp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .hosp-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .h-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .h-type {
+            font-size: 11px;
+            color: #4f46e5;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .h-stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .h-bar {
+            height: 6px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .h-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+
+        .h-bar-fill.red {
+            background: #ef4444;
+        }
+
+        .h-bar-fill.orange {
+            background: #f97316;
+        }
+
+        .h-bar-fill.green {
+            background: #10b981;
+        }
+
+        /* Resource */
+        .res-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 16px;
+        }
+
+        .res-table th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .res-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .res-table tr:hover td {
+            background: #fafafa;
+        }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-block;
+        }
+
+        .status-pill.critical {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-pill.low {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-pill.ok {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Alerts panel */
+        .notif-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .notif-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #e2e8f0;
+        }
+
+        .notif-item.urgent {
+            border-left-color: #ef4444;
+        }
+
+        .notif-item.warn {
+            border-left-color: #f59e0b;
+        }
+
+        .notif-item.info {
+            border-left-color: #2563eb;
+        }
+
+        /* Dropdown */
+        .state-select-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .state-select-wrap select {
+            border: none;
+            outline: none;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .04);
+            border: 1px solid rgba(0, 0, 0, .03);
+            margin-bottom: 16px;
+        }
+
+        .card-h {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-h h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 140px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .c-bar {
+            flex: 1;
+            background: linear-gradient(to top, #4f46e5, #818cf8);
+            border-radius: 4px 4px 0 0;
+            transition: .3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .c-bar:hover {
+            background: linear-gradient(to top, #3730a3, #4f46e5);
+        }
+
+        .bar-labels {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .bar-lbl {
+            flex: 1;
+            text-align: center;
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .dash-footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media(max-width:1100px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hosp-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- GOVT BAR -->
+    <div class="govt-bar">
+        <div class="gl">
+            <span><i class="fa-solid fa-circle-check" style="color:#6ee7b7;"></i> Ministry of Health &amp; Family
+                Welfare</span>
+            <span class="gsep">|</span>
+            <span><i class="fa-solid fa-server" style="color:#93c5fd;"></i> IDSP / IHIP Integrated</span>
+        </div>
+        <span>🇮🇳 Government of India</span>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+        <div class="brand-wrap">
+            <div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div>
+                <div class="bname">HealthAI</div>
+                <div class="bsub">District Analytics</div>
+            </div>
+        </div>
+        <div class="ndiv"></div>
+        <div class="portal-label"><i class="fa-solid fa-building-columns"
+                style="color:#7c3aed;margin-right:6px;"></i>District Portal</div>
+        <div class="top-right">
+            <span class="tgreeting" id="tbGreeting">Good Afternoon, Dr. Venkatesh</span>
+            <span class="ttime" id="topbarTime"></span>
+            <div class="t-bell"><i class="fa-solid fa-bell"></i>
+                <div class="nd"></div>
+            </div>
+            <div class="t-avatar">KV</div>
+        </div>
+    </nav>
+
+    <div class="shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="s-profile">
+                <div class="s-av"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="s-name">Dr. K. Venkatesh</div>
+                <div class="s-role">District Health Medical Officer</div>
+                <div class="s-loc"><i class="fa-solid fa-location-dot" style="font-size:10px;"></i> Anantapur, Andhra
+                    Pradesh</div>
+                <div class="s-badge">● Dashboard Live</div>
+            </div>
+
+            <div class="sl-label">Analytics</div>
+            <div class="nav-item active" id="nav-overview" onclick="switchPanel('overview')"><i
+                    class="fa-solid fa-chart-pie"></i><span>Dashboard Overview</span></div>
+            <div class="nav-item" id="nav-surveillance" onclick="switchPanel('surveillance')"><i
+                    class="fa-solid fa-magnifying-glass-chart"></i><span>Disease Surveillance</span></div>
+            <div class="nav-item" id="nav-outbreak" onclick="switchPanel('outbreak')"><i
+                    class="fa-solid fa-biohazard"></i><span>Outbreak Monitor</span><span class="nb">2</span></div>
+            <div class="nav-item" id="nav-maps" onclick="switchPanel('maps')"><i class="fa-solid fa-map"></i><span>Maps
+                    &amp; Heatmaps</span></div>
+
+            <div class="sl-label">Operations</div>
+            <div class="nav-item" id="nav-hospitals" onclick="switchPanel('hospitals')"><i
+                    class="fa-solid fa-hospital"></i><span>Hospital Readiness</span></div>
+            <div class="nav-item" id="nav-resources" onclick="switchPanel('resources')"><i
+                    class="fa-solid fa-boxes-stacked"></i><span>Resource Planning</span></div>
+            <div class="nav-item" id="nav-alerts" onclick="switchPanel('alerts')"><i
+                    class="fa-solid fa-bell"></i><span>Alerts &amp; Notifications</span><span class="nb orange">5</span>
+            </div>
+
+            <div class="s-bottom">
+                <div class="state-select-wrap"><i class="fa-solid fa-location-dot" style="color:#7c3aed;"></i>
+                    <select onchange="alert('Switching district view to: '+this.value)">
+                        <option>Andhra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chhattisgarh</option>
+                        <option>Goa</option>
+                        <option>Gujarat</option>
+                        <option>Haryana</option>
+                        <option>Himachal Pradesh</option>
+                        <option>Jharkhand</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Madhya Pradesh</option>
+                        <option>Maharashtra</option>
+                        <option>Manipur</option>
+                        <option>Meghalaya</option>
+                        <option>Mizoram</option>
+                        <option>Nagaland</option>
+                        <option>Odisha</option>
+                        <option>Punjab</option>
+                        <option>Rajasthan</option>
+                        <option>Sikkim</option>
+                        <option>Tamil Nadu</option>
+                        <option>Telangana</option>
+                        <option>Tripura</option>
+                        <option>Uttar Pradesh</option>
+                        <option>Uttarakhand</option>
+                        <option>West Bengal</option>
+                    </select>
+                </div>
+                <button class="btn-sb btn-exp" onclick="alert('Exporting district report...')"><i
+                        class="fa-solid fa-file-export"></i> Export Report</button>
+                <button class="btn-sb btn-lo" onclick="window.location.href='index.html'"><i
+                        class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main-content">
+
+            <!-- OVERVIEW PANEL -->
+            <div class="panel active" id="panel-overview">
+                <div class="ph">
+                    <div class="ph-icon navy"><i class="fa-solid fa-chart-pie"></i></div>
+                    <div>
+                        <div class="ph-title">District Health Analytics</div>
+                        <div class="ph-sub">Situational awareness and district performance monitoring</div>
+                    </div>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#ede9fe;color:#7c3aed;"><i
+                                class="fa-solid fa-heart-pulse"></i></div>
+                        <div>
+                            <div class="kv">84.2</div>
+                            <div class="kl">Health Score Index</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#dbeafe;color:#2563eb;"><i
+                                class="fa-solid fa-user-doctor"></i></div>
+                        <div>
+                            <div class="kv">1.4k</div>
+                            <div class="kl">Active Medical Staff</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#d1fae5;color:#10b981;"><i
+                                class="fa-solid fa-bed-pulse"></i></div>
+                        <div>
+                            <div class="kv">92%</div>
+                            <div class="kl">PHC Utilization</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fee2e2;color:#ef4444;"><i
+                                class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div>
+                            <div class="kv">03</div>
+                            <div class="kl">Potential Outbreaks</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-h">
+                            <h3><i class="fa-solid fa-chart-line" style="color:#4f46e5;"></i> Symptom Trend (Last 30
+                                Days)</h3>
+                        </div>
+                        <div class="chart-bars">
+                            <div class="c-bar" style="height:35%;" title="Week 1"></div>
+                            <div class="c-bar" style="height:55%;" title="Week 2"></div>
+                            <div class="c-bar" style="height:48%;" title="Week 3"></div>
+                            <div class="c-bar" style="height:75%;" title="Week 4"></div>
+                            <div class="c-bar" style="height:88%;" title="Week 5 (Current)"></div>
+                        </div>
+                        <div class="bar-labels"><span class="bar-lbl">W1</span><span class="bar-lbl">W2</span><span
+                                class="bar-lbl">W3</span><span class="bar-lbl">W4</span><span class="bar-lbl">W5</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-h">
+                            <h3><i class="fa-solid fa-bell" style="color:#ef4444;"></i> Critical Alerts</h3>
+                        </div>
+                        <div class="alert-grid">
+                            <div class="alert-row critical">
+                                <div class="alert-icon red"><i class="fa-solid fa-biohazard"></i></div>
+                                <div>
+                                    <div class="a-title">Dengue Alert</div>
+                                    <div class="a-meta">Anantapur Urban — 52 cases</div>
+                                </div><span class="a-badge high">HIGH</span>
+                            </div>
+                            <div class="alert-row warning">
+                                <div class="alert-icon yellow"><i class="fa-solid fa-syringe"></i></div>
+                                <div>
+                                    <div class="a-title">Vaccination Gap</div>
+                                    <div class="a-meta">Block B — 40% coverage</div>
+                                </div><span class="a-badge med">MED</span>
+                            </div>
+                            <div class="alert-row moderate">
+                                <div class="alert-icon orange"><i class="fa-solid fa-droplet"></i></div>
+                                <div>
+                                    <div class="a-title">Blood Stock Low</div>
+                                    <div class="a-meta">District Hospital — B+, O-</div>
+                                </div><span class="a-badge med">MED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAPS PANEL -->
+            <div class="panel" id="panel-maps">
+                <div class="ph">
+                    <div class="ph-icon purple"><i class="fa-solid fa-map"></i></div>
+                    <div>
+                        <div class="ph-title">Maps &amp; Heatmaps</div>
+                        <div class="ph-sub">Visual health intelligence for faster, data-driven decisions</div>
+                    </div>
+                </div>
+                <div class="map-tabs">
+                    <span class="m-tab active" onclick="switchMapTab(this)"><i class="fa-solid fa-virus"></i> Disease
+                        Spread</span>
+                    <span class="m-tab" onclick="switchMapTab(this)"><i class="fa-solid fa-hospital"></i> Hospital
+                        Capacity</span>
+                    <span class="m-tab" onclick="switchMapTab(this)"><i class="fa-solid fa-boxes-stacked"></i> Resource
+                        Gaps</span>
+                    <span class="m-tab" onclick="switchMapTab(this)"><i class="fa-solid fa-code-compare"></i> Mandal
+                        Compare</span>
+                </div>
+
+                <div class="map-card">
+                    <div class="map-card-title"><i class="fa-solid fa-map-location-dot" style="color:#7c3aed;"></i>
+                        Disease Intensity Map — Dengue Focus</div>
+                    <div class="map-legend">
+                        <div class="leg-item">
+                            <div class="leg-dot" style="background:#ef4444;border-radius:50%;"></div>&gt;40 cases
+                        </div>
+                        <div class="leg-item">
+                            <div class="leg-dot" style="background:#f97316;border-radius:50%;"></div>15–40 cases
+                        </div>
+                        <div class="leg-item">
+                            <div class="leg-dot" style="background:#fbbf24;border-radius:50%;"></div>5–15 cases
+                        </div>
+                        <div class="leg-item">
+                            <div class="leg-dot" style="background:#34d399;border-radius:50%;"></div>&lt;5 cases
+                        </div>
+                    </div>
+                    <div class="map-visual">
+                        <div class="map-grid-overlay"></div>
+                        <div class="mandal-block very-high" style="top:28%;left:18%;">Anantapur Urban<br><strong>52
+                                cases</strong><br>
+                            <div class="pulse-ring"></div>
+                        </div>
+                        <div class="mandal-block high" style="top:55%;left:14%;">Dharmavaram<br><strong>38
+                                cases</strong><br>
+                            <div class="pulse-ring"></div>
+                        </div>
+                        <div class="mandal-block medium" style="top:18%;left:50%;">Nandyal<br><strong>12 cases</strong>
+                        </div>
+                        <div class="mandal-block medium" style="top:55%;left:42%;">Guntakal<br><strong>5 cases</strong>
+                        </div>
+                        <div class="mandal-block medium" style="top:68%;left:34%;">Hindupur<br><strong>18 cases</strong>
+                        </div>
+                        <div class="mandal-block low" style="top:33%;left:72%;">Kadiri<br><strong>2 cases</strong></div>
+                        <div class="mandal-block clear" style="top:14%;left:80%;">Uravakonda<br><strong>0 cases</strong>
+                        </div>
+                        <div class="mandal-block low" style="top:65%;left:74%;">Penukonda<br><strong>1 case</strong>
+                        </div>
+                    </div>
+                    <div class="map-footer">
+                        <div class="mf-item"><span
+                                style="width:12px;height:12px;background:#ef4444;border-radius:50%;display:inline-block;"></span>Pulsing
+                            blocks = Active outbreak zones</div>
+                        <div class="mf-item"><i class="fa-solid fa-plus" style="color:#4f46e5;"></i>+ = Health
+                            facilities nearby</div>
+                        <div class="mf-item"><i class="fa-solid fa-hospital" style="color:#0f172a;"></i>Hospital
+                            locations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISEASE SURVEILLANCE PANEL -->
+            <div class="panel" id="panel-surveillance">
+                <div class="ph">
+                    <div class="ph-icon red"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div>
+                        <div class="ph-title">Disease Surveillance</div>
+                        <div class="ph-sub">Track disease spread across mandals in real-time</div>
+                    </div>
+                </div>
+                <div class="alert-grid">
+                    <div class="alert-row critical">
+                        <div class="alert-icon red"><i class="fa-solid fa-mosquito"></i></div>
+                        <div>
+                            <div class="a-title">Dengue — Anantapur Urban</div>
+                            <div class="a-meta">52 confirmed cases · 3 hospitalizations · Trend: ↑ Rising fast</div>
+                        </div><span class="a-badge high">CRITICAL</span><button class="btn-view"
+                            style="margin-left:8px;">Map View</button>
+                    </div>
+                    <div class="alert-row warning">
+                        <div class="alert-icon orange"><i class="fa-solid fa-temperature-high"></i></div>
+                        <div>
+                            <div class="a-title">Acute Fever Cluster — Dharmavaram</div>
+                            <div class="a-meta">38 suspected cases · Investigation ongoing · Trend: → Stable</div>
+                        </div><span class="a-badge med">HIGH</span><button class="btn-view" style="margin-left:8px;">Map
+                            View</button>
+                    </div>
+                    <div class="alert-row">
+                        <div class="alert-icon yellow"><i class="fa-solid fa-bacteria"></i></div>
+                        <div>
+                            <div class="a-title">Cholera Risk — Hindupur</div>
+                            <div class="a-meta">18 cases of acute diarrhea · Water source flagged · Trend: ↑ Watch</div>
+                        </div><span class="a-badge med">WATCH</span><button class="btn-view"
+                            style="margin-left:8px;">Map View</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OUTBREAK MONITOR PANEL -->
+            <div class="panel" id="panel-outbreak">
+                <div class="ph">
+                    <div class="ph-icon red"><i class="fa-solid fa-biohazard"></i></div>
+                    <div>
+                        <div class="ph-title">Outbreak Monitor</div>
+                        <div class="ph-sub">Early warning system for potential disease outbreaks</div>
+                    </div>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fee2e2;color:#ef4444;"><i
+                                class="fa-solid fa-circle-exclamation"></i></div>
+                        <div>
+                            <div class="kv">2</div>
+                            <div class="kl">Active Outbreaks</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#fef3c7;color:#d97706;"><i class="fa-solid fa-eye"></i>
+                        </div>
+                        <div>
+                            <div class="kv">4</div>
+                            <div class="kl">Under Watch</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#d1fae5;color:#10b981;"><i
+                                class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <div class="kv">11</div>
+                            <div class="kl">Mandals Contained</div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-ico" style="background:#dbeafe;color:#2563eb;"><i
+                                class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div>
+                            <div class="kv">3.2 hrs</div>
+                            <div class="kl">Avg Response Time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HOSPITAL READINESS PANEL -->
+            <div class="panel" id="panel-hospitals">
+                <div class="ph">
+                    <div class="ph-icon blue"><i class="fa-solid fa-hospital"></i></div>
+                    <div>
+                        <div class="ph-title">Hospital Readiness</div>
+                        <div class="ph-sub">Live bed availability, ICU capacity, and facility status</div>
+                    </div>
+                </div>
+                <div class="hosp-grid">
+                    <div class="hosp-card">
+                        <div class="h-type">District Hospital</div>
+                        <div class="h-name">GGH Anantapur</div>
+                        <div class="h-stat-row"><span>Bed Occupancy</span><span
+                                style="font-weight:700;color:#ef4444;">88%</span></div>
+                        <div class="h-bar">
+                            <div class="h-bar-fill red" style="width:88%;"></div>
+                        </div>
+                        <div class="h-stat-row"><span>ICU Available</span><span style="font-weight:700;">4 beds</span>
+                        </div>
+                        <div class="h-stat-row"><span>Ventilators</span><span style="font-weight:700;">2 free</span>
+                        </div>
+                    </div>
+                    <div class="hosp-card">
+                        <div class="h-type">CHC</div>
+                        <div class="h-name">CHC Dharmavaram</div>
+                        <div class="h-stat-row"><span>Bed Occupancy</span><span
+                                style="font-weight:700;color:#f97316;">72%</span></div>
+                        <div class="h-bar">
+                            <div class="h-bar-fill orange" style="width:72%;"></div>
+                        </div>
+                        <div class="h-stat-row"><span>ICU Available</span><span style="font-weight:700;">8 beds</span>
+                        </div>
+                        <div class="h-stat-row"><span>Oxygen Supply</span><span
+                                style="font-weight:700;color:#10b981;">Sufficient</span></div>
+                    </div>
+                    <div class="hosp-card">
+                        <div class="h-type">PHC</div>
+                        <div class="h-name">PHC Guntakal</div>
+                        <div class="h-stat-row"><span>Bed Occupancy</span><span
+                                style="font-weight:700;color:#10b981;">45%</span></div>
+                        <div class="h-bar">
+                            <div class="h-bar-fill green" style="width:45%;"></div>
+                        </div>
+                        <div class="h-stat-row"><span>OPD Today</span><span style="font-weight:700;">38 patients</span>
+                        </div>
+                        <div class="h-stat-row"><span>Status</span><span
+                                style="font-weight:700;color:#10b981;">Operational</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESOURCE PLANNING PANEL -->
+            <div class="panel" id="panel-resources">
+                <div class="ph">
+                    <div class="ph-icon amber"><i class="fa-solid fa-boxes-stacked"></i></div>
+                    <div>
+                        <div class="ph-title">Resource Planning</div>
+                        <div class="ph-sub">Medicines, equipment, and ASHA worker deployment status</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-h">
+                        <h3><i class="fa-solid fa-pills" style="color:#7c3aed;"></i> Medicine & Supply Status</h3>
+                    </div>
+                    <table class="res-table">
+                        <thead>
+                            <tr>
+                                <th>Resource</th>
+                                <th>Available</th>
+                                <th>Required</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ORS Packets</strong></td>
+                                <td>1,200</td>
+                                <td>5,000</td>
+                                <td><span class="status-pill critical">Critical</span></td>
+                                <td><button class="btn-view">Request</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dengue RDT Kits</strong></td>
+                                <td>340</td>
+                                <td>800</td>
+                                <td><span class="status-pill low">Low</span></td>
+                                <td><button class="btn-view">Request</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Paracetamol 500mg</strong></td>
+                                <td>8,500</td>
+                                <td>6,000</td>
+                                <td><span class="status-pill ok">Adequate</span></td>
+                                <td><button class="btn-view">View</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>IV Fluids (NS 500ml)</strong></td>
+                                <td>180</td>
+                                <td>400</td>
+                                <td><span class="status-pill low">Low</span></td>
+                                <td><button class="btn-view">Request</button></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ambulances</strong></td>
+                                <td>6</td>
+                                <td>10</td>
+                                <td><span class="status-pill low">Low</span></td>
+                                <td><button class="btn-view">Deploy</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ALERTS PANEL -->
+            <div class="panel" id="panel-alerts">
+                <div class="ph">
+                    <div class="ph-icon red"><i class="fa-solid fa-bell"></i></div>
+                    <div>
+                        <div class="ph-title">Alerts &amp; Notifications</div>
+                        <div class="ph-sub">Real-time health alerts requiring your attention</div>
+                    </div>
+                </div>
+                <div class="notif-list">
+                    <div class="notif-item urgent"><i class="fa-solid fa-circle-exclamation"
+                            style="color:#ef4444;margin-top:2px;"></i>
+                        <div><strong>Dengue spike detected</strong> in Anantapur Urban. 52 cases reported in last 48
+                            hours. Immediate field response recommended.</div>
+                    </div>
+                    <div class="notif-item warn"><i class="fa-solid fa-droplet"
+                            style="color:#f59e0b;margin-top:2px;"></i>
+                        <div><strong>Water contamination alert</strong> in Hindupur mandal. Cholera surveillance
+                            recommended. Alert ASHA workers.</div>
+                    </div>
+                    <div class="notif-item info"><i class="fa-solid fa-syringe"
+                            style="color:#2563eb;margin-top:2px;"></i>
+                        <div><strong>Vaccination drive scheduled</strong> for Feb 28. 3 PHCs, 12 ASHA workers needed.
+                            Confirm deployment.</div>
+                    </div>
+                    <div class="notif-item warn"><i class="fa-solid fa-boxes-stacked"
+                            style="color:#f59e0b;margin-top:2px;"></i>
+                        <div><strong>ORS stock critically low</strong> at Guntakal PHC. Only 1,200 packets available vs
+                            need of 5,000. Request resupply.</div>
+                    </div>
+                    <div class="notif-item info"><i class="fa-solid fa-file-invoice"
+                            style="color:#2563eb;margin-top:2px;"></i>
+                        <div><strong>Monthly report due</strong> on March 1. 3 sections pending. Ensure submission to
+                            State Health Directorate.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-footer">
+                <i class="fa-solid fa-shield-halved" style="color:#4f46e5;"></i>
+                <span>Data protected by DPDP Act 2023. Access is logged and monitored by State IT Cell.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        function updateClock() { var n = new Date(), t = n.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }), d = n.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }), el = document.getElementById('topbarTime'); if (el) el.textContent = t + ' | ' + d; }
+        function setGreeting() { var h = new Date().getHours(), g = h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening', el = document.getElementById('tbGreeting'); if (el) el.textContent = g + ', Dr. Venkatesh'; }
+        function switchPanel(id) { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); var p = document.getElementById('panel-' + id), n = document.getElementById('nav-' + id); if (p) p.classList.add('active'); if (n) n.classList.add('active'); }
+        function switchMapTab(el) { document.querySelectorAll('.m-tab').forEach(t => t.classList.remove('active')); el.classList.add('active'); }
+        document.addEventListener('DOMContentLoaded', function () { updateClock(); setGreeting(); setInterval(updateClock, 1000); });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Risk Tracker | Arogya Raksha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <!-- Region Risk Specific CSS -->
+    <link rel="stylesheet" href="region-risk.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-light-bg dashboard-body regional-body">
+
+    <!-- Navbar -->
+    <nav class="navbar dashboard-navbar regional-navbar">
+        <div class="container-fluid nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-map-location-dot text-primary"></i>
+                <span>Arogya Raksha <span class="text-secondary fw-400">| Disease Risk</span></span>
+            </div>
+            <div class="nav-links hide-mobile">
+                <a href="dashboard.html" class="nav-link text-gray hover-primary"><i
+                        class="fa-solid fa-chart-line mr-1"></i> Public Health Dashboard</a>
+            </div>
+            <div class="nav-user">
+                <div class="user-info hide-mobile">
+                    <span class="user-name">District Health Officer</span>
+                </div>
+                <div class="user-avatar-sm bg-primary-light text-primary">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <main class="dashboard-main px-max">
+
+            <!-- 1. PAGE HEADER -->
+            <header class="dashboard-header regional-header fade-in-up">
+                <div class="header-titles">
+                    <h1>Disease Risk Tracker</h1>
+                    <p class="subtitle text-gray mb-0">Village and district-level disease risk insights</p>
+                </div>
+
+                <div class="dashboard-filters">
+                    <div class="filter-group regional-filter">
+                        <i class="fa-solid fa-location-crosshairs text-gray"></i>
+                        <select class="form-control-sm" id="regionFilter" title="Static Demo Filter">
+                            <option value="all">All Districts</option>
+                            <option value="n1" selected>Northern District</option>
+                            <option value="s2">Southern District</option>
+                        </select>
+                    </div>
+                    <div class="filter-group regional-filter">
+                        <i class="fa-solid fa-virus text-gray"></i>
+                        <select class="form-control-sm" id="diseaseFilter" title="Static Demo Filter">
+                            <option value="all" selected>All Diseases</option>
+                            <option value="fever">Viral Fever</option>
+                            <option value="resp">Respiratory</option>
+                            <option value="water">Waterborne</option>
+                        </select>
+                    </div>
+                    <div class="filter-group regional-filter">
+                        <i class="fa-solid fa-cloud-sun text-gray"></i>
+                        <select class="form-control-sm" id="seasonFilter" title="Static Demo Filter">
+                            <option value="current" selected>Current (Winter)</option>
+                            <option value="summer">Summer</option>
+                            <option value="monsoon">Monsoon</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Layout Grid -->
+            <div class="regional-grid fade-in-up delay-1">
+
+                <!-- LEFT COLUMN -->
+                <div class="regional-col-left">
+
+                    <!-- 2. VILLAGE-LEVEL RISK SCORE SECTION -->
+                    <section class="card p-0 mb-4 table-card shadow-sm border-soft">
+                        <div class="card-header border-bottom p-3 bg-white d-flex justify-between align-center">
+                            <h3 class="mb-0 text-dark font-md"><i
+                                    class="fa-solid fa-map-location text-primary mr-2"></i> Village-Level Risk Scores
+                            </h3>
+                            <span class="badge bg-light-gray text-dark text-xs"><i class="fa-solid fa-filter"></i>
+                                Northern District</span>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="data-table regional-table">
+                                <thead>
+                                    <tr>
+                                        <th>Village Name</th>
+                                        <th>Risk Score</th>
+                                        <th>Status</th>
+                                        <th>Key Insight (Static)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="row-danger-light">
+                                        <td class="fw-600 text-dark">Gopalpur</td>
+                                        <td>
+                                            <div class="d-flex align-center gap-2">
+                                                <span class="fw-700 text-danger font-md">88</span>
+                                                <span class="text-xs text-gray">/100</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-danger"><i class="fa-solid fa-arrow-trend-up"></i>
+                                                🔴 High</span></td>
+                                        <td class="text-sm text-gray">Rising respiratory cases reported by CHWs.</td>
+                                    </tr>
+                                    <tr class="row-warning-light">
+                                        <td class="fw-600 text-dark">Rampur</td>
+                                        <td>
+                                            <div class="d-flex align-center gap-2">
+                                                <span class="fw-700 text-warning font-md">65</span>
+                                                <span class="text-xs text-gray">/100</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-warning"><i class="fa-solid fa-equals"></i> 🟡
+                                                Medium</span></td>
+                                        <td class="text-sm text-gray">Moderate fever incidence; stable.</td>
+                                    </tr>
+                                    <tr class="row-success-light">
+                                        <td class="fw-600 text-dark">Sitapur</td>
+                                        <td>
+                                            <div class="d-flex align-center gap-2">
+                                                <span class="fw-700 text-success font-md">24</span>
+                                                <span class="text-xs text-gray">/100</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-success"><i
+                                                    class="fa-solid fa-arrow-trend-down"></i> 🟢 Low</span></td>
+                                        <td class="text-sm text-gray">No significant disease activity.</td>
+                                    </tr>
+                                    <tr class="row-success-light">
+                                        <td class="fw-600 text-dark">Bhimavaram</td>
+                                        <td>
+                                            <div class="d-flex align-center gap-2">
+                                                <span class="fw-700 text-success font-md">18</span>
+                                                <span class="text-xs text-gray">/100</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-success"><i class="fa-solid fa-equals"></i> 🟢
+                                                Low</span></td>
+                                        <td class="text-sm text-gray">Healthy baseline.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <!-- 3. SEASONAL DISEASE TREND SECTION -->
+                    <section class="card mb-4 shadow-sm border-soft bg-white">
+                        <div class="card-header border-bottom pb-3 mb-3">
+                            <h3 class="mb-0 text-dark font-md"><i
+                                    class="fa-solid fa-chart-area text-secondary mr-2"></i> Seasonal Disease Trends</h3>
+                        </div>
+                        <div class="chart-container" style="position: relative; height:300px; width:100%">
+                            <canvas id="seasonalChart"></canvas>
+                        </div>
+                        <div class="chart-insight bg-light-blue p-3 mt-3 rounded-sm border-left-primary">
+                            <p class="m-0 text-sm text-dark"><i class="fa-solid fa-lightbulb text-warning mr-2"></i>
+                                <strong>AI Insight:</strong> Respiratory illnesses show a consistent historical increase
+                                during Winter periods in the Northern District.
+                            </p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="regional-col-right">
+
+                    <!-- 4. ALERTS FOR RISK SPIKES -->
+                    <section class="card mb-4 shadow-sm border-soft bg-white h-100-max">
+                        <div class="card-header border-bottom pb-3 mb-3 d-flex justify-between align-center">
+                            <h3 class="mb-0 text-dark font-md"><i class="fa-regular fa-bell text-danger mr-2"></i> Risk
+                                Spike Alerts</h3>
+                            <span class="badge bg-danger text-white pulse">2 Active</span>
+                        </div>
+                        <div class="alert-list">
+                            <!-- Alert 1 -->
+                            <div class="risk-alert border-soft rounded-sm p-3 mb-3 bg-danger-light-10 hover-up">
+                                <div class="d-flex justify-between align-start mb-2">
+                                    <span class="badge badge-danger text-xs">Critical</span>
+                                    <span class="text-xs text-gray"><i class="fa-regular fa-clock"></i> 2h ago</span>
+                                </div>
+                                <strong class="d-block text-dark font-sm mb-1">Sudden increase in cases detected in
+                                    Gopalpur</strong>
+                                <p class="text-xs text-gray mb-3">Triage app data indicates a 40% week-over-week
+                                    increase in reported respiratory distress.</p>
+                                <div class="alert-action text-right border-top-dash pt-2">
+                                    <button class="btn-text text-danger text-xs fw-600"><i
+                                            class="fa-solid fa-truck-medical mr-1"></i> Deploy Field Team</button>
+                                </div>
+                            </div>
+
+                            <!-- Alert 2 -->
+                            <div class="risk-alert border-soft rounded-sm p-3 mb-2 bg-warning-light hover-up">
+                                <div class="d-flex justify-between align-start mb-2">
+                                    <span class="badge badge-warning text-xs">Warning</span>
+                                    <span class="text-xs text-gray"><i class="fa-regular fa-clock"></i> 1d ago</span>
+                                </div>
+                                <strong class="d-block text-dark font-sm mb-1">High-risk threshold crossed in
+                                    Rampur</strong>
+                                <p class="text-xs text-gray mb-3">Dengue vector indicators have risen. Projected
+                                    outbreak risk is moderate.</p>
+                                <div class="alert-action text-right border-top-dash pt-2">
+                                    <button class="btn-text text-warning text-xs fw-600 text-dark-hover"><i
+                                            class="fa-solid fa-eye mr-1"></i> Monitor Closely</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 5. ENVIRONMENTAL FACTORS (PLACEHOLDER) -->
+                    <section class="card mb-4 shadow-sm border-soft bg-white">
+                        <div class="card-header border-bottom pb-3 mb-3">
+                            <h3 class="mb-0 text-dark font-md"><i class="fa-solid fa-leaf text-success mr-2"></i>
+                                Environmental Factors <span class="text-xs text-gray fw-400">(Indicative)</span></h3>
+                        </div>
+                        <div class="env-grid grid grid-2 gap-2 mb-3">
+                            <div class="env-card border-soft p-3 rounded-sm text-center">
+                                <i class="fa-solid fa-cloud-showers-heavy text-secondary text-2xl mb-2 block"></i>
+                                <span class="d-block text-xs text-gray uppercase">Rainfall Check</span>
+                                <strong class="text-dark">Normal</strong>
+                            </div>
+                            <div class="env-card border-soft p-3 rounded-sm text-center">
+                                <i class="fa-solid fa-temperature-arrow-down text-primary text-2xl mb-2 block"></i>
+                                <span class="d-block text-xs text-gray uppercase">Temp Trend</span>
+                                <strong class="text-dark">Dropping</strong>
+                            </div>
+                        </div>
+                        <!-- Note -->
+                        <div class="bg-light-gray p-2 text-center rounded-sm">
+                            <span class="text-xs text-gray"><i class="fa-solid fa-info-circle mr-1"></i> Environmental
+                                indicators can be integrated for enhanced risk prediction.</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 6. ETHICAL DATA DISCLAIMER -->
+            <div
+                class="disclaimer-box card bg-white text-sm text-gray mt-2 mb-xl text-center fade-in-up delay-2 shadow-sm border-soft">
+                <i class="fa-solid fa-database text-light-gray mb-2 font-md block"></i>
+                <p class="m-0"><strong>Data Disclaimer:</strong> Risk indicators are generated using predictive trends
+                    and mock public data to assist localized public health planning. Final interventions must comply
+                    with departmental protocols.</p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 8. FOOTER -->
+    <footer class="dashboard-footer bg-white border-top py-sm">
+        <div class="container-fluid flex-row justify-between align-center px-4">
+            <div>
+                <a href="dashboard.html" class="btn btn-outline sm-btn"><i class="fa-solid fa-chart-line mr-1"></i> Back
+                    to Public Health Dashboard</a>
+            </div>
+            <div class="text-sm text-gray mt-mobile-2">
+                &copy; 2026 Arogya Raksha Government Platform.
+            </div>
+            <div class="mt-mobile-2">
+                <a href="privacy.html" class="text-primary hover-dark text-sm fw-500">Privacy & Ethics Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="region-risk.js"></script>
+</body>
+
+</html>

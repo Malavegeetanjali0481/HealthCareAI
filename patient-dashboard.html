@@ -1,0 +1,1639 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard | HealthAI — My Health</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-l: #eff6ff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warn: #f59e0b;
+            --sl: #1e3a8a;
+            --sw: 220px;
+            --gh: 32px;
+            --th: 56px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f7ff;
+            color: #0f172a;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* GOVT BAR */
+        .govt-bar {
+            height: var(--gh);
+            background: #020617;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .gl {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .gsep {
+            margin: 0 8px;
+            opacity: .3;
+        }
+
+        /* TOP NAV */
+        .top-nav {
+            height: var(--th);
+            background: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 16px;
+            z-index: 200;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: var(--sw);
+            flex-shrink: 0;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .bname {
+            font-size: 15px;
+            font-weight: 800;
+            color: #1e3a8a;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .bsub {
+            font-size: 9px;
+            font-weight: 700;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .ndiv {
+            width: 1px;
+            height: 32px;
+            background: #e2e8f0;
+        }
+
+        .portal-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .top-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .tgreeting {
+            font-size: 13px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .ttime {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .t-bell {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .t-bell .nd {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+        }
+
+        .t-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .s-name-span {
+            display: block;
+        }
+
+        /* SHELL */
+        .shell {
+            display: flex;
+            height: calc(100vh - var(--gh) - var(--th));
+            overflow: hidden;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: var(--sw);
+            background: var(--sl);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+
+        .s-profile {
+            padding: 24px 16px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+            text-align: center;
+        }
+
+        .s-av {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, .15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #fff;
+            margin: 0 auto 12px;
+        }
+
+        .s-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .s-pid {
+            font-size: 11px;
+            color: #93c5fd;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .s-loc {
+            font-size: 11px;
+            color: #bfdbfe;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .s-badge {
+            margin-top: 10px;
+            background: #1d4ed8;
+            color: #bfdbfe;
+            border: 1px solid rgba(147, 197, 253, .3);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            gap: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 8px;
+            color: rgba(255, 255, 255, .65);
+            font-size: 13px;
+            font-weight: 500;
+            transition: .2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, .08);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: #2563eb;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-item i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .s-bottom {
+            padding: 14px;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-sb {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-emergency {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .btn-emergency:hover {
+            background: #dc2626;
+        }
+
+        .btn-logout {
+            background: transparent;
+            color: #f87171;
+            border: 1px solid rgba(248, 113, 113, .3);
+        }
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, .15);
+        }
+
+        /* MAIN */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 32px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+            animation: fadeIn .3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* PAGE HEADER */
+        .ph {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            gap: 16px;
+        }
+
+        .ph-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .ph-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .ph-icon.blue {
+            background: #dbeafe;
+            color: #2563eb;
+        }
+
+        .ph-icon.green {
+            background: #d1fae5;
+            color: #10b981;
+        }
+
+        .ph-icon.purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .ph-icon.amber {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .ph-icon.pink {
+            background: #fce7f3;
+            color: #ec4899;
+        }
+
+        .ph-icon.red {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .ph-icon.teal {
+            background: #ccfbf1;
+            color: #0d9488;
+        }
+
+        .ph-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+        .ph-sub {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .btn-voice {
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* PATIENT CARD */
+        .patient-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            border: 1px solid #e0f2fe;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .pc-field label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: .05em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pc-field span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        /* SYMPTOM SECTION */
+        .sym-section {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            margin-bottom: 20px;
+        }
+
+        .sym-section h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sym-section p {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .sym-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .sym-check {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: .2s;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .sym-check:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .sym-check.checked {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .sym-check input {
+            display: none;
+        }
+
+        .sym-icon {
+            font-size: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: .2s;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .upload-area:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+
+        .btn-analyze {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, .3);
+        }
+
+        /* RISK RESULT */
+        .risk-result {
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .risk-result.show {
+            display: block;
+            animation: fadeIn .4s ease;
+        }
+
+        .risk-result.low {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border: 1px solid #6ee7b7;
+        }
+
+        .risk-result.medium {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #fbbf24;
+        }
+
+        .risk-result.high {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border: 1px solid #f87171;
+        }
+
+        .risk-level {
+            font-size: 28px;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 6px;
+        }
+
+        .risk-level.low {
+            color: #065f46;
+        }
+
+        .risk-level.medium {
+            color: #92400e;
+        }
+
+        .risk-level.high {
+            color: #b91c1c;
+        }
+
+        .risk-rec {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .risk-exp {
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 18px;
+        }
+
+        .risk-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-care {
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-care.primary {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .btn-care.outline {
+            background: #fff;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        /* HISTORY */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .hist-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .hist-date {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            min-width: 80px;
+        }
+
+        .hist-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .hist-badge.low {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .hist-badge.medium {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .hist-badge.high {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-detail {
+            margin-left: auto;
+            padding: 7px 14px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-detail:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        /* ASHA WORKER */
+        .asha-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .asha-av {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .asha-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .asha-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .asha-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .btn-call {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-call.green {
+            background: #10b981;
+            color: #fff;
+        }
+
+        .btn-call.blue {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        /* CAMPS */
+        .camp-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .camp-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .camp-date-box {
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: #fff;
+            border-radius: 12px;
+            padding: 10px 14px;
+            text-align: center;
+            min-width: 56px;
+        }
+
+        .camp-date-d {
+            font-size: 22px;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+        }
+
+        .camp-date-m {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .camp-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .camp-meta {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .camp-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .camp-tag {
+            padding: 3px 10px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .btn-map {
+            margin-left: auto;
+            padding: 10px 16px;
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* HELP DESK */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            padding: 14px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e3a8a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-a {
+            padding: 0 18px 14px;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-a.open {
+            display: block;
+        }
+
+        .help-contacts {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 16px;
+        }
+
+        .hc-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hc-row:last-child {
+            border-bottom: none;
+        }
+
+        .btn-help-req {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* HEALTH TIPS */
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .tip-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+        }
+
+        .tip-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .tip-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 6px;
+        }
+
+        .tip-body {
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .seasonal-alert {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 1px solid #fbbf24;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .seasonal-alert p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        /* PROFILE */
+        .profile-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .profile-av {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #fff;
+            margin: 0 auto 16px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .pf-field label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #94a3b8;
+            letter-spacing: .05em;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .pf-field span {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* FOOTER */
+        .dash-footer {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-top: 1px solid #e2e8f0;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            line-height: 1.6;
+        }
+
+        /* LOADING */
+        .loading-text {
+            display: none;
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .loading-text.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 3px solid #bfdbfe;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @media(max-width:1000px) {
+            .sym-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .patient-card {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tip-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- GOVT BAR -->
+    <div class="govt-bar">
+        <div class="gl">
+            <span><i class="fa-solid fa-circle-check" style="color:#6ee7b7;"></i> Ministry of Health &amp; Family
+                Welfare</span>
+            <span class="gsep">|</span>
+            <span><i class="fa-solid fa-shield-halved" style="color:#93c5fd;"></i> ABDM Integrated</span>
+        </div>
+        <span>🇮🇳 Government of India</span>
+    </div>
+
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+        <div class="brand-wrap">
+            <div class="brand-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div>
+                <div class="bname">HealthAI</div>
+                <div class="bsub">Patient Portal</div>
+            </div>
+        </div>
+        <div class="ndiv"></div>
+        <div class="portal-label"><i class="fa-solid fa-user-injured" style="color:#2563eb;margin-right:6px;"></i>My
+            Health Portal</div>
+        <div class="top-right">
+            <span class="tgreeting" id="tbGreeting">Good Afternoon, Priya</span>
+            <span class="ttime" id="topbarTime"></span>
+            <div class="t-bell"><i class="fa-solid fa-bell"></i>
+                <div class="nd"></div>
+            </div>
+            <div class="t-avatar" id="topAvatar">PD</div>
+        </div>
+    </nav>
+
+    <div class="shell">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="s-profile">
+                <div class="s-av" id="sideAvatar"><i class="fa-solid fa-user-injured"></i></div>
+                <div class="s-name" id="sideName">Welcome, Priya Devi</div>
+                <div class="s-pid">Patient ID: PAT-20847</div>
+                <div class="s-loc"><i class="fa-solid fa-location-dot" style="font-size:10px;"></i> Rampura Village,
+                    Barwani</div>
+                <div class="s-badge">● Active Patient</div>
+            </div>
+
+            <div style="padding:10px 8px 4px;">
+                <div class="nav-item active" id="nav-symptom" onclick="switchPanel('symptom')"><i
+                        class="fa-solid fa-stethoscope"></i><span>Check Your Symptoms</span></div>
+                <div class="nav-item" id="nav-history" onclick="switchPanel('history')"><i
+                        class="fa-solid fa-clock-rotate-left"></i><span>Symptom History</span></div>
+                <div class="nav-item" id="nav-asha" onclick="switchPanel('asha')"><i
+                        class="fa-solid fa-person-walking"></i><span>ASHA Worker Details</span></div>
+                <div class="nav-item" id="nav-camps" onclick="switchPanel('camps')"><i
+                        class="fa-solid fa-tent-medical"></i><span>Medical Camps Near You</span></div>
+                <div class="nav-item" id="nav-help" onclick="switchPanel('help')"><i
+                        class="fa-solid fa-headset"></i><span>Help Desk &amp; Support</span></div>
+                <div class="nav-item" id="nav-education" onclick="switchPanel('education')"><i
+                        class="fa-solid fa-book-medical"></i><span>Health Education</span></div>
+                <div class="nav-item" id="nav-profile" onclick="switchPanel('profile')"><i
+                        class="fa-solid fa-user"></i><span>My Profile</span></div>
+            </div>
+
+            <div class="s-bottom">
+                <button class="btn-sb btn-emergency" onclick="window.location.href='tel:108'"><i
+                        class="fa-solid fa-phone-volume"></i> Emergency: 108</button>
+                <button class="btn-sb btn-logout" onclick="window.location.href='index.html'"><i
+                        class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+
+            <!-- ===== CHECK SYMPTOMS ===== -->
+            <div class="panel active" id="panel-symptom">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon blue"><i class="fa-solid fa-stethoscope"></i></div>
+                        <div>
+                            <div class="ph-title">Check Your Symptoms</div>
+                            <div class="ph-sub">Quickly assess your health risk and get care guidance</div>
+                        </div>
+                    </div>
+                    <button class="btn-voice"><i class="fa-solid fa-microphone"></i> Enable Voice Input</button>
+                </div>
+
+                <!-- Patient Card -->
+                <div class="patient-card">
+                    <div class="pc-field"><label>Name</label><span id="cardPatientName">Priya Devi</span></div>
+                    <div class="pc-field"><label>Age</label><span>28 years</span></div>
+                    <div class="pc-field"><label>Gender</label><span>Female</span></div>
+                    <div class="pc-field"><label>Location</label><span>Rampura, Barwani</span></div>
+                </div>
+
+                <!-- Symptoms -->
+                <div class="sym-section">
+                    <h3><i class="fa-solid fa-list-check" style="color:#2563eb;"></i> Select Your Symptoms</h3>
+                    <p>Select all symptoms you are experiencing. Be as accurate as possible.</p>
+                    <div class="sym-grid">
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">🌡️</span>Fever</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">😮</span>Cough</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">😮‍💨</span>Shortness of Breath</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">😴</span>Fatigue</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">💪</span>Body Pain</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">🤕</span>Headache</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">🤢</span>Vomiting</label>
+                        <label class="sym-check" onclick="this.classList.toggle('checked')"><span
+                                class="sym-icon">💧</span>Diarrhea</label>
+                    </div>
+
+                    <div class="upload-area" onclick="alert('Photo upload feature coming soon.')">
+                        <i class="fa-solid fa-camera"
+                            style="font-size:24px;color:#94a3b8;margin-bottom:8px;display:block;"></i>
+                        <strong>Upload Photo</strong> (optional for skin issues or wounds)<br>
+                        <span style="font-size:12px;color:#94a3b8;">Tap to take photo or upload from gallery</span>
+                    </div>
+
+                    <button class="btn-analyze" onclick="runAnalysis()"><i class="fa-solid fa-robot"></i> Analyze My
+                        Symptoms</button>
+
+                    <div class="loading-text" id="loadingText">
+                        <div class="spinner"></div> Assessing risk, please wait...
+                    </div>
+
+                    <!-- RESULT CARD -->
+                    <div class="risk-result" id="riskResult">
+                        <div class="risk-level medium">🟡 MEDIUM RISK</div>
+                        <div class="risk-rec">Recommended: Teleconsultation with a Doctor</div>
+                        <div class="risk-exp">Based on your symptoms (Fever, Cough, Fatigue) and age, a doctor
+                            consultation is advised within 24 hours. Monitor your temperature closely.</div>
+                        <div class="risk-btns">
+                            <button class="btn-care primary" onclick="alert('Opening care instructions...')"><i
+                                    class="fa-solid fa-notes-medical"></i> View Care Instructions</button>
+                            <button class="btn-care outline" onclick="alert('Connecting to teleconsultation...')"><i
+                                    class="fa-solid fa-video"></i> Talk to a Doctor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-footer"><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i><span>This AI
+                        system assists healthcare delivery. It does not replace doctors. For emergencies, contact the
+                        nearest health facility or call <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== SYMPTOM HISTORY ===== -->
+            <div class="panel" id="panel-history">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon purple"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div>
+                            <div class="ph-title">Symptom Reports &amp; History</div>
+                            <div class="ph-sub">Your previous AI health assessments</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="history-list">
+                    <div class="hist-item">
+                        <div class="hist-date">22 Feb 2026</div>
+                        <div style="flex:1;"><strong style="font-size:14px;">Fever, Body Pain</strong>
+                            <div style="font-size:12px;color:#64748b;margin-top:2px;">Consulted Dr. Anand Sharma via
+                                telecall</div>
+                        </div><span class="hist-badge medium">Medium Risk</span><button class="btn-detail">View
+                            Details</button>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-date">10 Feb 2026</div>
+                        <div style="flex:1;"><strong style="font-size:14px;">Headache, Fatigue</strong>
+                            <div style="font-size:12px;color:#64748b;margin-top:2px;">Home care recommended</div>
+                        </div><span class="hist-badge low">Low Risk</span><button class="btn-detail">View
+                            Details</button>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-date">28 Jan 2026</div>
+                        <div style="flex:1;"><strong style="font-size:14px;">Fever, Cough, Breathlessness</strong>
+                            <div style="font-size:12px;color:#64748b;margin-top:2px;">Referred to PHC Rampura</div>
+                        </div><span class="hist-badge high">High Risk</span><button class="btn-detail">View
+                            Details</button>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-date">15 Jan 2026</div>
+                        <div style="flex:1;"><strong style="font-size:14px;">Cough, Runny Nose</strong>
+                            <div style="font-size:12px;color:#64748b;margin-top:2px;">Home care recommended</div>
+                        </div><span class="hist-badge low">Low Risk</span><button class="btn-detail">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="dash-footer"><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i><span>This AI
+                        system assists healthcare delivery. It does not replace doctors. For emergencies, call
+                        <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== ASHA WORKER ===== -->
+            <div class="panel" id="panel-asha">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon green"><i class="fa-solid fa-person-walking"></i></div>
+                        <div>
+                            <div class="ph-title">Your ASHA Worker</div>
+                            <div class="ph-sub">Your assigned frontline healthcare contact</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="asha-card">
+                    <div class="asha-av"><i class="fa-solid fa-person-walking"></i></div>
+                    <div class="asha-name">Sunita Bai</div>
+                    <div class="asha-row"><i class="fa-solid fa-id-badge" style="color:#10b981;"></i> Worker ID:
+                        ASHA-2041</div>
+                    <div class="asha-row"><i class="fa-solid fa-phone" style="color:#10b981;"></i> +91 98765 43210</div>
+                    <div class="asha-row"><i class="fa-solid fa-map-location-dot" style="color:#10b981;"></i> Area:
+                        Rampura Village, Barwani Block</div>
+                    <div class="asha-row"><i class="fa-solid fa-calendar-check" style="color:#10b981;"></i> Last Visit:
+                        24 Feb, 2026</div>
+                    <div class="asha-row"><i class="fa-solid fa-calendar-days" style="color:#10b981;"></i> Next
+                        Scheduled: 28 Feb, 2026</div>
+                    <div class="asha-btns">
+                        <button class="btn-call green" onclick="window.location.href='tel:+919876543210'"><i
+                                class="fa-solid fa-phone"></i> Call Sunita Bai</button>
+                        <button class="btn-call blue" onclick="alert('Opening messaging...')"><i
+                                class="fa-solid fa-message"></i> Send Message</button>
+                    </div>
+                </div>
+                <div class="dash-footer"><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i><span>This AI
+                        system assists healthcare delivery. It does not replace doctors. For emergencies, call
+                        <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== MEDICAL CAMPS ===== -->
+            <div class="panel" id="panel-camps">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon amber"><i class="fa-solid fa-tent-medical"></i></div>
+                        <div>
+                            <div class="ph-title">Medical Camps Near You</div>
+                            <div class="ph-sub">Upcoming free health camps in your district</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="camp-grid">
+                    <div class="camp-card">
+                        <div class="camp-date-box">
+                            <div class="camp-date-d">28</div>
+                            <div class="camp-date-m">Feb</div>
+                        </div>
+                        <div style="flex:1;">
+                            <div class="camp-name">Vaccination Drive — Block Rampura</div>
+                            <div class="camp-meta"><i class="fa-solid fa-location-dot"></i> Panchayat Hall, Rampura
+                                &nbsp;|&nbsp; 9:00 AM – 2:00 PM</div>
+                            <div class="camp-tags"><span class="camp-tag">BCG</span><span
+                                    class="camp-tag">DPT</span><span class="camp-tag">Measles</span><span
+                                    class="camp-tag">Free</span></div>
+                        </div>
+                        <button class="btn-map" onclick="alert('Map feature coming soon.')"><i
+                                class="fa-solid fa-map-location-dot"></i> View Map</button>
+                    </div>
+                    <div class="camp-card">
+                        <div class="camp-date-box">
+                            <div class="camp-date-d">03</div>
+                            <div class="camp-date-m">Mar</div>
+                        </div>
+                        <div style="flex:1;">
+                            <div class="camp-name">Maternal &amp; Child Health Camp</div>
+                            <div class="camp-meta"><i class="fa-solid fa-location-dot"></i> PHC Rampura &nbsp;|&nbsp;
+                                10:00 AM – 4:00 PM</div>
+                            <div class="camp-tags"><span class="camp-tag">ANC Checkup</span><span class="camp-tag">Iron
+                                    Tablets</span><span class="camp-tag">Free</span></div>
+                        </div>
+                        <button class="btn-map" onclick="alert('Map feature coming soon.')"><i
+                                class="fa-solid fa-map-location-dot"></i> View Map</button>
+                    </div>
+                    <div class="camp-card">
+                        <div class="camp-date-box" style="background:linear-gradient(135deg,#10b981,#059669);">
+                            <div class="camp-date-d">07</div>
+                            <div class="camp-date-m">Mar</div>
+                        </div>
+                        <div style="flex:1;">
+                            <div class="camp-name">General Health & Dengue Awareness</div>
+                            <div class="camp-meta"><i class="fa-solid fa-location-dot"></i> Community Centre, Barwani
+                                &nbsp;|&nbsp; 8:00 AM – 1:00 PM</div>
+                            <div class="camp-tags"><span class="camp-tag">Blood Test</span><span class="camp-tag">Dengue
+                                    RDT</span><span class="camp-tag">Free</span></div>
+                        </div>
+                        <button class="btn-map" onclick="alert('Map feature coming soon.')"><i
+                                class="fa-solid fa-map-location-dot"></i> View Map</button>
+                    </div>
+                </div>
+                <div class="dash-footer"><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i><span>This AI
+                        system assists healthcare delivery. It does not replace doctors. For emergencies, call
+                        <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== HELP DESK ===== -->
+            <div class="panel" id="panel-help">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon teal"><i class="fa-solid fa-headset"></i></div>
+                        <div>
+                            <div class="ph-title">Help Desk &amp; Support</div>
+                            <div class="ph-sub">Answers to common questions and quick assistance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">How do I book a teleconsultation? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-a">Go to "Check Your Symptoms", complete the symptom analysis, and click "Talk
+                            to a Doctor" when your result shows Medium or High risk. You will be connected to an
+                            available doctor.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">How can I contact my ASHA Worker? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-a">Click on "ASHA Worker Details" in the left menu. You will see your assigned
+                            ASHA worker's name, phone number, and a direct call button.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">What does the AI Risk Level mean? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-a">🟢 Low Risk: Manage at home with rest and fluids. 🟡 Medium Risk: Speak to a
+                            doctor within 24 hours. 🔴 High Risk: Visit a health facility immediately or call 108.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Is my health data safe and private? <i
+                                class="fa-solid fa-chevron-down"></i></div>
+                        <div class="faq-a">Yes. All data is protected under the DPDP Act 2023 and ABDM guidelines. Your
+                            information is encrypted and only accessible to authorized healthcare professionals.</div>
+                    </div>
+                </div>
+                <div class="help-contacts">
+                    <div class="hc-row"><i class="fa-solid fa-phone"
+                            style="color:#2563eb;width:20px;"></i><strong>Emergency Ambulance:</strong>&nbsp;108 (24/7
+                        Free)</div>
+                    <div class="hc-row"><i class="fa-solid fa-phone"
+                            style="color:#10b981;width:20px;"></i><strong>Health Helpline:</strong>&nbsp;1800-180-1104
+                        (Toll Free)</div>
+                    <div class="hc-row"><i class="fa-solid fa-envelope"
+                            style="color:#f59e0b;width:20px;"></i><strong>Email
+                            Support:</strong>&nbsp;support@healthai.gov.in</div>
+                </div>
+                <button class="btn-help-req"
+                    onclick="alert('Support request submitted. A health worker will contact you within 24 hours.')"><i
+                        class="fa-solid fa-paper-plane"></i> Request Help Now</button>
+                <div class="dash-footer" style="margin-top:24px;"><i class="fa-solid fa-circle-info"
+                        style="color:#3b82f6;"></i><span>This AI system assists healthcare delivery. It does not replace
+                        doctors. For emergencies, call <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== HEALTH EDUCATION ===== -->
+            <div class="panel" id="panel-education">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon green"><i class="fa-solid fa-book-medical"></i></div>
+                        <div>
+                            <div class="ph-title">Health Education</div>
+                            <div class="ph-sub">Tips, prevention guides, and seasonal alerts</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="seasonal-alert"><i class="fa-solid fa-triangle-exclamation"
+                        style="font-size:22px;color:#d97706;margin-top:2px;"></i>
+                    <div><strong style="color:#92400e;">Seasonal Alert — Dengue Season:</strong>
+                        <p>Dengue cases are rising in Barwani district. Keep water containers covered. Use mosquito
+                            repellent. Check for fever above 102°F and rash. Visit PHC immediately if symptoms appear.
+                        </p>
+                    </div>
+                </div>
+                <div class="tip-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">💧</div>
+                        <div class="tip-title">Stay Hydrated</div>
+                        <div class="tip-body">Drink at least 8 glasses of clean, boiled water every day. Dehydration
+                            worsens most illnesses, especially in summer months.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🍎</div>
+                        <div class="tip-title">Balanced Diet</div>
+                        <div class="tip-body">Include fruits, vegetables, and lentils in every meal. Good nutrition
+                            strengthens your immunity against seasonal diseases.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🧼</div>
+                        <div class="tip-title">Hand Hygiene</div>
+                        <div class="tip-body">Wash hands with soap for 20 seconds before eating, after using the toilet,
+                            and after touching animals. This prevents 80% of infections.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">💉</div>
+                        <div class="tip-title">Stay Vaccinated</div>
+                        <div class="tip-body">Ensure all children under 5 are vaccinated as per the national schedule.
+                            Check with your ASHA worker for due dates. Vaccines save lives.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🌙</div>
+                        <div class="tip-title">Sleep Well</div>
+                        <div class="tip-body">Adults need 7–8 hours of sleep per night. Good sleep helps your body
+                            repair, boosts immunity, and reduces stress-related illness.</div>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-icon">🚶</div>
+                        <div class="tip-title">Daily Exercise</div>
+                        <div class="tip-body">Even a 30-minute walk reduces risk of diabetes, heart disease, and
+                            depression. Encourage the whole family to stay active.</div>
+                    </div>
+                </div>
+                <div class="dash-footer"><i class="fa-solid fa-circle-info" style="color:#3b82f6;"></i><span>This AI
+                        system assists healthcare delivery. It does not replace doctors. For emergencies, call
+                        <strong>108</strong>.</span></div>
+            </div>
+
+            <!-- ===== MY PROFILE ===== -->
+            <div class="panel" id="panel-profile">
+                <div class="ph">
+                    <div class="ph-left">
+                        <div class="ph-icon blue"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <div class="ph-title">My Profile</div>
+                            <div class="ph-sub">Your personal health record (view only)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div style="text-align:center;">
+                        <div class="profile-av" id="profileAvatar">PD</div>
+                        <div id="profileName"
+                            style="font-size:22px;font-weight:800;font-family:'Outfit',sans-serif;color:#0f172a;">Priya
+                            Devi</div>
+                        <div style="font-size:13px;color:#64748b;margin-top:4px;">Patient ID: PAT-20847</div>
+                    </div>
+                    <div class="profile-grid">
+                        <div class="pf-field"><label>Date of Birth</label><span>14 March 1998</span></div>
+                        <div class="pf-field"><label>Age</label><span>28 years</span></div>
+                        <div class="pf-field"><label>Gender</label><span>Female</span></div>
+                        <div class="pf-field"><label>Blood Group</label><span>B+</span></div>
+                        <div class="pf-field"><label>Village</label><span>Rampura</span></div>
+                        <div class="pf-field"><label>Block</label><span>Barwani</span></div>
+                        <div class="pf-field"><label>District</label><span>Barwani, MP</span></div>
+                        <div class="pf-field"><label>Phone</label><span>+91 94321 XXXXX</span></div>
+                        <div class="pf-field"><label>Known Conditions</label><span>Mild Anaemia</span></div>
+                        <div class="pf-field"><label>Emergency Contact</label><span>Ramesh Devi (Husband) · 108</span>
+                        </div>
+                        <div class="pf-field"><label>ASHA Worker</label><span>Sunita Bai (ASHA-2041)</span></div>
+                        <div class="pf-field"><label>Registered Since</label><span>Jan 2025</span></div>
+                    </div>
+                </div>
+                <div class="dash-footer"><i class="fa-solid fa-shield-halved" style="color:#3b82f6;"></i><span>Your data
+                        is protected under DPDP Act 2023. This profile is view-only. Contact your ASHA Worker to update
+                        details.</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        function updateClock() { var n = new Date(), t = n.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }), d = n.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }), el = document.getElementById('topbarTime'); if (el) el.textContent = t + ' | ' + d; }
+
+        function setGreeting(name) {
+            var h = new Date().getHours(), g = h < 12 ? 'Good Morning' : h < 17 ? 'Good Afternoon' : 'Good Evening', el = document.getElementById('tbGreeting');
+            var firstName = name.split(' ')[0];
+            if (el) el.textContent = g + ', ' + firstName;
+        }
+
+        function loadPatientName() {
+            // Get name from localStorage (saved during login)
+            const name = localStorage.getItem('ha_patient_name') || 'Priya Devi';
+
+            // Generate initials for avatar (e.g., "Priya Devi" -> "PD")
+            let initials = 'PD';
+            const nameParts = name.split(' ').filter(n => n.length > 0);
+            if (nameParts.length > 0) {
+                initials = nameParts[0][0].toUpperCase();
+                if (nameParts.length > 1) {
+                    initials += nameParts[1][0].toUpperCase();
+                }
+            }
+
+            // Update UI elements
+            const elSideName = document.getElementById('sideName');
+            const elProfileName = document.getElementById('profileName');
+            const elCardName = document.getElementById('cardPatientName');
+
+            if (elSideName) elSideName.textContent = 'Welcome, ' + name;
+            if (elProfileName) elProfileName.textContent = name;
+            if (elCardName) elCardName.textContent = name;
+
+            // Update avatars
+            const elTopAv = document.getElementById('topAvatar');
+            const elSideAv = document.getElementById('sideAvatar');
+            const elProfAv = document.getElementById('profileAvatar');
+
+            if (elTopAv) elTopAv.textContent = initials;
+            if (elSideAv) elSideAv.textContent = initials;
+            if (elProfAv) elProfAv.textContent = initials;
+
+            // Update greeting
+            setGreeting(name);
+        }
+
+        function switchPanel(id) { document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); var p = document.getElementById('panel-' + id), n = document.getElementById('nav-' + id); if (p) p.classList.add('active'); if (n) n.classList.add('active'); }
+        function runAnalysis() {
+            var selected = document.querySelectorAll('.sym-check.checked');
+            if (selected.length === 0) { alert('Please select at least one symptom to analyze.'); return; }
+            var lt = document.getElementById('loadingText'), rr = document.getElementById('riskResult');
+            lt.classList.add('show'); rr.classList.remove('show');
+            setTimeout(function () { lt.classList.remove('show'); rr.classList.add('show'); rr.className = 'risk-result medium show'; rr.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 2000);
+        }
+        function toggleFaq(el) { var ans = el.nextElementSibling; ans.classList.toggle('open'); }
+        document.addEventListener('DOMContentLoaded', function () {
+            updateClock();
+            loadPatientName();
+            setInterval(updateClock, 1000);
+        });
+    </script>
+</body>
+
+</html>

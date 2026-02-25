@@ -1,0 +1,462 @@
+﻿/* =========================================
+   FRONTLINE HEALTH WORKER (CHW) STYLES
+   ========================================= */
+
+/* Variables override & custom palette for CHW App */
+:root {
+    --chw-green: #059669;
+    --chw-blue: #0ea5e9;
+    --chw-bg: #f0fdfa;
+    /* Very light mint/cyan background */
+    --border-soft: 1px solid #e2e8f0;
+    --border-soft-white: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chw-body {
+    background-color: var(--chw-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Helpers */
+.hidden {
+    display: none !important;
+}
+
+.block {
+    display: block;
+}
+
+.mr-1 {
+    margin-right: 0.25rem;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+.pt-3 {
+    padding-top: 1rem;
+}
+
+.pt-4 {
+    padding-top: 1.5rem;
+}
+
+.pb-2 {
+    padding-bottom: 0.5rem;
+}
+
+.px-3 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.opacity-70 {
+    opacity: 0.7;
+}
+
+.strike-through {
+    text-decoration: line-through;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.bg-white {
+    background: var(--white);
+}
+
+.border-soft {
+    border: var(--border-soft);
+}
+
+.border-top-soft {
+    border-top: var(--border-soft);
+}
+
+.border-top-soft-white {
+    border-top: var(--border-soft-white);
+}
+
+.border-left-danger {
+    border-left: 4px solid var(--danger-color);
+}
+
+.font-md {
+    font-size: 1.125rem;
+}
+
+.text-white-80 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Header Area */
+.chw-header {
+    background: linear-gradient(135deg, var(--chw-blue) 0%, var(--primary-color) 100%);
+    padding: 1.5rem 1rem;
+    box-shadow: var(--shadow-sm);
+    border-radius: 0 0 16px 16px;
+    z-index: 10;
+    position: relative;
+}
+
+.header-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chw-icon-xl {
+    font-size: 2rem;
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Offline & Language Controls */
+.offline-status {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    color: var(--white);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(4px);
+}
+
+.language-selector {
+    position: relative;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-full);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.lang-dropdown {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    outline: none;
+    appearance: none;
+    padding-right: 1.5rem;
+    cursor: pointer;
+}
+
+.lang-dropdown option {
+    color: var(--dark-color);
+    background: var(--white);
+}
+
+/* Banner */
+.offline-banner {
+    background-color: var(--warning-light);
+    color: var(--dark-dark);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--warning-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Main Content constraints for mobile-first feel */
+.chw-main {
+    flex: 1;
+    max-width: 600px;
+    /* Keep it narrow for a mobile "app" feel even on desktop */
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    color: var(--dark-dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* Quick Actions Grid */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.action-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.action-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.action-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.border-primary-hover:hover {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.border-secondary-hover:hover {
+    border-color: var(--secondary-color);
+    background-color: var(--secondary-light);
+}
+
+.border-warning-hover:hover {
+    border-color: var(--warning-color);
+    background-color: var(--warning-light);
+}
+
+/* Guidance Card */
+.guidance-card {
+    box-shadow: var(--shadow-md);
+}
+
+.audio-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.audio-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.step-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.step-list li::before {
+    content: "•";
+    color: var(--primary-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    display: inline-flex;
+    align-items: center;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background-color: var(--light-gray);
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-input:checked+.toggle-slider {
+    background-color: var(--secondary-color);
+}
+
+.toggle-input:checked+.toggle-slider::before {
+    transform: translateX(20px);
+}
+
+/* Tasks & MCH Timeline */
+.timeline-container {
+    padding-left: 0.5rem;
+}
+
+.task-card {
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+}
+
+.left-border-primary {
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Custom Large Checkboxes  */
+.check-item {
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.custom-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+    background: var(--white);
+    flex-shrink: 0;
+}
+
+.custom-check:checked {
+    background-color: var(--primary-color);
+}
+
+.custom-check:checked::after {
+    content: '\f00c';
+    /* FontAwesome check */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--white);
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Buttons and Utils */
+.btn-text {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-text:hover {
+    text-decoration: underline;
+}
+
+.hover-bg-light:hover {
+    background-color: var(--light-bg);
+}
+
+.icon-btn-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    transition: 0.2s;
+}
+
+/* Footer */
+.chw-footer {
+    background: var(--dark-dark);
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+    /* Push to bottom */
+}
+
+/* Toast (Audio Mock) */
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e293b;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    transition: opacity 0.3s, bottom 0.3s;
+    opacity: 1;
+}
+
+.toast.hidden {
+    opacity: 0;
+    bottom: 60px;
+    pointer-events: none;
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+    .chw-main {
+        padding: 2rem 1rem;
+    }
+
+    .mt-mobile {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 599px) {
+    .mt-mobile {
+        margin-top: 1.5rem;
+    }
+}

@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Health Analytics | Arogya Raksha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Dashboard Specific CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body class="bg-light-bg dashboard-body">
+    <!-- Navbar (Dashboard style) -->
+    <nav class="navbar dashboard-navbar">
+        <div class="container-fluid nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-chart-line text-primary"></i>
+                <span>Arogya Raksha <span class="text-secondary fw-400">| Analytics</span></span>
+            </div>
+            <div class="nav-user">
+                <div class="user-info hide-mobile">
+                    <span class="user-name">Dr. Sharma</span>
+                    <span class="user-role">District Health Officer</span>
+                </div>
+                <div class="user-avatar-sm bg-primary-light text-primary">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar (Desktop only) -->
+        <aside class="dashboard-sidebar hide-mobile">
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#"><i class="fa-solid fa-border-all"></i> Overview</a></li>
+                <li><a href="region-risk.html"><i class="fa-solid fa-map-location-dot"></i> Regional Risk</a></li>
+                <li><a href="#"><i class="fa-solid fa-virus"></i> Outbreaks</a></li>
+                <li><a href="#"><i class="fa-solid fa-hospital"></i> Resources</a></li>
+                <li><a href="#"><i class="fa-solid fa-file-export"></i> Reports</a></li>
+            </ul>
+        </aside>
+
+        <main class="dashboard-main">
+            <!-- 1. PAGE HEADER & FILTERS -->
+            <header class="dashboard-header fade-in-up">
+                <div class="header-titles">
+                    <h1>Public Health Analytics</h1>
+                    <p class="subtitle text-gray mb-0">Data-driven insights for proactive healthcare planning</p>
+                </div>
+
+                <div class="dashboard-filters">
+                    <div class="filter-group">
+                        <i class="fa-regular fa-calendar text-gray"></i>
+                        <select class="form-control-sm" id="dateFilter">
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                            <option value="180">Last 6 Months</option>
+                            <option value="365" selected>Last 12 Months</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <i class="fa-solid fa-location-dot text-gray"></i>
+                        <select class="form-control-sm" id="regionFilter">
+                            <option value="all" selected>All Districts</option>
+                            <option value="north">North District</option>
+                            <option value="south">South District</option>
+                            <option value="east">East District</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <i class="fa-solid fa-virus text-gray"></i>
+                        <select class="form-control-sm" id="diseaseFilter">
+                            <option value="all" selected>All Diseases</option>
+                            <option value="respiratory">Respiratory Illness (ARI/ILI)</option>
+                            <option value="gastro">Gastroenteritis</option>
+                            <option value="vector">Vector-borne (Dengue/Malaria)</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Loading Overlay (hidden by default) -->
+            <div id="dashboardLoader" class="dashboard-loader hidden">
+                <div class="spinner"></div>
+                <p class="mt-2 text-primary">Updating datasets...</p>
+            </div>
+
+            <!-- 2. KEY HEALTH METRICS OVERVIEW -->
+            <section class="metrics-grid mb-4 fade-in-up delay-1">
+                <div class="metric-card card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">Total Reported Cases <br>(Current Month)</h4>
+                        <div class="metric-icon bg-primary-light text-primary"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value">4,285</h2>
+                        <div class="metric-trend trend-down">
+                            <i class="fa-solid fa-arrow-down"></i> <span>12% from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">Cases Requiring <br>Hospitalization</h4>
+                        <div class="metric-icon bg-secondary-light text-secondary"><i class="fa-solid fa-bed-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value text-secondary">842</h2>
+                        <div class="metric-trend trend-up">
+                            <i class="fa-solid fa-arrow-up"></i> <span>5% from last month</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">High-Risk Regions <br>(Alert Status)</h4>
+                        <div class="metric-icon bg-danger-light text-danger"><i
+                                class="fa-solid fa-triangle-exclamation"></i></div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value text-danger">3 <span class="font-sm text-gray fw-400">/ 12
+                                Districts</span></h2>
+                        <div class="metric-trend text-gray">
+                            <i class="fa-solid fa-minus"></i> <span>Unchanged</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card card">
+                    <div class="metric-header">
+                        <h4 class="text-gray fw-600 font-sm">Estimated Hospital <br>Bed Utilization</h4>
+                        <div class="metric-icon bg-warning-light text-warning"><i class="fa-solid fa-hospital"></i>
+                        </div>
+                    </div>
+                    <div class="metric-body mt-2">
+                        <h2 class="metric-value">78%</h2>
+                        <div class="metric-trend trend-up">
+                            <i class="fa-solid fa-arrow-up"></i> <span>Approaching Capacity</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid fade-in-up delay-2">
+
+                <!-- 3. DISEASE TREND ANALYSIS SECTION -->
+                <section class="chart-card card col-span-2">
+                    <div class="chart-header">
+                        <div>
+                            <h3>Disease Trends Over Time</h3>
+                            <p class="text-sm text-gray">Monthly reported cases across selected regions.</p>
+                        </div>
+                        <div class="chart-actions">
+                            <button class="btn-icon" title="Download Data"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 300px; position: relative;">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- 6. OUTBREAK PROBABILITY PREDICTION -->
+                <section class="chart-card card">
+                    <div class="chart-header">
+                        <div>
+                            <h3>Outbreak Risk Prediction</h3>
+                            <p class="text-sm text-gray">Early warning AI model estimation.</p>
+                        </div>
+                    </div>
+                    <div class="gauge-container text-center mt-3">
+                        <div class="risk-meter">
+                            <!-- CSS Gauge Visualization -->
+                            <div class="gauge-arch">
+                                <div class="gauge-fill" style="transform: rotate(65deg);"></div>
+                                <div class="gauge-needle" style="transform: rotate(65deg);"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span class="text-secondary">Low</span>
+                                <span class="text-warning">Med</span>
+                                <span class="text-danger">High</span>
+                            </div>
+                        </div>
+                        <h2 class="mt-3 text-warning">MEDIUM RISK (65%)</h2>
+                        <p class="text-sm text-gray mt-2 px-3">Based on recent trends and historical data patterns,
+                            there is an elevated probability of a localized vector-borne outbreak in the East District
+                            within 14 days.</p>
+                        <div class="text-xs text-light-gray mt-2">
+                            <i class="fa-solid fa-robot"></i> Prediction generated using simple machine learning models
+                            for early warning.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. MONTHLY COMPARISON SECTION -->
+                <section class="chart-card card">
+                    <div class="chart-header">
+                        <div>
+                            <h3>Month-to-Month Comparison</h3>
+                            <p class="text-sm text-gray">Current vs Previous month case volume.</p>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 250px; position: relative;">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="chart-insight bg-primary-light text-primary mt-3 p-3 rounded-sm text-sm">
+                        <i class="fa-solid fa-lightbulb"></i> <strong>Insight:</strong> Total reported cases decreased
+                        by 12% compared to last month, driven by a drop in respiratory illnesses.
+                    </div>
+                </section>
+
+                <!-- 7. HOSPITAL LOAD ESTIMATION -->
+                <section class="chart-card card col-span-2">
+                    <div class="chart-header">
+                        <div>
+                            <h3>Healthcare Resource Load Estimation</h3>
+                            <p class="text-sm text-gray">Helps administrators prepare resources in advance.</p>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 250px; position: relative;">
+                        <canvas id="hospitalLoadChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- 5. HIGH-RISK AREA INDICATORS -->
+                <section class="chart-card card col-span-3">
+                    <div class="chart-header">
+                        <div>
+                            <h3>High-Risk Regions</h3>
+                            <p class="text-sm text-gray">Districts categorized by current active case severity.</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive mt-3">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Region / District</th>
+                                    <th>Active Cases</th>
+                                    <th>Trend (7 days)</th>
+                                    <th>Resource Strain</th>
+                                    <th>Risk Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-600">East District</td>
+                                    <td>1,245</td>
+                                    <td><span class="text-danger"><i class="fa-solid fa-arrow-trend-up"></i> +18%</span>
+                                    </td>
+                                    <td>High (89% beds)</td>
+                                    <td><span class="badge badge-danger">High Risk</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-600">North District</td>
+                                    <td>950</td>
+                                    <td><span class="text-warning"><i class="fa-solid fa-arrow-trend-up"></i> +4%</span>
+                                    </td>
+                                    <td>Medium (72% beds)</td>
+                                    <td><span class="badge badge-warning">Moderate</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-600">South District</td>
+                                    <td>630</td>
+                                    <td><span class="text-secondary"><i class="fa-solid fa-arrow-trend-down"></i>
+                                            -12%</span></td>
+                                    <td>Low (45% beds)</td>
+                                    <td><span class="badge badge-success">Low Risk</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-600">West Block</td>
+                                    <td>420</td>
+                                    <td><span class="text-secondary"><i class="fa-solid fa-arrow-trend-down"></i>
+                                            -5%</span></td>
+                                    <td>Low (38% beds)</td>
+                                    <td><span class="badge badge-success">Low Risk</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 8. DATA SOURCE & TRANSPARENCY SECTION -->
+            <div class="explainable-ai-card mt-4 mb-4 fade-in-up delay-3">
+                <details class="xai-details card border-dash">
+                    <summary class="xai-summary text-gray font-sm">
+                        <span class="d-flex align-center gap-2"><i class="fa-solid fa-database"></i> Data Sources &
+                            Transparency</span>
+                        <i class="fa-solid fa-chevron-down xai-icon"></i>
+                    </summary>
+                    <div class="xai-content mt-3 text-sm">
+                        <div class="grid grid-3">
+                            <div>
+                                <strong><i class="fa-solid fa-link text-primary"></i> Data Sources:</strong>
+                                <ul class="guidance-list mt-2 text-gray">
+                                    <li>Kaggle Public Health Datasets (Simulated)</li>
+                                    <li>Government Open Data Portals</li>
+                                    <li>WHO Global Health Data Repository</li>
+                                    <li>Aggregated anonymized platform entries</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong><i class="fa-solid fa-clock-rotate-left text-primary"></i> Last
+                                    Updated:</strong>
+                                <p class="mt-2 text-gray">Real-time sync completed 5 minutes ago.</p>
+                                <p class="text-gray">Predictive models retrained: Daily at 00:00 UTC.</p>
+                            </div>
+                            <div>
+                                <strong><i class="fa-solid fa-circle-info text-primary"></i> Disclaimer:</strong>
+                                <p class="mt-2 text-gray">Insights are indicative and designed to support
+                                    decision-making for public health officials. Data is anonymized. Do not use for
+                                    individual patient diagnosis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </main>
+    </div>
+
+    <!-- 10. FOOTER -->
+    <footer class="dashboard-footer bg-white border-top py-sm">
+        <div class="container-fluid flex-row justify-between align-center px-4">
+            <div>
+                <a href="index.html" class="btn btn-outline sm-btn"><i class="fa-solid fa-house"></i> Return to Main
+                    Site</a>
+            </div>
+            <div class="text-sm text-gray mt-mobile-2">
+                &copy; 2026 Arogya Raksha Dashboard. For authorized personnel only.
+            </div>
+            <div class="mt-mobile-2">
+                <a href="privacy.html" class="text-primary hover-dark text-sm fw-500">Privacy & Ethics Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

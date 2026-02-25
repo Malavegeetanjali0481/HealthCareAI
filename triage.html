@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Your Symptoms | Arogya Raksha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Triage Specific CSS -->
+    <link rel="stylesheet" href="triage.css">
+</head>
+
+<body class="bg-light">
+    <!-- Navbar (Simplified for App Interface) -->
+    <nav class="navbar app-navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-heart-pulse text-primary"></i>
+                <span>Arogya Raksha</span>
+            </div>
+            <div class="nav-actions">
+                <select class="language-selector" aria-label="Select Language">
+                    <option value="en" selected>English</option>
+                    <option value="hi">हिंदी (Hindi)</option>
+                    <option value="te">తెలుగు (Telugu)</option>
+                    <option value="ta">தமிழ் (Tamil)</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main class="triage-main container py-md mt-4">
+
+        <!-- 1. PAGE HEADER -->
+        <header class="triage-header text-center mb-4">
+            <h1 class="h2">Check Your Symptoms</h1>
+            <p class="subtitle text-gray">Quickly assess patient risk and get care guidance</p>
+
+            <button class="btn btn-outline voice-toggle mt-2" id="voiceToggleBtn" type="button">
+                <i class="fa-solid fa-microphone"></i>
+                <span>Enable Voice Input</span>
+            </button>
+        </header>
+
+        <form id="triageForm" class="triage-form">
+            <!-- 2. PATIENT DETAILS SECTION -->
+            <section class="card form-section mb-4 fade-in-up">
+                <div class="section-header-sm">
+                    <h3><i class="fa-solid fa-user-injured text-primary"></i> Patient Details</h3>
+                </div>
+                <div class="grid grid-2">
+                    <div class="form-group">
+                        <label for="patientAge">Age (Years) *</label>
+                        <input type="number" id="patientAge" class="form-control" min="0" max="120" required
+                            placeholder="e.g. 45">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientGender">Gender *</label>
+                        <select id="patientGender" class="form-control" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientId">Patient ID (Optional)</label>
+                        <input type="text" id="patientId" class="form-control" placeholder="Health ID or Phone...">
+                    </div>
+                    <div class="form-group">
+                        <label for="patientLocation">Location (Optional)</label>
+                        <input type="text" id="patientLocation" class="form-control" placeholder="Village / District">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. SYMPTOM INPUT SECTION -->
+            <section class="card form-section mb-4 fade-in-up delay-1">
+                <div class="section-header-sm d-flex justify-between align-center">
+                    <div>
+                        <h3><i class="fa-solid fa-clipboard-list text-primary"></i> Current Symptoms</h3>
+                        <p class="text-sm text-gray">Select all symptoms observed.</p>
+                    </div>
+                    <button type="button" class="btn btn-outline sm-btn" title="Upload Image (Skin/Wound)">
+                        <i class="fa-solid fa-camera"></i> <span class="hide-mobile">Upload Photo</span>
+                    </button>
+                </div>
+
+                <div class="symptom-grid my-3">
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="fever">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-temperature-high"></i> Fever
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="cough">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-head-side-cough"></i> Cough
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="shortness_of_breath" id="symptomSob">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-lungs"></i> Shortness of breath
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="fatigue">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-bed"></i> Fatigue
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="body_aches">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-person-walking-with-cane"></i> Body aches
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="headache">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-head-side-virus"></i> Headache
+                        </span>
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptom" value="vomiting_diarrhea">
+                        <span class="symptom-btn">
+                            <i class="fa-solid fa-viruses"></i> Vomiting / Diarrhea
+                        </span>
+                    </label>
+                </div>
+
+                <div class="form-group mt-3 spO2-container">
+                    <label for="patientSpo2"><i class="fa-solid fa-lungs text-gray"></i> Oxygen Level (SpO₂) -
+                        Optional</label>
+                    <div class="input-with-suffix">
+                        <input type="number" id="patientSpo2" class="form-control" min="0" max="100"
+                            placeholder="e.g. 96">
+                        <span class="suffix">%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. ACTION BUTTON -->
+            <div class="action-container text-center mb-4 fade-in-up delay-2">
+                <button type="submit" class="btn btn-primary btn-lg w-100 analyze-btn" id="analyzeBtn">
+                    <i class="fa-solid fa-robot"></i> Analyze Symptoms
+                </button>
+                <div class="loading-state hidden mt-3" id="loadingState">
+                    <div class="spinner"></div>
+                    <p class="mt-2 text-primary fw-600 pulse-text">AI is assessing risk based on clinical guidelines...
+                    </p>
+                </div>
+            </div>
+        </form>
+
+        <!-- RESULTS SECTION (Hidden by default) -->
+        <div id="resultsSection" class="results-section hidden">
+            <hr class="divider mb-4">
+
+            <h2 class="text-center mb-4">Assessment Results</h2>
+
+            <!-- 5. AI RISK ASSESSMENT RESULT SECTION -->
+            <div class="card risk-card text-center mb-4" id="riskCard">
+                <div class="risk-indicator" id="riskIndicator">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <h2 class="risk-level-title" id="riskTitle">HIGH RISK</h2>
+                <p class="risk-description text-gray" id="riskDescription">Patient requires immediate medical
+                    intervention.</p>
+            </div>
+
+            <!-- 6. REFERRAL & CARE GUIDANCE SECTION -->
+            <div class="card guidance-card mb-4" id="guidanceCard">
+                <div class="guidance-header">
+                    <h3><i class="fa-solid fa-notes-medical text-primary"></i> Recommendation: <span
+                            id="recommendationTitle">Immediate Hospital Referral</span></h3>
+                </div>
+                <div class="guidance-body mt-3">
+                    <div id="guidanceContent">
+                        <!-- Dynamic Content injected here via JS -->
+                    </div>
+                    <div class="mt-4 text-center" id="guidanceAction">
+                        <!-- Dynamic Button injected here via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. “WHY THIS DECISION?” EXPLANATION SECTION -->
+            <div class="explainable-ai-card mt-2 mb-4">
+                <details class="xai-details card">
+                    <summary class="xai-summary fw-600">
+                        <span class="d-flex align-center gap-2"><i class="fa-solid fa-brain text-secondary"></i> Why did
+                            the AI suggest this?</span>
+                        <i class="fa-solid fa-chevron-down xai-icon"></i>
+                    </summary>
+                    <div class="xai-content mt-3 text-sm">
+                        <p class="mb-2"><strong>Key factors used in this assessment:</strong></p>
+                        <ul class="xai-factors mb-3" id="xaiFactors">
+                            <!-- Dynamic factors injected via JS -->
+                        </ul>
+                        <div class="alert bg-light-blue text-primary p-3 rounded-sm">
+                            <i class="fa-solid fa-info-circle"></i> <span id="xaiExplanationText">AI uses symptom
+                                patterns and safety protocols to assist healthcare workers.</span>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <div class="text-center mt-4 mb-4">
+                <button type="button" class="btn btn-outline" id="resetBtn">
+                    <i class="fa-solid fa-rotate-left"></i> Start New Assessment
+                </button>
+            </div>
+        </div>
+
+        <!-- 8. ETHICAL AI DISCLAIMER -->
+        <div class="disclaimer-box card bg-light-blue text-sm text-gray mt-4 mb-xl text-center">
+            <i class="fa-solid fa-shield-cat text-primary mb-2 text-md"></i>
+            <p><strong>Disclaimer:</strong> This AI system assists healthcare workers and patients. It does not diagnose
+                diseases or replace doctors. Final decisions should be made by qualified medical professionals.</p>
+        </div>
+
+    </main>
+
+    <!-- 10. FOOTER -->
+    <footer class="footer py-md bg-dark-dark text-white text-center">
+        <div class="container flex-row footer-content justify-between align-center">
+            <div>
+                <a href="index.html" class="btn btn-white sm-btn"><i class="fa-solid fa-arrow-left"></i> Back to
+                    Dashboard</a>
+            </div>
+            <div class="text-sm mt-mobile-2">
+                <p>&copy; 2026 Arogya Raksha Platform.</p>
+            </div>
+            <div class="mt-mobile-2">
+                <a href="privacy.html" class="text-gray hover-white text-sm">Privacy & Ethics Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="firestore-service.js"></script>
+    <script src="script.js"></script>
+    <script src="triage.js"></script>
+</body>
+
+</html>

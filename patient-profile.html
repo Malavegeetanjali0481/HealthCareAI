@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Health Record | Arogya Raksha</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Profile Specific CSS -->
+    <link rel="stylesheet" href="patient-profile.css">
+</head>
+
+<body class="bg-light-blue profile-body">
+
+    <!-- 1. PAGE HEADER -->
+    <header class="profile-header">
+        <div class="container py-4 text-center">
+            <h1 class="text-primary mb-1">Patient Health Record</h1>
+            <p class="text-gray mb-4">Your health information in one place</p>
+
+            <!-- Patient Info Summary Card -->
+            <div class="patient-summary-card bg-white shadow-sm border-soft text-left fade-in-up">
+                <div class="summary-header border-bottom-soft p-3 d-flex justify-between align-center bg-primary-light">
+                    <div class="d-flex align-center gap-3">
+                        <div class="patient-avatar bg-primary text-white flex-center">
+                            <span class="text-xl fw-700">RV</span>
+                        </div>
+                        <div>
+                            <h2 class="font-lg text-dark mb-0">Raju Verma</h2>
+                            <span class="badge bg-white text-primary border-primary mt-1">ID: PT-8942</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="summary-body p-3 grid grid-2 gap-3 text-sm">
+                    <div>
+                        <span class="text-light-gray d-block text-xs uppercase letter-spacing">Age</span>
+                        <strong class="text-dark">8 Months</strong>
+                    </div>
+                    <div>
+                        <span class="text-light-gray d-block text-xs uppercase letter-spacing">Gender</span>
+                        <strong class="text-dark">Male</strong>
+                    </div>
+                    <div class="col-span-2">
+                        <span class="text-light-gray d-block text-xs uppercase letter-spacing">Location</span>
+                        <strong class="text-dark"><i class="fa-solid fa-location-dot text-primary mr-2"></i> Village
+                            North, House 42</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-main container pb-5">
+
+        <!-- 2. MEDICAL HISTORY SECTION -->
+        <section class="profile-section mb-4 fade-in-up delay-1">
+            <h3 class="section-title text-dark font-md mb-3"><i class="fa-solid fa-notes-medical text-primary mr-2"></i>
+                Medical History</h3>
+            <div class="card bg-white border-soft p-4 shadow-sm">
+                <div class="history-group mb-3 pb-3 border-bottom-dash">
+                    <strong class="d-block text-dark mb-2">Past Conditions</strong>
+                    <ul class="bullet-list text-gray text-sm">
+                        <li>Fever episode - Recovered (Jan 12, 2026)</li>
+                        <li>Mild respiratory infection - Treated (Dec 05, 2025)</li>
+                    </ul>
+                </div>
+                <div class="history-group mb-3 pb-3 border-bottom-dash">
+                    <strong class="d-block text-dark mb-2">Chronic Conditions</strong>
+                    <p class="text-gray text-sm m-0">None reported.</p>
+                </div>
+                <div class="history-group">
+                    <strong class="d-block text-dark mb-2">Allergies</strong>
+                    <p class="text-danger text-sm m-0 fw-600"><i class="fa-solid fa-triangle-exclamation mr-1"></i>
+                        Penicillin</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. AI RISK HISTORY SECTION -->
+        <section class="profile-section mb-4 fade-in-up delay-1">
+            <h3 class="section-title text-dark font-md mb-3"><i class="fa-solid fa-brain text-secondary mr-2"></i> AI
+                Risk Assessment History</h3>
+
+            <div class="card bg-white border-soft p-0 shadow-sm overflow-hidden mb-3">
+                <div class="risk-timeline p-4">
+                    <!-- High Risk Entry -->
+                    <div class="timeline-entry d-flex gap-3 mb-4 position-relative">
+                        <div class="timeline-date text-xs text-gray text-right pt-1" style="min-width: 80px;">Feb 25,
+                            2026</div>
+                        <div class="timeline-marker bg-danger"></div>
+                        <div class="timeline-content pb-4 border-left-dash">
+                            <span class="badge badge-danger mb-2">🔴 High Risk</span>
+                            <p class="text-sm text-dark fw-500 mb-1">Suspected severe respiratory distress</p>
+                            <p class="text-xs text-gray m-0">Based on symptoms (Shortness of breath, SpO2 89%) and age.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Medium Risk Entry -->
+                    <div class="timeline-entry d-flex gap-3 mb-4 position-relative">
+                        <div class="timeline-date text-xs text-gray text-right pt-1" style="min-width: 80px;">Jan 10,
+                            2026</div>
+                        <div class="timeline-marker bg-warning"></div>
+                        <div class="timeline-content pb-4 border-left-dash">
+                            <span class="badge badge-warning mb-2">🟡 Medium Risk</span>
+                            <p class="text-sm text-dark fw-500 mb-1">Persistent high fever</p>
+                            <p class="text-xs text-gray m-0">Based on reported fever over 102°F for 2 days.</p>
+                        </div>
+                    </div>
+
+                    <!-- Low Risk Entry -->
+                    <div class="timeline-entry d-flex gap-3 position-relative">
+                        <div class="timeline-date text-xs text-gray text-right pt-1" style="min-width: 80px;">Nov 15,
+                            2025</div>
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <span class="badge badge-success mb-2">🟢 Low Risk</span>
+                            <p class="text-sm text-dark fw-500 mb-1">Routine nutrition checkup</p>
+                            <p class="text-xs text-gray m-0">Growth parameters normal.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light-blue p-3 text-xs text-center text-gray border-top-soft">
+                    <i class="fa-solid fa-circle-info mr-1"></i> AI risk assessments are assistive and do not replace
+                    medical diagnosis.
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PRESCRIPTIONS SECTION -->
+        <section class="profile-section mb-4 fade-in-up delay-2">
+            <h3 class="section-title text-dark font-md mb-3"><i
+                    class="fa-solid fa-file-prescription text-primary mr-2"></i> Prescriptions</h3>
+            <div class="prescription-list">
+                <!-- Prescription Card -->
+                <div
+                    class="card bg-white border-soft p-3 shadow-sm mb-3 d-flex justify-between align-center mobile-col">
+                    <div>
+                        <strong class="d-block text-dark font-sm mb-1">Feb 25, 2026 - Pulmonology</strong>
+                        <div class="text-xs text-gray mb-1"><i class="fa-solid fa-user-doctor mr-1"></i> Dr. Sharma
+                            (Teleconsultation)</div>
+                        <p class="text-sm text-dark fw-500 mt-2 mb-0">Salbutamol inhaler, Paracetamol syrup</p>
+                    </div>
+                    <div class="mobile-mt">
+                        <button class="btn btn-outline sm-btn"><i class="fa-solid fa-download mr-1"></i> View
+                            PDF</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. APPOINTMENTS SECTION -->
+        <section class="profile-section mb-4 fade-in-up delay-2">
+            <h3 class="section-title text-dark font-md mb-3"><i
+                    class="fa-regular fa-calendar-check text-secondary mr-2"></i> Appointments</h3>
+            <div class="appointment-list">
+
+                <!-- Upcoming -->
+                <div
+                    class="card bg-white border-primary p-3 shadow-sm mb-3 d-flex justify-between align-center mobile-col bg-primary-light-hover">
+                    <div>
+                        <span class="badge bg-primary text-white mb-2">Upcoming</span>
+                        <strong class="d-block text-dark font-sm mb-1">Mar 02, 2026 • 10:30 AM</strong>
+                        <div class="text-xs text-dark fw-500"><i class="fa-solid fa-video text-secondary mr-1"></i>
+                            Teleconsultation Follow-up</div>
+                        <div class="text-xs text-gray mt-1">Dr. Sharma (Pulmonology)</div>
+                    </div>
+                </div>
+
+                <!-- Past -->
+                <div
+                    class="card bg-white border-soft p-3 shadow-sm mb-3 d-flex justify-between align-center mobile-col opacity-80">
+                    <div>
+                        <span class="badge bg-light-gray text-dark mb-2">Completed</span>
+                        <strong class="d-block text-gray font-sm mb-1 strike-through">Feb 25, 2026 • 10:00 AM</strong>
+                        <div class="text-xs text-gray"><i class="fa-solid fa-building text-light-gray mr-1"></i>
+                            In-person Assessment</div>
+                        <div class="text-xs text-gray mt-1">ASHA Sunita Devi</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. REPORTS & DOCUMENTS SECTION -->
+        <section class="profile-section mb-4 fade-in-up delay-3">
+            <h3 class="section-title text-dark font-md mb-3"><i class="fa-solid fa-file-medical text-primary mr-2"></i>
+                Health Reports & Documents</h3>
+            <div class="grid grid-2 gap-3 mobile-col">
+
+                <div class="doc-card border-soft p-3 rounded-md bg-white shadow-sm hover-up text-center cursor-pointer">
+                    <i class="fa-regular fa-file-pdf text-danger text-3xl mb-2 d-block"></i>
+                    <strong class="text-sm text-dark d-block">Blood Test Panel</strong>
+                    <span class="text-xs text-gray">Jan 12, 2026</span>
+                    <button class="btn btn-outline sm-btn w-100 mt-3"><i class="fa-solid fa-download mr-1"></i>
+                        Download</button>
+                </div>
+
+                <div class="doc-card border-soft p-3 rounded-md bg-white shadow-sm hover-up text-center cursor-pointer">
+                    <i class="fa-regular fa-file-pdf text-danger text-3xl mb-2 d-block"></i>
+                    <strong class="text-sm text-dark d-block">Consultation Summary</strong>
+                    <span class="text-xs text-gray">Feb 25, 2026</span>
+                    <button class="btn btn-outline sm-btn w-100 mt-3"><i class="fa-solid fa-download mr-1"></i>
+                        Download</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 7. DATA ACCESS & PRIVACY NOTE -->
+        <div
+            class="disclaimer-box card bg-secondary-light text-sm text-gray mt-4 text-center fade-in-up delay-3 border-transparent shadow-sm">
+            <i class="fa-solid fa-shield-halved text-secondary mb-2 font-md"></i>
+            <p class="m-0 text-dark"><strong>Data Protection:</strong> Your health data is protected. Access is
+                role-based and shared only with authorized healthcare professionals.</p>
+        </div>
+
+    </main>
+
+    <!-- 9. FOOTER -->
+    <footer class="bg-white border-top py-sm">
+        <div class="container d-flex justify-between align-center mobile-col-center gap-3">
+            <a href="index.html" class="btn btn-outline sm-btn"><i class="fa-solid fa-arrow-left mr-2"></i> Back to
+                Dashboard</a>
+            <div class="text-xs text-gray text-center">
+                &copy; 2026 Arogya Raksha Rural Platform.
+            </div>
+            <a href="privacy.html" class="text-primary hover-dark text-xs fw-500">Privacy & Ethics Policy</a>
+        </div>
+    </footer>
+
+    <script type="module" src="firestore-service.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,878 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHA Worker App | Arogya Raksha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="chw-assistant.css">
+
+    <style>
+        /* ====== IMPROVED CHW INTERFACE STYLES ====== */
+        .chw-body {
+            background: #f0fdf4;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* HEADER */
+        .chw-header {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            padding: 1.25rem 1.25rem 2.5rem;
+            position: relative;
+        }
+
+        .chw-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .chw-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .chw-logo-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .chw-app-name {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .chw-app-sub {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.7rem;
+        }
+
+        .chw-header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .chw-status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            padding: 0.3rem 0.75rem;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #86efac;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .lang-pill {
+            background: rgba(255, 255, 255, 0.18);
+            border: none;
+            border-radius: 20px;
+            padding: 0.3rem 0.65rem;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* Worker greeting card */
+        .worker-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .worker-avatar {
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .worker-info .worker-name {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .worker-info .worker-detail {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.78rem;
+            margin-top: 0.2rem;
+        }
+
+        .worker-badge {
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 8px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Pull up bottom curve */
+        .chw-wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: #f0fdf4;
+            border-radius: 24px 24px 0 0;
+        }
+
+        /* ---- MAIN CONTAINER ---- */
+        .chw-content {
+            padding: 1rem 1rem 2rem;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        /* SECTION HEADERS */
+        .sec-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sec-title i {
+            color: #16a34a;
+        }
+
+        /* OFFLINE ALERT */
+        .offline-strip {
+            background: #fef3c7;
+            border: 1.5px solid #fcd34d;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.82rem;
+            color: #92400e;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .offline-strip.show {
+            display: flex;
+        }
+
+        /* BIG ACTION BUTTONS */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .action-card {
+            border-radius: 14px;
+            padding: 1.1rem 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .action-card:active {
+            transform: scale(0.97);
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .action-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .action-label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .action-sub {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .ac-green {
+            background: #f0fdf4;
+        }
+
+        .ac-green .action-icon-box {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .ac-green .action-label {
+            color: #15803d;
+        }
+
+        .ac-blue {
+            background: #eff6ff;
+        }
+
+        .ac-blue .action-icon-box {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .ac-blue .action-label {
+            color: #1e40af;
+        }
+
+        .ac-orange {
+            background: #fff7ed;
+        }
+
+        .ac-orange .action-icon-box {
+            background: #fed7aa;
+            color: #c2410c;
+        }
+
+        .ac-orange .action-label {
+            color: #9a3412;
+        }
+
+        .ac-purple {
+            background: #faf5ff;
+        }
+
+        .ac-purple .action-icon-box {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+
+        .ac-purple .action-label {
+            color: #6d28d9;
+        }
+
+        /* PATIENT CARDS */
+        .patient-card {
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.65rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: box-shadow 0.15s;
+        }
+
+        .patient-card:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .patient-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #111827;
+        }
+
+        .patient-meta {
+            font-size: 0.74rem;
+            color: #6b7280;
+            margin-top: 0.2rem;
+        }
+
+        .patient-right {
+            text-align: right;
+        }
+
+        /* TASK CARDS */
+        .task-card {
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .task-card.done {
+            opacity: 0.6;
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .task-icon-box {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .task-name {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #111827;
+        }
+
+        .task-patient {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 0.2rem;
+        }
+
+        .task-btn {
+            margin-left: auto;
+            flex-shrink: 0;
+            background: #dcfce7;
+            color: #15803d;
+            border: none;
+            border-radius: 8px;
+            padding: 0.4rem 0.85rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .task-checklist {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .check-item input[type=checkbox] {
+            width: 18px;
+            height: 18px;
+            accent-color: #16a34a;
+        }
+
+        .check-item span {
+            font-size: 0.82rem;
+            color: #374151;
+        }
+
+        /* CARE GUIDE CARD */
+        .guide-card {
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 0.75rem;
+        }
+
+        .guide-card-header {
+            background: linear-gradient(90deg, #0ea5e9, #2563eb);
+            padding: 0.85rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guide-title {
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .guide-sub {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.72rem;
+            margin-top: 0.15rem;
+        }
+
+        .audio-play-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guide-body {
+            padding: 1rem;
+        }
+
+        .guide-step-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 0.75rem 0;
+        }
+
+        .guide-list li {
+            font-size: 0.82rem;
+            color: #4b5563;
+            padding: 0.3rem 0 0.3rem 1.2rem;
+            position: relative;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .guide-list li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .guide-warn {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            color: #991b1b;
+        }
+
+        .guide-warn-title {
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        /* REMINDERS */
+        .reminder-item {
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.65rem;
+        }
+
+        .reminder-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .reminder-sub {
+            font-size: 0.73rem;
+            color: #6b7280;
+            margin-top: 0.2rem;
+        }
+
+        .reminder-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .r-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .r-snooze {
+            background: #f1f5f9;
+            color: #6b7280;
+        }
+
+        .r-done {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        /* SAFETY NOTE */
+        .safety-note {
+            background: #f0fdf4;
+            border: 1.5px dashed #86efac;
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            font-size: 0.8rem;
+            color: #166534;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* FOOTER */
+        .chw-bottom {
+            background: #15803d;
+            padding: 1rem 1.25rem;
+        }
+
+        .chw-bottom a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        /* TOAST */
+        .toast-msg {
+            position: fixed;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: #fff;
+            padding: 0.65rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="chw-body">
+
+    <!-- TOAST -->
+    <div class="toast-msg" id="toastMsg"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="chw-header">
+        <div class="chw-header-top">
+            <div class="chw-logo-row">
+                <div class="chw-logo-icon"><i class="fa-solid fa-hand-holding-medical"></i></div>
+                <div>
+                    <div class="chw-app-name">ASHA Worker App</div>
+                    <div class="chw-app-sub">Your health helper tool</div>
+                </div>
+            </div>
+            <div class="chw-header-right">
+                <div class="chw-status-pill">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span id="statusText">Online</span>
+                </div>
+                <select class="lang-pill" id="langSelect">
+                    <option value="en">EN</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="te">తెలుగు</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Worker Identity Card -->
+        <div class="worker-card">
+            <div class="worker-avatar"><i class="fa-solid fa-user-nurse"></i></div>
+            <div class="worker-info">
+                <div class="worker-name">ASHA Sunita Devi</div>
+                <div class="worker-detail"><i class="fa-solid fa-location-dot"></i> Gopalpur Village &nbsp;|&nbsp; ID:
+                    ASHA-2041</div>
+            </div>
+            <div class="worker-badge">Today<br><strong>3 Tasks</strong></div>
+        </div>
+
+        <div class="chw-wave"></div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="chw-content">
+
+        <!-- Offline Alert Strip -->
+        <div class="offline-strip" id="offlineStrip">
+            <i class="fa-solid fa-wifi-slash"></i>
+            <span>No Internet — Saved data is available. It will sync when internet comes back.</span>
+        </div>
+
+        <!-- ===== 1. WHAT DO YOU WANT TO DO? ===== -->
+        <div class="sec-title"><i class="fa-solid fa-hand-pointer"></i> What do you want to do?</div>
+        <div class="action-grid">
+            <a href="triage.html" class="action-card ac-green">
+                <div class="action-icon-box"><i class="fa-solid fa-stethoscope"></i></div>
+                <div class="action-label">Check a Patient's Symptoms</div>
+            </a>
+            <button class="action-card ac-blue" onclick="scrollToId('tasks')">
+                <div class="action-icon-box"><i class="fa-solid fa-clipboard-list"></i></div>
+                <div class="action-label">See Today's Work</div>
+            </button>
+            <button class="action-card ac-orange" onclick="scrollToId('guidance')">
+                <div class="action-icon-box"><i class="fa-solid fa-book-medical"></i></div>
+                <div class="action-label">How to Help a Patient</div>
+            </button>
+            <button class="action-card ac-purple" onclick="scrollToId('reminders')">
+                <div class="action-icon-box"><i class="fa-solid fa-bell"></i></div>
+                <div class="action-label">Reminders &amp; Follow-ups</div>
+            </button>
+        </div>
+
+        <!-- ===== 2. RECENT PATIENTS ===== -->
+        <div class="sec-title"><i class="fa-solid fa-users"></i> Patients You Visited</div>
+
+        <div class="patient-card" onclick="showToast('Opening patient record...')">
+            <div>
+                <div class="patient-name">Raju Verma <span style="font-weight:400;color:#6b7280;font-size:0.8rem;">(Boy,
+                        8 months)</span></div>
+                <div class="patient-meta"><i class="fa-regular fa-clock"></i> Checked today at 9:00 AM</div>
+            </div>
+            <div class="patient-right">
+                <span class="badge badge-success">Low Risk</span>
+                <div style="font-size:0.72rem;color:#16a34a;margin-top:0.25rem;"><i class="fa-solid fa-house"></i> Stay
+                    at home</div>
+            </div>
+        </div>
+
+        <div class="patient-card" onclick="showToast('Opening patient record...')">
+            <div>
+                <div class="patient-name">Anita Devi <span
+                        style="font-weight:400;color:#6b7280;font-size:0.8rem;">(Woman, 24)</span></div>
+                <div class="patient-meta"><i class="fa-regular fa-clock"></i> Checked yesterday</div>
+            </div>
+            <div class="patient-right">
+                <span class="badge badge-warning">Medium Risk</span>
+                <div style="font-size:0.72rem;color:#d97706;margin-top:0.25rem;"><i class="fa-solid fa-video"></i>
+                    Doctor call needed</div>
+            </div>
+        </div>
+
+        <!-- ===== 3. TODAY'S WORK ===== -->
+        <div id="tasks" class="sec-title mt-4"><i class="fa-solid fa-list-check"></i> Today's Work</div>
+
+        <!-- Task 1 -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-icon-box" style="background:#fef3c7;color:#d97706;"><i
+                        class="fa-solid fa-person-breastfeeding"></i></div>
+                <div>
+                    <div class="task-name">Check on Pregnant Woman — 3rd Visit</div>
+                    <div class="task-patient">Meena K. · 32 weeks pregnant · House 42, North Village</div>
+                </div>
+                <span class="badge badge-warning" style="flex-shrink:0;">Due Soon</span>
+            </div>
+            <div class="task-checklist">
+                <div class="check-item">
+                    <input type="checkbox" id="t1c1">
+                    <label for="t1c1" class="text-sm" style="font-size:0.82rem;color:#374151;">Check if she is taking
+                        Iron tablets</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="t1c2">
+                    <label for="t1c2" class="text-sm" style="font-size:0.82rem;color:#374151;">Measure her blood
+                        pressure</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Task 2 -->
+        <div class="task-card">
+            <div class="task-header">
+                <div class="task-icon-box" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-syringe"></i>
+                </div>
+                <div>
+                    <div class="task-name">Give Polio Vaccine to Baby</div>
+                    <div class="task-patient">Aarav S. · 6 weeks old</div>
+                </div>
+                <span class="badge" style="background:#ede9fe;color:#7c3aed;flex-shrink:0;">Pending</span>
+            </div>
+        </div>
+
+        <!-- Task 3 (Done) -->
+        <div class="task-card done">
+            <div class="task-header">
+                <div class="task-icon-box" style="background:#f0fdf4;color:#16a34a;"><i
+                        class="fa-solid fa-apple-whole"></i></div>
+                <div>
+                    <div class="task-name" style="text-decoration:line-through;">Check Nutrition — Follow-up</div>
+                    <div class="task-patient">Kamala T. · Supplements given ✓</div>
+                </div>
+                <span class="badge badge-success" style="flex-shrink:0;">Done</span>
+            </div>
+        </div>
+
+        <!-- ===== 4. HOW TO HELP A PATIENT ===== -->
+        <div id="guidance" class="sec-title mt-4"><i class="fa-solid fa-book-medical"></i> How to Help a Patient (Viral
+            Fever)</div>
+
+        <div class="guide-card">
+            <div class="guide-card-header">
+                <div>
+                    <div class="guide-title"><i class="fa-solid fa-virus"></i> Patient has Fever — What to do</div>
+                    <div class="guide-sub">For: Raju Verma</div>
+                </div>
+                <button class="audio-play-btn" onclick="showToast('🔊 Playing audio guide...')">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+            </div>
+            <div class="guide-body">
+                <div class="guide-step-title">✅ What to do now:</div>
+                <ul class="guide-list">
+                    <li>Give paracetamol (500mg) if temperature is above 100°F.</li>
+                    <li>Ask patient to drink ORS or boiled water.</li>
+                    <li>Keep the patient in a cool, airy room.</li>
+                </ul>
+                <div class="guide-step-title">👁️ Watch for these things at home:</div>
+                <ul class="guide-list">
+                    <li>Check temperature every 6 hours.</li>
+                    <li>Write down how the patient is feeling each time.</li>
+                    <li>Make sure urine is light yellow (shows good water intake).</li>
+                </ul>
+                <div class="guide-warn">
+                    <div class="guide-warn-title">🚨 Go to hospital immediately if:</div>
+                    <ul class="guide-list" style="color:#991b1b; margin:0;">
+                        <li>Fast breathing or trouble breathing.</li>
+                        <li>Cannot wake up or very sleepy.</li>
+                        <li>Vomits everything they eat or drink.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 5. REMINDERS ===== -->
+        <div id="reminders" class="sec-title mt-4"><i class="fa-solid fa-bell"></i> Things to Remember</div>
+
+        <div class="reminder-item">
+            <div>
+                <div class="reminder-text"><i class="fa-solid fa-truck-medical" style="color:#ef4444;"></i> Visit
+                    High-Risk Patient</div>
+                <div class="reminder-sub">Suresh P. — 3 days after coming home from hospital</div>
+            </div>
+            <div class="reminder-actions">
+                <button class="r-btn r-snooze" title="Snooze"
+                    onclick="this.closest('.reminder-item').style.opacity='0.4'"><i
+                        class="fa-regular fa-clock"></i></button>
+                <button class="r-btn r-done" title="Mark Done"
+                    onclick="this.closest('.reminder-item').style.display='none';showToast('✓ Marked done!')"><i
+                        class="fa-solid fa-check"></i></button>
+            </div>
+        </div>
+
+        <div class="reminder-item">
+            <div>
+                <div class="reminder-text"><i class="fa-solid fa-boxes-packing" style="color:#0ea5e9;"></i> Report Low
+                    Medicine Stock</div>
+                <div class="reminder-sub">Paracetamol is running low — inform supervisor</div>
+            </div>
+            <div class="reminder-actions">
+                <button class="r-btn r-snooze" onclick="this.closest('.reminder-item').style.opacity='0.4'"><i
+                        class="fa-regular fa-clock"></i></button>
+                <button class="r-btn r-done"
+                    onclick="this.closest('.reminder-item').style.display='none';showToast('✓ Marked done!')"><i
+                        class="fa-solid fa-check"></i></button>
+            </div>
+        </div>
+
+        <!-- ===== SAFETY NOTE ===== -->
+        <div class="safety-note">
+            <i class="fa-solid fa-shield-heart" style="font-size:1.2rem;flex-shrink:0;"></i>
+            <span><strong>Remember:</strong> This app helps you, but it does not replace a doctor. For serious cases,
+                always call the doctor or take the patient to the hospital.</span>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="chw-bottom">
+        <div style="display:flex;justify-content:space-between;align-items:center;max-width:540px;margin:0 auto;">
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <a href="privacy.html">Privacy &amp; Ethics</a>
+        </div>
+    </div>
+
+    <script src="chw-assistant.js"></script>
+    <script>
+        function scrollToId(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function showToast(msg) {
+            var t = document.getElementById('toastMsg');
+            t.textContent = msg; t.style.display = 'block';
+            setTimeout(function () { t.style.display = 'none'; }, 2200);
+        }
+        // Offline indicator (simulated from chw-assistant.js)
+        window.addEventListener('online', function () { updateStatus(true); });
+        window.addEventListener('offline', function () { updateStatus(false); });
+        function updateStatus(online) {
+            document.getElementById('statusText').textContent = online ? 'Online' : 'Offline';
+            document.getElementById('statusDot').style.background = online ? '#86efac' : '#fbbf24';
+            document.getElementById('offlineStrip').style.display = online ? 'none' : 'flex';
+        }
+    </script>
+</body>
+
+</html>

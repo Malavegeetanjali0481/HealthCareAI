@@ -1,0 +1,116 @@
+﻿/* =========================================
+   REGION RISK MONITORING STYLES
+   ========================================= */
+
+/* Use slightly cooler grays and blues for government style */
+.regional-body {
+    background-color: #f1f5f9;
+    /* Slate 100 */
+}
+
+.regional-navbar {
+    background-color: #1e293b;
+    /* Slate 800 */
+}
+
+.regional-navbar .logo span {
+    color: var(--white);
+}
+
+/* Header */
+.regional-header {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+}
+
+.regional-filter select {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* Grid Layout */
+.regional-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.regional-col-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.regional-col-right {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tables */
+.regional-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.regional-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+/* Row Highlights */
+.row-danger-light {
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.row-warning-light {
+    background-color: rgba(245, 158, 11, 0.05);
+}
+
+.row-success-light {
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+/* Alerts */
+.bg-danger-light-10 {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.bg-warning-light-10 {
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.alert-action {
+    margin-top: 0.5rem;
+}
+
+/* Helpers */
+.h-100-max {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    display: block;
+}
+
+.mr-2 {
+    margin-right: 0.5rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .regional-grid {
+        grid-template-columns: 1fr;
+        /* Stack columns on tablets/mobile */
+    }
+}
