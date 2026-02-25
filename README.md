@@ -85,4 +85,4 @@ This work highlights the potential of responsible, data-driven AI to advance equ
 ## 9.Contact
 malavegeetanjali09@gmail.com
 
-Project Link:
+Project Link: <a href="https://malavegeetanjali0481.github.io/HealthCareAI/"</a>
