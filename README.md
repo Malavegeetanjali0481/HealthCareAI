@@ -20,14 +20,11 @@ Open the Arogya Mithra web application and select Login / Register.
 
 Role Selection and Login
 Log in as one of the following roles:
-
-Patient
-
-Frontline Health Worker
-
-Doctor
-
-Admin (Public Health Official)
+<ul>
+<li> Patient</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
 
 Symptom Assessment (Patient / Health Worker)
 Enter symptoms and basic details, then submit for AI-assisted analysis.
