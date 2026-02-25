@@ -30,8 +30,11 @@ All AI outputs are assistive only, and final clinical decisions rest with qualif
 ## 4. Data Source
 
 Public health datasets (Kaggle, Government Open Data, WHO)
+
 Symptom-based datasets for triage modeling
+
 Mock data used where live integration is not feasible
+
 All data usage follows privacy-first and consent-based principles.
 
 ## 5. Regulatory & Ethical Alignment
