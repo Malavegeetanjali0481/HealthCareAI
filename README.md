@@ -1,7 +1,7 @@
 # HealthCareAI
-### Arogya Mithra
+#### Arogya Mithra
 ### Arogya Mithra  AI for Equitable Healthcare
-Arogya Mithra
+
 
 AI for Equitable Healthcare
 
