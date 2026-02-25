@@ -14,18 +14,37 @@ Arogya Mithra is an AI-assisted, role-based healthcare platform designed to redu
 
 The platform enables early symptom triage, telemedicine prioritization, and public health intelligence, ensuring healthcare delivery is accessible, affordable, data-driven, and ethical.
 
-## 3. Intended Use & Medical Disclaimer
+## 3.Workflow
+Access the Application
+Open the Arogya Mithra web application and select Login / Register.
 
-Intended Use:
-To assist healthcare delivery through decision support for:
-Early risk identification
-Telemedicine prioritization
-Frontline health worker guidance
-Public health monitoring
+Role Selection and Login
+Log in as one of the following roles:
 
-Medical Disclaimer:
-This system does not provide medical diagnosis or treatment.
-All AI outputs are assistive only, and final clinical decisions rest with qualified healthcare professionals.
+Patient
+
+Frontline Health Worker
+
+Doctor
+
+Admin (Public Health Official)
+
+Symptom Assessment (Patient / Health Worker)
+Enter symptoms and basic details, then submit for AI-assisted analysis.
+The system displays a risk level (Low, Medium, High) with recommended next steps.
+
+Care Guidance and Referral
+Based on the assessed risk, the user is guided toward home monitoring, teleconsultation, or referral.
+
+Telemedicine Consultation (Doctor)
+Doctors access an AI-prioritized patient queue, review case summaries, and conduct consultations.
+Clinical decisions are made by the doctor.
+
+Public Health Monitoring (Admin)
+Administrators review aggregated data to monitor disease trends and regional health risks.
+
+Follow-Up and History
+Users can review previous assessments, consultations, and follow-up records for continuity of care.
 
 ## 4. Data Source
 
